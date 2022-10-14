@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //Classe para definir as cores básicas do projeto
 
 class AppColors {
-  static Color get textColor => Colors.white70;
+  static Color get textColor => const Color(0xFF47525E);
   static Color get titleColor => const Color(0xFF47525E);
   static Color get backgroundColor => const Color(0xFFF5F6FF);
   static Color get backgrountCardColor => const Color(0xFFFFFFFF);
