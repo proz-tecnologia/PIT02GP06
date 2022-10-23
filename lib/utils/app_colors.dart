@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 // Classe para definir as cores básicas do projeto
 
 class AppColors {
-  //primary
   static Color get primaryColor => const Color(0xFF242424);
-
-  // Texts
-  static Color get textColor => const Color(0xFF47525E);
-  static Color get textCreditCardColor => const Color(0xFFF8F8F8);
-  static Color get textValueIncome => const Color(0xFF1E38FA);
-  static Color get textValueExpense => const Color(0xFFDB353E);
-
-  // Backgrounds
-  static Color get backgroundColor => const Color(0xFFF5F6FF);
-  static Color get backgroundCardColor => const Color(0xFFFFFFFF);
-  static Color get backgroundCreditCardColor => const Color(0xFF13239F);
+  static Color get secondaryColor => const Color(0xFF1E38FA); // Azul principal
+  static Color get grey1Color => const Color(0xFF47525E);
+  static Color get grey2Color => const Color(0xFF808080);
+  static Color get red1Color => const Color(0xFFDB353E); // Despesas
+  static Color get whiteColor =>
+      const Color(0xFFFFFFFF); // Background dos cards
+  static Color get blue1Color => const Color(
+      0xFF13239F); // Background dos cartões preenchidos e também faz parte do gráfico
+  static Color get blue2Color =>
+      const Color(0xFF278DFF); // Cor que faz parte do gráfico
+  static Color get blue3Color =>
+      const Color(0xFF00ABEA); // Cor que faz parte do gráfico
+  static Color get blue4Color =>
+      const Color(0xFF000CFF); // Cor que faz parte do gráfico
+  static Color get backgroundColor =>
+      const Color(0xFFF5F6FF); // Background do app
 }
