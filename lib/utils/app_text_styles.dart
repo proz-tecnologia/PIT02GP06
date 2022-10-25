@@ -3,7 +3,9 @@ import 'package:pit02gp06/utils/app_colors.dart';
 
 class AppTextStyles {
   static TextStyle get textHello =>
-      TextStyle(fontSize: 40, color: AppColors.primaryColor);
+      TextStyle(fontSize: 20, color: AppColors.primaryColor);
+  static TextStyle get textName => TextStyle(
+      fontSize: 25, fontWeight: FontWeight.bold, color: AppColors.primaryColor);
   static TextStyle get textTitle =>
       TextStyle(fontSize: 50, color: AppColors.grey1Color);
   static TextStyle get textOfDropDown =>
