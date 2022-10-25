@@ -20,4 +20,10 @@ class AppTextStyles {
       TextStyle(fontSize: 40, color: AppColors.red1Color);
   static TextStyle get textNotRegistered =>
       TextStyle(fontSize: 35, color: AppColors.grey1Color);
+
+//credit card
+  static TextStyle get textCreditCard =>
+      TextStyle(fontSize: 13, color: AppColors.whiteColor);
+  static TextStyle get textCreditCardValueBalance => TextStyle(
+      fontSize: 25, color: AppColors.whiteColor, fontWeight: FontWeight.bold);
 }
