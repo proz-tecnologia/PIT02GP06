@@ -65,29 +65,6 @@ class HeaderUserCard extends StatelessWidget {
           ],
         ),
       )),
-      // child: ListTile(
-      //   minLeadingWidth: 1,
-      //   leading: CircleAvatar(
-      //       radius: 50,
-      //       backgroundColor: Color.fromARGB(255, 225, 222, 222),
-      //       child: Icon(
-      //         Icons.person,
-      //         color: Colors.grey,
-      //         size: 50,
-      //       )),
-      //   title: Text(
-      //     "Olá",
-      //     style: AppTextStyles.textHello,
-      //   ),
-      //   subtitle: Text(
-      //     userName,
-      //     style: AppTextStyles.textName,
-      //   ),
-      //   trailing: Icon(
-      //     Icons.notifications,
-      //     size: 40,
-      //   ),
-      // ),
     );
   }
 }
