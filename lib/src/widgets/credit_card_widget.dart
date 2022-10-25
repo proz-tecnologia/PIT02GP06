@@ -13,7 +13,7 @@ class CreditCardWidget extends StatelessWidget {
   String bandeira = "";
   String apelido;
   String valorAberto;
-  var iconBandeira;
+  late Widget iconBandeira;
   CreditCardWidget(
       {super.key,
       required this.apelido,
@@ -24,14 +24,14 @@ class CreditCardWidget extends StatelessWidget {
       case "visa":
       case "elo":
       case "american":
-        iconBandeira = Image.asset("lib/images/$bandeira.png", height: 12);
+        iconBandeira = Image.asset("lib/images/$bandeira.png", height: 16);
         break;
       default:
         {
           iconBandeira = Icon(
             Icons.credit_card,
             color: AppColors.whiteColor,
-            size: 18,
+            size: 20,
           );
           bandeira = "outro";
         }
@@ -44,7 +44,6 @@ class CreditCardWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: 200,
-        height: 180,
         decoration: BoxDecoration(
           color: AppColors.blue1Color,
           borderRadius: BorderRadius.circular(30),
@@ -72,7 +71,7 @@ class CreditCardWidget extends StatelessWidget {
                     "Fatura em aberto",
                     style: AppTextStyles.textCreditCard,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/utils/app_colors.dart';
 
 import 'credit_card_widget.dart';
 
@@ -9,8 +10,8 @@ class ListViewCreditCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
+    return SizedBox(
+      height: 180,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
@@ -24,19 +25,21 @@ class ListViewCreditCards extends StatelessWidget {
             valorAberto: "300,00",
             bandeira: "elo",
           ),
-          CreditCardWidget(
-            apelido: "Digio",
-            valorAberto: "20,00",
-            bandeira: "visa",
-          ),
-          CreditCardWidget(
-            apelido: "De fora",
-            valorAberto: "80,00",
-            bandeira: "american",
-          ),
-          CreditCardWidget(
-            apelido: "Itau",
-            valorAberto: "80,00",
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.whiteColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+              ),
+              onPressed: () {},
+              child: Icon(
+                Icons.add,
+                color: AppColors.grey2Color,
+                size: 50,
+              ),
+            ),
           ),
         ],
       ),
