@@ -15,10 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Center(
-        child: Container(
-          color: AppColors.backgroundColor,
-        ),
+      home: Scaffold(
+        backgroundColor: AppColors.backgroundColor,
+        body: Center(),
       ),
     );
   }

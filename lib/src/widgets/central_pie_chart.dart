@@ -31,33 +31,40 @@ class _CentralPieChartState extends State<CentralPieChart> {
   }
   @override
   Widget build(BuildContext context) {
-    return Chart(
-      data: data,
-      variables: {
-        'genre': Variable(
-          accessor: (Map map) => map['genre'] as String,
+    return SizedBox(
+      height: 200,
+      width: 200,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Chart(
+          data: data,
+          variables: {
+            'genre': Variable(
+              accessor: (Map map) => map['genre'] as String,
+            ),
+            'sold': Variable(
+              accessor: (Map map) => map['sold'] as num,
+            ),
+          },
+          transforms: [
+            Proportion(
+              variable: 'sold',
+              as: 'percent',
+            )
+          ],
+          elements: [
+            IntervalElement(
+              position: Varset('percent') / Varset('genre'),
+              color: ColorAttr(variable: 'genre', values: cores),
+              modifiers: [StackModifier()],
+            )
+          ],
+          coord: PolarCoord(
+            transposed: true,
+            dimCount: 1,
+            startRadius: 0.4,
+          ),
         ),
-        'sold': Variable(
-          accessor: (Map map) => map['sold'] as num,
-        ),
-      },
-      transforms: [
-        Proportion(
-          variable: 'sold',
-          as: 'percent',
-        )
-      ],
-      elements: [
-        IntervalElement(
-          position: Varset('percent') / Varset('genre'),
-          color: ColorAttr(variable: 'genre', values: cores),
-          modifiers: [StackModifier()],
-        )
-      ],
-      coord: PolarCoord(
-        transposed: true,
-        dimCount: 1,
-        startRadius: 0.4,
       ),
     );
   }
