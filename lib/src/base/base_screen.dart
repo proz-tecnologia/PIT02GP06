@@ -8,6 +8,7 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(color: AppColors.backgroundColor),
+      bottomNavigationBar: ,
     );
   }
 }
