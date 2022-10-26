@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         backgroundColor: AppColors.backgroundColor,
-        body: const Center(),
+        body: Center(),
       ),
     );
   }
