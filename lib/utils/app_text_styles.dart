@@ -7,7 +7,7 @@ class AppTextStyles {
   static TextStyle get textName => TextStyle(
       fontSize: 25, fontWeight: FontWeight.bold, color: AppColors.primaryColor);
   static TextStyle get textTitle =>
-      TextStyle(fontSize: 50, color: AppColors.grey1Color);
+      TextStyle(fontSize: 25, color: AppColors.grey1Color);
   static TextStyle get textOfDropDown =>
       TextStyle(fontSize: 50, color: AppColors.primaryColor);
   static TextStyle get textBalance => // Saldo, Receitas e Despesas
