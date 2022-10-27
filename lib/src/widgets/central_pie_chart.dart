@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:graphic/graphic.dart';
 
@@ -18,50 +16,41 @@ class CentralPieChart extends StatefulWidget {
   const CentralPieChart({super.key, required this.data});
 
   @override
-  State<CentralPieChart> createState() => _CentralPieChartState(data: data);
+  State<CentralPieChart> createState() => _CentralPieChartState();
 }
 
 class _CentralPieChartState extends State<CentralPieChart> {
-  final data;
-
   List<Color> cores = [];
-  _CentralPieChartState({this.data}) {
-    cores = List.from(data.map((e) => e['color']));
-    log(cores.toString());
-  }
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      width: 200,
-      child: Chart(
-        data: data,
-        variables: {
-          'genre': Variable(
-            accessor: (Map map) => map['genre'] as String,
-          ),
-          'sold': Variable(
-            accessor: (Map map) => map['sold'] as num,
-          ),
-        },
-        transforms: [
-          Proportion(
-            variable: 'sold',
-            as: 'percent',
-          )
-        ],
-        elements: [
-          IntervalElement(
-            position: Varset('percent') / Varset('genre'),
-            color: ColorAttr(variable: 'genre', values: cores),
-            modifiers: [StackModifier()],
-          )
-        ],
-        coord: PolarCoord(
-          transposed: true,
-          dimCount: 1,
-          startRadius: 0.5,
+    cores = List.from(widget.data.map((e) => e['color']));
+    return Chart(
+      data: widget.data,
+      variables: {
+        'genre': Variable(
+          accessor: (Map map) => map['genre'] as String,
         ),
+        'sold': Variable(
+          accessor: (Map map) => map['sold'] as num,
+        ),
+      },
+      transforms: [
+        Proportion(
+          variable: 'sold',
+          as: 'percent',
+        )
+      ],
+      elements: [
+        IntervalElement(
+          position: Varset('percent') / Varset('genre'),
+          color: ColorAttr(variable: 'genre', values: cores),
+          modifiers: [StackModifier()],
+        )
+      ],
+      coord: PolarCoord(
+        transposed: true,
+        dimCount: 1,
+        startRadius: 0.5,
       ),
     );
   }

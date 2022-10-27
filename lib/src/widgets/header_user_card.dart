@@ -15,7 +15,7 @@ class HeaderUserCard extends StatelessWidget {
     return Container(
 //      color: AppColors.whiteColor,
       width: MediaQuery.of(context).size.width,
-      height: 130,
+      height: 100,
 
       decoration: BoxDecoration(
           color: AppColors.whiteColor,
@@ -23,7 +23,7 @@ class HeaderUserCard extends StatelessWidget {
               const BorderRadius.vertical(bottom: Radius.elliptical(30, 30))),
       child: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(20, 6, 20, 6),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -31,12 +31,12 @@ class HeaderUserCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  radius: 30,
+                  radius: 25,
                   backgroundColor: const Color.fromARGB(255, 237, 236, 236),
                   foregroundColor: AppColors.grey2Color,
                   child: const Icon(
                     Icons.person,
-                    size: 50,
+                    size: 40,
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -59,7 +59,7 @@ class HeaderUserCard extends StatelessWidget {
             ),
             Icon(
               Icons.notifications,
-              size: 40,
+              size: 30,
               color: AppColors.grey2Color,
             ),
           ],

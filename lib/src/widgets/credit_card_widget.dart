@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
+// ignore: must_be_immutable
 class CreditCardWidget extends StatelessWidget {
   final mapBrands = {
     "master": "Mastercard",
@@ -43,7 +44,7 @@ class CreditCardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 200,
+        width: 180,
         decoration: BoxDecoration(
           color: AppColors.blue1Color,
           borderRadius: BorderRadius.circular(30),
