@@ -12,6 +12,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    int index = 0;
 
     return Container(
       width: size.width,
@@ -24,8 +25,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
             heightFactor: 0.5,
             child: FloatingActionButton(
               onPressed: () {},
-              backgroundColor: AppColors.backgroundButtonBottomNavColor,
-              child: Icon(Icons.add),
+              backgroundColor: AppColors.textValueIncome,
+              child: const Icon(Icons.add),
             ),
           ),
           Container(
@@ -34,17 +35,34 @@ class _BottomNavBarState extends State<BottomNavBar> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.add_business)),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.home),
+                    color: AppColors.textValueIncome,
+                    tooltip: 'Principal',
+                    // isSelected: ,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.add_business),
+                    color: AppColors.textTitleColor,
+                    tooltip: 'Transações',
+                  ),
                   Container(
                     width: size.width * 0.10,
                   ),
                   IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.corporate_fare_rounded)),
+                    onPressed: () {},
+                    icon: const Icon(Icons.list),
+                    color: AppColors.textTitleColor,
+                    tooltip: 'Detalhes',
+                  ),
                   IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.account_circle_outlined)),
+                    onPressed: () {},
+                    icon: const Icon(Icons.person_outline),
+                    color: AppColors.textTitleColor,
+                    tooltip: 'Perfil',
+                  ),
                 ]),
           )
         ],

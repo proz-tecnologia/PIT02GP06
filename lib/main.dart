@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pit02gp06/src/base/base_screen.dart';
+import 'package:pit02gp06/src/page/base_screen.dart';
 
 void main() {
   runApp(const MyApp());
