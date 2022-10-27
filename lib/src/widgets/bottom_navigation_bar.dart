@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  PageController pageController;
+  BottomNavBar({super.key, required this.pageController});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -10,9 +11,15 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
+  int index = 0;
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    int index = 0;
+    void changeIndex(value) {
+      setState(() {
+        widget.pageController.jumpToPage(value);
+        index = value;
+      });
+    }
 
     return Container(
       width: size.width,
@@ -36,31 +43,47 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      changeIndex(0);
+                    },
                     icon: const Icon(Icons.home),
-                    color: AppColors.textValueIncome,
+                    color: index == 0
+                        ? AppColors.textValueIncome
+                        : AppColors.textTitleColor,
                     tooltip: 'Principal',
                     // isSelected: ,
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.add_business),
-                    color: AppColors.textTitleColor,
+                    onPressed: () {
+                      changeIndex(1);
+                    },
+                    icon: const Icon(Icons.change_circle),
+                    color: index == 1
+                        ? AppColors.textValueIncome
+                        : AppColors.textTitleColor,
                     tooltip: 'Transações',
                   ),
                   Container(
                     width: size.width * 0.10,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      changeIndex(2);
+                    },
                     icon: const Icon(Icons.list),
-                    color: AppColors.textTitleColor,
+                    color: index == 2
+                        ? AppColors.textValueIncome
+                        : AppColors.textTitleColor,
                     tooltip: 'Detalhes',
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      changeIndex(3);
+                    },
                     icon: const Icon(Icons.person_outline),
-                    color: AppColors.textTitleColor,
+                    color: index == 3
+                        ? AppColors.textValueIncome
+                        : AppColors.textTitleColor,
                     tooltip: 'Perfil',
                   ),
                 ]),

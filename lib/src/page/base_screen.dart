@@ -14,14 +14,14 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  final List<Widget> screens = [
+  final List<Widget> screens = const [
     HomeScreen(),
     TransactionsScreen(),
     DetailsScreen(),
     ProfileScreen()
   ];
 
-  Widget currentScreen = HomeScreen();
+//  Widget currentScreen = HomeScreen();
   final pageController = PageController();
 
   @override
@@ -30,15 +30,12 @@ class _BaseScreenState extends State<BaseScreen> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: [
-          Container(color: Colors.red),
-          Container(color: Colors.green),
-          Container(color: Colors.blue),
-          Container(color: Colors.yellow),
-        ],
+        children: screens,
       ),
       backgroundColor: AppColors.backgroundColor,
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(
+        pageController: pageController,
+      ),
     );
   }
 }
