@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/details_screen.dart';
 import 'package:pit02gp06/src/page/home_screen.dart';
 import 'package:pit02gp06/src/page/profile.screen.dart';
@@ -15,7 +16,8 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   final List<Widget> screens = const [
-    HomeScreen(),
+//    HomeScreen(),
+    HomePage(),
     TransactionsScreen(),
     DetailsScreen(),
     ProfileScreen()

@@ -24,7 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Container(
       width: size.width,
       height: 70,
-      color: AppColors.backgroundCardColor,
+      color: AppColors.whiteColor,
       child: Stack(
         children: [
           CustomPaint(size: Size(size.width, 80)),
@@ -32,7 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             heightFactor: 0.5,
             child: FloatingActionButton(
               onPressed: () {},
-              backgroundColor: AppColors.textValueIncome,
+              backgroundColor: AppColors.blue1Color,
               child: const Icon(Icons.add),
             ),
           ),
@@ -48,8 +48,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     },
                     icon: const Icon(Icons.home),
                     color: index == 0
-                        ? AppColors.textValueIncome
-                        : AppColors.textTitleColor,
+                        ? AppColors.blue1Color
+                        : AppColors.grey1Color,
                     tooltip: 'Principal',
                     // isSelected: ,
                   ),
@@ -59,8 +59,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     },
                     icon: const Icon(Icons.change_circle),
                     color: index == 1
-                        ? AppColors.textValueIncome
-                        : AppColors.textTitleColor,
+                        ? AppColors.blue1Color
+                        : AppColors.grey1Color,
                     tooltip: 'Transações',
                   ),
                   Container(
@@ -72,8 +72,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     },
                     icon: const Icon(Icons.list),
                     color: index == 2
-                        ? AppColors.textValueIncome
-                        : AppColors.textTitleColor,
+                        ? AppColors.blue1Color
+                        : AppColors.grey1Color,
                     tooltip: 'Detalhes',
                   ),
                   IconButton(
@@ -82,8 +82,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     },
                     icon: const Icon(Icons.person_outline),
                     color: index == 3
-                        ? AppColors.textValueIncome
-                        : AppColors.textTitleColor,
+                        ? AppColors.blue1Color
+                        : AppColors.grey1Color,
                     tooltip: 'Perfil',
                   ),
                 ]),
