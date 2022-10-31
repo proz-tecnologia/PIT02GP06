@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/details_screen.dart';
-import 'package:pit02gp06/src/page/home_screen.dart';
 import 'package:pit02gp06/src/page/profile.screen.dart';
 import 'package:pit02gp06/src/page/transactions_screen.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
@@ -15,12 +14,12 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  final List<Widget> screens = const [
+  final List<Widget> screens = [
 //    HomeScreen(),
     HomePage(),
-    TransactionsScreen(),
-    DetailsScreen(),
-    ProfileScreen()
+    const TransactionsScreen(),
+    const DetailsScreen(),
+    const ProfileScreen()
   ];
 
 //  Widget currentScreen = HomeScreen();

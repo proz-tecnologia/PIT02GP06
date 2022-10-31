@@ -36,7 +36,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               child: const Icon(Icons.add),
             ),
           ),
-          Container(
+          SizedBox(
             width: size.width,
             height: 80,
             child: Row(

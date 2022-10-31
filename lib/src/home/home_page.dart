@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/home/home_controller.dart';
 import 'package:pit02gp06/src/widgets/balance_card.dart';
 import 'package:pit02gp06/src/widgets/card_despesas_widget.dart';
 import 'package:pit02gp06/src/widgets/header_user_card.dart';
@@ -9,7 +10,8 @@ import 'dart:developer';
 import '../widgets/title_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  HomeController controller = HomeController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,10 @@ class HomePage extends StatelessWidget {
                 Icons.menu,
                 color: AppColors.grey1Color,
               ),
-              const BalanceCard(balance: "300", income: "1000", spend: "700"),
+              BalanceCard(
+                  balance: controller.balance,
+                  income: controller.income,
+                  spend: controller.spend),
               TitleWidget(title: "Cartões de Crédito"),
               const ListViewCreditCards(),
               TitleWidget(title: "Despesas"),
