@@ -27,9 +27,28 @@ class AppTextStyles {
   static TextStyle get textNotRegistered =>
       TextStyle(fontSize: 35, fontFamily: 'Karla', color: AppColors.grey1Color);
 
-//credit card
+// credit card
   static TextStyle get textCreditCard =>
       TextStyle(fontSize: 13, fontFamily: 'Karla', color: AppColors.whiteColor);
   static TextStyle get textCreditCardValueBalance => TextStyle(
       fontSize: 25, color: AppColors.whiteColor, fontWeight: FontWeight.bold);
+
+// button widget (criar uma conta, entrar)
+
+  static TextStyle get textButtonWidget =>
+      TextStyle(fontSize: 20, color: AppColors.whiteColor);
+
+// button secondary (já sou cadastrado, recuperar a senha, criar conta)
+  static TextStyle get textButtonSecondaryBlue => TextStyle(
+      fontSize: 20, fontFamily: 'Karla', color: AppColors.secondaryColor);
+  static TextStyle get textButtonSecondaryGrey => TextStyle(
+      fontSize: 20, fontFamily: 'Karla', color: AppColors.primaryColor);
+
+// text intro (texto da tela inicial)
+  static TextStyle get textIntro =>
+      TextStyle(fontSize: 25, fontFamily: 'Karla', color: AppColors.grey3Color);
+
+// text intro (logo)
+  static TextStyle get textBrand =>
+      TextStyle(fontSize: 65, fontFamily: 'Karla', color: AppColors.grey3Color);
 }
