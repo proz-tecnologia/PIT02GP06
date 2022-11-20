@@ -7,6 +7,7 @@ class AppColors {
   static Color get secondaryColor => const Color(0xFF1E38FA); // Azul principal
   static Color get grey1Color => const Color(0xFF47525E);
   static Color get grey2Color => const Color(0xFF808080);
+  static Color get grey3Color => const Color(0xFF343F4B);
   static Color get red1Color => const Color(0xFFDB353E); // Despesas
   static Color get whiteColor =>
       const Color(0xFFFFFFFF); // Background dos cards
