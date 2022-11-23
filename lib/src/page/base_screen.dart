@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/details_screen.dart';
 import 'package:pit02gp06/src/page/profile.screen.dart';
-import 'package:pit02gp06/src/page/transactions_screen.dart';
+import 'package:pit02gp06/src/transactions/transactions_screen.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
@@ -17,7 +17,7 @@ class _BaseScreenState extends State<BaseScreen> {
   final List<Widget> screens = [
 //    HomeScreen(),
     HomePage(),
-    const TransactionsScreen(),
+    TransactionsScreen(),
     const DetailsScreen(),
     const ProfileScreen()
   ];
