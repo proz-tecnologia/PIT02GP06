@@ -65,13 +65,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                 child: Row(
                                   children: [
                                     IconButton(
-                                      onPressed: controller.save,
+                                      onPressed: null,
                                       icon: Icon(Icons.edit),
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        controller.delete(
-                                            index, value.transactionsList);
+                                        controller.delete(index);
                                       },
                                       icon: Icon(Icons.delete),
                                     ),

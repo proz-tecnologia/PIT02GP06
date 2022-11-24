@@ -22,22 +22,17 @@ class TransactionsController {
     state.value = TransactionsSuccessState(transactionsList: transactionsList);
   }
 
-  void delete(int index, List<TransactionModel> list) {
+  void delete(int index) async {
     state.value = TransactionsLoadState();
-    list = _repository.remove(index, list);
+    await _repository.remove(index);
+    List<TransactionModel> list = await _repository.loadTransactions();
     state.value = TransactionsSuccessState(transactionsList: list);
   }
 
   void add(TransactionModel transaction) async {
     state.value = TransactionsLoadState();
+    await _repository.add(transaction);
     List<TransactionModel> list = await _repository.loadTransactions();
-    list = _repository.add(transaction, list);
-
     state.value = TransactionsSuccessState(transactionsList: list);
-  }
-
-  void save() {
-    _repository
-        .save((state.value as TransactionsSuccessState).transactionsList);
   }
 }

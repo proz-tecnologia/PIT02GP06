@@ -36,19 +36,15 @@ class TransactionsRepository {
     // ];
   }
 
-  List<TransactionModel> add(
-      TransactionModel transaction, List<TransactionModel> list) {
+  Future add(TransactionModel transaction) async {
+    List<TransactionModel> list = await loadTransactions();
     list.add(transaction);
-    return list;
+    await service.set(url: SharedPreferencesKeys.transactions, data: list);
   }
 
-  List<TransactionModel> remove(int index, List<TransactionModel> list) {
+  Future remove(int index) async {
+    List<TransactionModel> list = await loadTransactions();
     list.removeAt(index);
-    service.set(url: SharedPreferencesKeys.transactions, data: list);
-    return list;
-  }
-
-  void save(List<TransactionModel> list) async {
     await service.set(url: SharedPreferencesKeys.transactions, data: list);
   }
 }
