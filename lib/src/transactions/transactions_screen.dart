@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pit02gp06/models/income_model.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/transactions/add_transaction_page.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
