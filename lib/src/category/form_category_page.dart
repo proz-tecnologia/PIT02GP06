@@ -61,8 +61,12 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
                           log('---> newNotePage -->  validate=true -> cria newNote');
                           final category = CategoryModel(
                               genre: textController.text,
-                              color: 0xFF0F0297,
-                              type: "Expense");
+                              color: widget.category != null
+                                  ? widget.category!.color
+                                  : 0xFF0F0297,
+                              type: widget.category != null
+                                  ? widget.category!.type
+                                  : "Expense");
                           log('---> newNotePage -->  navega devolta para home');
                           Navigator.pop(context, category);
                         }
