@@ -35,6 +35,8 @@ class _CategoryPageState extends State<CategoryPage> {
     bloc.inputCategory.close();
   }
 
+  Object dropDownTypeValue = 0;
+  List<String> listType = ['Income', 'Expense'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +49,9 @@ class _CategoryPageState extends State<CategoryPage> {
               onPressed: () async {
                 await Navigator.of(context)
                     .push<CategoryModel?>(MaterialPageRoute(
-                        builder: (context) => FormCategoryPage()))
+                        builder: (context) => FormCategoryPage(
+                            type: listType[
+                                int.parse(dropDownTypeValue.toString())])))
                     .then((value) {
                   if (value != null && value.runtimeType == CategoryModel) {
                     bloc.inputCategory.add(AddCategoryEvent(category: value));
@@ -59,81 +63,124 @@ class _CategoryPageState extends State<CategoryPage> {
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
-        child: StreamBuilder<CategoryState>(
-            stream: bloc.stream,
-            builder: (context, snapshot) {
-              final categoryList = snapshot.data?.categoryList ?? [];
-              return ListView.builder(
-                itemCount: categoryList.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Color(categoryList[index].color),
-                      child: ClipRRect(
-                        child: Text(categoryList[index].genre.substring(0, 1)),
-                      ),
-                    ),
-                    title: Text(categoryList[index].genre),
-                    trailing: SizedBox(
-                      width: 150,
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.color_lens,
-                              color: Color(categoryList[index].color),
-                            ),
-                            onPressed: () async {
-                              var color;
-                              color = await SelectColorModal(context);
-                              log("color retornada $color");
-                              if (color != null && color.runtimeType == int) {
-                                categoryList[index].color = color;
-                                bloc.inputCategory.add(EditCategoryEvent(
-                                    index: index,
-                                    category: categoryList[index]));
-                              }
-                            },
-                          ),
-                          IconButton(
-                            onPressed: () async {
-                              await Navigator.of(context)
-                                  .push<CategoryModel?>(MaterialPageRoute(
-                                      builder: (context) => FormCategoryPage(
-                                          category: categoryList[index])))
-                                  .then((value) {
-                                if (value != null &&
-                                    value.runtimeType == CategoryModel) {
-                                  bloc.inputCategory.add(EditCategoryEvent(
-                                      index: index, category: value));
-                                }
-                              });
-                            },
-                            icon: const Icon(Icons.edit),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              if (index < 2) {
-                                const snackBar = SnackBar(
-                                  content:
-                                      Text('Este ítem não pode ser excluído!'),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                                return;
-                              }
-                              bloc.inputCategory.add(RemoveCategoryEvent(
-                                  category: categoryList[index]));
-                            },
-                            icon: const Icon(Icons.delete),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
-            }),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 100,
+              child: DropdownButton(
+                  value: dropDownTypeValue,
+                  items: [
+                    DropdownMenuItem(value: 0, child: Text("Receitas")),
+                    DropdownMenuItem(value: 1, child: Text("Despesas")),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      dropDownTypeValue = value!;
+                    });
+                  }),
+            ),
+            Expanded(
+              child: StreamBuilder<CategoryState>(
+                  stream: bloc.stream,
+                  builder: (context, snapshot) {
+                    final categoryList = snapshot.data?.categoryList ?? [];
+                    return ListView.builder(
+                      itemCount: categoryList.length,
+                      itemBuilder: (context, index) {
+                        return listType[
+                                    int.parse(dropDownTypeValue.toString())] !=
+                                categoryList[index].type
+                            ? const SizedBox()
+                            : ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor:
+                                      Color(categoryList[index].color),
+                                  child: ClipRRect(
+                                    child: Text(categoryList[index]
+                                        .genre
+                                        .substring(0, 1)),
+                                  ),
+                                ),
+                                title: Text(categoryList[index].genre),
+                                trailing: SizedBox(
+                                  width: 150,
+                                  child: Row(
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.color_lens,
+                                          color:
+                                              Color(categoryList[index].color),
+                                        ),
+                                        onPressed: () async {
+                                          var color;
+                                          color =
+                                              await SelectColorModal(context);
+                                          log("color retornada $color");
+                                          if (color != null &&
+                                              color.runtimeType == int) {
+                                            categoryList[index].color = color;
+                                            bloc.inputCategory.add(
+                                                EditCategoryEvent(
+                                                    index: index,
+                                                    category:
+                                                        categoryList[index]));
+                                          }
+                                        },
+                                      ),
+                                      IconButton(
+                                        onPressed: () async {
+                                          await Navigator.of(context)
+                                              .push<CategoryModel?>(MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      FormCategoryPage(
+                                                          type: listType[int.parse(
+                                                              dropDownTypeValue
+                                                                  .toString())],
+                                                          category:
+                                                              categoryList[
+                                                                  index])))
+                                              .then((value) {
+                                            if (value != null &&
+                                                value.runtimeType ==
+                                                    CategoryModel) {
+                                              bloc.inputCategory.add(
+                                                  EditCategoryEvent(
+                                                      index: index,
+                                                      category: value));
+                                            }
+                                          });
+                                        },
+                                        icon: const Icon(Icons.edit),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          if (index < 2) {
+                                            const snackBar = SnackBar(
+                                              content: Text(
+                                                  'Este ítem não pode ser excluído!'),
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                            return;
+                                          }
+                                          bloc.inputCategory.add(
+                                              RemoveCategoryEvent(
+                                                  category:
+                                                      categoryList[index]));
+                                        },
+                                        icon: const Icon(Icons.delete),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                      },
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }

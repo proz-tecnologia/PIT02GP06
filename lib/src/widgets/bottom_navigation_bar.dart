@@ -1,5 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
+
+import '../../models/transaction_model.dart';
+import '../transactions/add_transaction_page.dart';
+import 'new_transaction_dialog.dart';
 
 class BottomNavBar extends StatefulWidget {
   PageController pageController;
@@ -10,6 +18,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  final transactionsController = TransactionsController();
   @override
   int index = 0;
   Widget build(BuildContext context) {
@@ -31,7 +40,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Center(
             heightFactor: 0.5,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () async {
+                String? type = await showNewTransactionDialog(context);
+                if (type != null) {
+                  await Navigator.of(context)
+                      .push<TransactionModel?>(MaterialPageRoute(
+                          builder: (context) => AddTransactionPage(type: type)))
+                      .then((value) {
+                    if (value != null &&
+                        value.runtimeType == TransactionModel) {
+                      transactionsController.add(value);
+                    }
+                  });
+                }
+              },
               backgroundColor: AppColors.blue1Color,
               child: const Icon(Icons.add),
             ),

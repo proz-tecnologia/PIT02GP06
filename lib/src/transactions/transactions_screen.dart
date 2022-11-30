@@ -27,7 +27,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               onPressed: () async {
                 await Navigator.of(context)
                     .push<TransactionModel?>(MaterialPageRoute(
-                        builder: (context) => AddTransactionPage()))
+                        builder: (context) => AddTransactionPage(
+                              type: "Expense",
+                            )))
                     .then((value) {
                   if (value != null && value.runtimeType == TransactionModel) {
                     controller.add(value);

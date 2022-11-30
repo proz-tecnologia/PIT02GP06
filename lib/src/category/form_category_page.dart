@@ -7,7 +7,8 @@ import '../../models/category_model.dart';
 
 class FormCategoryPage extends StatefulWidget {
   CategoryModel? category;
-  FormCategoryPage({super.key, this.category});
+  String type;
+  FormCategoryPage({required this.type, super.key, this.category});
 
   @override
   State<FormCategoryPage> createState() => _FormCategoryPageState();
@@ -64,9 +65,7 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
                               color: widget.category != null
                                   ? widget.category!.color
                                   : 0xFF0F0297,
-                              type: widget.category != null
-                                  ? widget.category!.type
-                                  : "Expense");
+                              type: widget.type);
                           log('---> newNotePage -->  navega devolta para home');
                           Navigator.pop(context, category);
                         }
