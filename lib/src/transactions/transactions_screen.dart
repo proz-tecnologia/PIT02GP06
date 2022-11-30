@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
+import 'package:pit02gp06/src/category/category_page.dart';
 import 'package:pit02gp06/src/transactions/add_transaction_page.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/src/transactions/transactions_state.dart';
@@ -11,6 +12,9 @@ class TransactionsScreen extends StatefulWidget {
 
   @override
   State<TransactionsScreen> createState() => _TransactionsScreenState();
+
+  @override
+  void dispose() {}
 }
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
@@ -37,6 +41,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 });
               },
               icon: Icon(Icons.add)),
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push<TransactionModel?>(
+                    MaterialPageRoute(builder: (context) => CategoryPage()));
+              },
+              icon: Icon(Icons.settings)),
           Expanded(
             child: ValueListenableBuilder(
                 valueListenable: controller.state,

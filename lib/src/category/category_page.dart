@@ -32,6 +32,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   void dispose() {
+    super.dispose();
     bloc.inputCategory.close();
   }
 
