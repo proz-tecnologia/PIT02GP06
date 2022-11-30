@@ -10,9 +10,9 @@ class TransactionsRepository {
   TransactionsRepository({required this.service});
 
   Future<List<TransactionModel>> loadTransactions() async {
-    final transactionsString =
+    final String? transactionsString =
         await service.get(url: SharedPreferencesKeys.transactions);
-    if (transactionsString != null) {
+    if (transactionsString != null && transactionsString.isNotEmpty) {
       final listJsonTransactions = jsonDecode(transactionsString);
       final listTransactions = List.from(listJsonTransactions)
           .map((e) => TransactionModel.fromJson(e))

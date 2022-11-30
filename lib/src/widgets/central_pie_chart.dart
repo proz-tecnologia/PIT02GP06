@@ -23,7 +23,8 @@ class _CentralPieChartState extends State<CentralPieChart> {
   List<Color> cores = [];
   @override
   Widget build(BuildContext context) {
-    cores = List.from(widget.data.map((e) => e['color']));
+    cores = List.from(
+        widget.data.map((e) => Color(int.parse(e['color'].toString()))));
     return Chart(
       data: widget.data,
       variables: {
