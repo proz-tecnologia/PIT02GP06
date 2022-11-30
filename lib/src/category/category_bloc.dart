@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:pit02gp06/models/category_model.dart';
 import 'package:pit02gp06/repositories/category_repository.dart';
@@ -30,12 +31,15 @@ class CategoryBloc {
   _mapEventToState(CategoryEvent event) async {
     await init();
     List<CategoryModel> categoryList = [];
+    log("repos é ${_repository.runtimeType}");
     if (event is LoadCategoryEvent) {
-      categoryList = _repository.loadList();
+      categoryList = await _repository.loadList();
     } else if (event is AddCategoryEvent) {
-      categoryList = _repository.add(event.category);
+      categoryList = await _repository.add(event.category);
     } else if (event is RemoveCategoryEvent) {
-      categoryList = _repository.remove(event.category);
+      categoryList = await _repository.remove(event.category);
+    } else if (event is EditCategoryEvent) {
+      categoryList = await _repository.edit(event.index, event.category);
     }
     _outputCategoryController
         .add(CategorySuccessState(categoryList: categoryList));

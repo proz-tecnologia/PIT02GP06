@@ -18,3 +18,12 @@ class RemoveCategoryEvent extends CategoryEvent {
     required this.category,
   });
 }
+
+class EditCategoryEvent extends CategoryEvent {
+  CategoryModel category;
+  int index;
+  EditCategoryEvent({
+    required this.index,
+    required this.category,
+  });
+}
