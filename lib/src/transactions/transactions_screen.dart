@@ -8,17 +8,18 @@ import 'package:pit02gp06/src/widgets/title_widget.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 class TransactionsScreen extends StatefulWidget {
-  TransactionsScreen({super.key});
+  final TransactionsController controller;
+  TransactionsScreen({super.key, required this.controller});
 
   @override
   State<TransactionsScreen> createState() => _TransactionsScreenState();
 
-  @override
-  void dispose() {}
+//   @override
+//   void dispose() {}
 }
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
-  final controller = TransactionsController();
+//  final controller = TransactionsController();
   TextEditingController newValueController = TextEditingController();
 
   @override
@@ -36,7 +37,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                             )))
                     .then((value) {
                   if (value != null && value.runtimeType == TransactionModel) {
-                    controller.add(value);
+                    widget.controller.add(value);
                   }
                 });
               },
@@ -49,7 +50,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               icon: Icon(Icons.settings)),
           Expanded(
             child: ValueListenableBuilder(
-                valueListenable: controller.state,
+                valueListenable: widget.controller.state,
                 builder: (context, value, child) {
                   switch (value.runtimeType) {
                     case TransactionsEmptyState:
@@ -81,7 +82,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        controller.delete(index);
+                                        widget.controller.delete(index);
                                       },
                                       icon: Icon(Icons.delete),
                                     ),

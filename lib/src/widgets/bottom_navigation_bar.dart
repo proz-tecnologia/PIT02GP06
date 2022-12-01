@@ -11,14 +11,17 @@ import 'new_transaction_dialog.dart';
 
 class BottomNavBar extends StatefulWidget {
   PageController pageController;
-  BottomNavBar({super.key, required this.pageController});
+  final transactionsController;
+  BottomNavBar(
+      {super.key,
+      required this.pageController,
+      required this.transactionsController});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final transactionsController = TransactionsController();
   @override
   int index = 0;
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       .then((value) {
                     if (value != null &&
                         value.runtimeType == TransactionModel) {
-                      transactionsController.add(value);
+                      widget.transactionsController.add(value);
                     }
                   });
                 }
