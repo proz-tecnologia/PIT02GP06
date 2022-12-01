@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/src/home/home_controller.dart';
+import 'package:pit02gp06/src/home/home_state.dart';
 import 'package:pit02gp06/src/widgets/balance_card.dart';
 import 'package:pit02gp06/src/widgets/card_despesas_widget.dart';
 import 'package:pit02gp06/src/widgets/header_user_card.dart';
@@ -10,8 +11,8 @@ import 'dart:developer';
 import '../widgets/title_widget.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-  HomeController controller = HomeController();
+  HomePage({super.key, required this.controller});
+  HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,22 @@ class HomePage extends StatelessWidget {
                 Icons.menu,
                 color: AppColors.grey1Color,
               ),
-              BalanceCard(
-                  balance: controller.balance,
-                  income: controller.income,
-                  spend: controller.spend),
+              ValueListenableBuilder(
+                valueListenable: controller.state,
+                builder: (context, value, child) {
+                  return BalanceCard(
+                    balance: value is HomeSuccessState
+                        ? value.resume.balance.toStringAsFixed(2)
+                        : "-.--",
+                    income: value is HomeSuccessState
+                        ? value.resume.income.toStringAsFixed(2)
+                        : "-.--",
+                    spend: value is HomeSuccessState
+                        ? value.resume.spend.toStringAsFixed(2)
+                        : "-.--",
+                  );
+                },
+              ),
               TitleWidget(title: "Cartões de Crédito"),
               const ListViewCreditCards(),
               TitleWidget(title: "Despesas"),

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/home/home_controller.dart';
 import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/details_screen.dart';
 import 'package:pit02gp06/src/page/profile.screen.dart';
 import 'package:pit02gp06/src/transactions/transactions_screen.dart';
+import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
@@ -17,15 +21,26 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   final transactiosController = TransactionsController();
-
-//  Widget currentScreen = HomeScreen();
+  final homeController = HomeController();
   final pageController = PageController();
+  @override
+  void initState() {
+    transactiosController.state.addListener(() {
+      if (transactiosController.state.value is TransactionsSuccessState) {
+        homeController.update(
+            (transactiosController.state.value as TransactionsSuccessState)
+                .transactionsList);
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-//    HomeScreen(),
-      HomePage(),
+      HomePage(
+        controller: homeController,
+      ),
       TransactionsScreen(
         controller: transactiosController,
       ),
