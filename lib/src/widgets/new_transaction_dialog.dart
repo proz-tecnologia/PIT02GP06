@@ -8,7 +8,7 @@ Future<String?> showNewTransactionDialog(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Incluir uma"),
+          backgroundColor: Color(0x00000000),
           content: Row(children: [
             ElevatedButton(
                 onPressed: () {
