@@ -57,7 +57,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                           final newNote = TransactionModel(
                               data: DateTime.now(),
                               valor: double.parse(textController.text),
-                              contaId: 0);
+                              contaId: 0,
+                              type: widget.type);
                           log('---> newNotePage -->  navega devolta para home');
                           Navigator.pop(context, newNote);
                         }
