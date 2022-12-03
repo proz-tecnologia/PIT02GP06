@@ -25,7 +25,7 @@ class _ListViewDespesasState extends State<ListViewDespesas> {
                 children: [
                   Icon(
                     Icons.circle,
-                    color: widget.listCategorias[index]['color'] as Color,
+                    color: Color(widget.listCategorias[index]['color']),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

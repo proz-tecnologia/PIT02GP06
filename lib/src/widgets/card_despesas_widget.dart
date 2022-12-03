@@ -8,27 +8,17 @@ class CardDespesasWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final listaCustosPorCategoria = [
+    //   {'genre': 'Lazer', 'sold': 200, 'color': Color(0xFF5A41FF)},
+    //   {'genre': 'Transporte', 'sold': 130, 'color': Color(0xFF0F0297)},
+    //   {'genre': 'Casa', 'sold': 300, 'color': Color(0xFFE10F00)},
+    //   {'genre': 'Outros', 'sold': 50, 'color': Color(0xFFE6F201)},
+    // ];
     final listaCustosPorCategoria = [
-      {
-        'genre': 'Lazer',
-        'sold': 200,
-        'color': const Color.fromARGB(255, 90, 65, 255)
-      },
-      {
-        'genre': 'Transporte',
-        'sold': 130,
-        'color': const Color.fromARGB(255, 15, 2, 151)
-      },
-      {
-        'genre': 'Casa',
-        'sold': 300,
-        'color': const Color.fromARGB(255, 225, 15, 0)
-      },
-      {
-        'genre': 'Outros',
-        'sold': 50,
-        'color': const Color.fromARGB(255, 230, 242, 1)
-      },
+      {'genre': 'Lazer', 'sold': 200, 'color': 0xFF5A41FF},
+      {'genre': 'Transporte', 'sold': 130, 'color': 0xFF0F0297},
+      {'genre': 'Casa', 'sold': 300, 'color': 0xFFE10F00},
+      {'genre': 'Outros', 'sold': 50, 'color': 0xFFE6F201},
     ];
 
     return Card(

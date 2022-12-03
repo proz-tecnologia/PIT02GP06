@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/category/category_page.dart';
+import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/base_screen.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: const BaseScreen(),
+        body: BaseScreen(),
         backgroundColor: AppColors.backgroundColor,
       ),
     );

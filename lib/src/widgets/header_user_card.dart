@@ -32,7 +32,7 @@ class HeaderUserCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 25,
-                  backgroundColor: const Color.fromARGB(255, 237, 236, 236),
+                  backgroundColor: AppColors.whiteColor,
                   foregroundColor: AppColors.grey2Color,
                   child: const Icon(
                     Icons.person,
