@@ -1,10 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/home/home_controller.dart';
 import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/details_screen.dart';
 import 'package:pit02gp06/src/page/profile.screen.dart';
 import 'package:pit02gp06/src/transactions/transactions_screen.dart';
+import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+
+import '../transactions/transactions_controller.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -14,19 +20,33 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  final List<Widget> screens = [
-//    HomeScreen(),
-    HomePage(),
-    TransactionsScreen(),
-    const DetailsScreen(),
-    const ProfileScreen()
-  ];
-
-//  Widget currentScreen = HomeScreen();
+  final transactiosController = TransactionsController();
+  final homeController = HomeController();
   final pageController = PageController();
+  @override
+  void initState() {
+    transactiosController.state.addListener(() {
+      if (transactiosController.state.value is TransactionsSuccessState) {
+        homeController.update(
+            (transactiosController.state.value as TransactionsSuccessState)
+                .transactionsList);
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      HomePage(
+        controller: homeController,
+      ),
+      TransactionsScreen(
+        controller: transactiosController,
+      ),
+      const DetailsScreen(),
+      const ProfileScreen()
+    ];
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
@@ -36,6 +56,7 @@ class _BaseScreenState extends State<BaseScreen> {
       backgroundColor: AppColors.backgroundColor,
       bottomNavigationBar: BottomNavBar(
         pageController: pageController,
+        transactionsController: transactiosController,
       ),
     );
   }

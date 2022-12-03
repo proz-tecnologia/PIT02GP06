@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 
 class AddTransactionPage extends StatefulWidget {
-  const AddTransactionPage({super.key});
+  String type;
+  AddTransactionPage({super.key, required this.type});
 
   @override
   State<AddTransactionPage> createState() => _AddTransactionPageState();
@@ -18,7 +19,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF00127A),
-        title: const Text("Adicionar Transação"),
+        title: Text("Adicionar Transação de ${widget.type}"),
         centerTitle: true,
       ),
       body: Form(
@@ -56,7 +57,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                           final newNote = TransactionModel(
                               data: DateTime.now(),
                               valor: double.parse(textController.text),
-                              contaId: 0);
+                              contaId: 0,
+                              type: widget.type);
                           log('---> newNotePage -->  navega devolta para home');
                           Navigator.pop(context, newNote);
                         }

@@ -65,7 +65,7 @@ class _BalanceCardState extends State<BalanceCard> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        secret ? '*****' : widget.balance,
+                        secret ? '*****' : "R\$ ${widget.balance}",
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -77,11 +77,11 @@ class _BalanceCardState extends State<BalanceCard> {
                         children: [
                           _financialMovementWidget(
                               "Receitas",
-                              secret ? '*****' : widget.income,
+                              secret ? '*****' : "R\$ ${widget.income}",
                               const Color(0xFF1E38FA)),
                           _financialMovementWidget(
                               "Despesas",
-                              secret ? '*****' : widget.spend,
+                              secret ? '*****' : "R\$ ${widget.spend}",
                               const Color(0xFFDB353E)),
                         ],
                       ),

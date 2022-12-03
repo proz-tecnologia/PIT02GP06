@@ -1,41 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class TransactionModel {
   DateTime data;
   double valor;
   int contaId;
+  String type;
   TransactionModel({
     required this.data,
     required this.valor,
     required this.contaId,
+    required this.type,
   });
-
-  @override
-  String toString() =>
-      'TransactionModel(data: $data, valor: $valor, contaId: $contaId)';
-
-  @override
-  bool operator ==(covariant TransactionModel other) {
-    if (identical(this, other)) return true;
-
-    return other.data == data &&
-        other.valor == valor &&
-        other.contaId == contaId;
-  }
-
-  @override
-  int get hashCode => data.hashCode ^ valor.hashCode ^ contaId.hashCode;
 
   TransactionModel copyWith({
     DateTime? data,
     double? valor,
     int? contaId,
+    String? type,
   }) {
     return TransactionModel(
       data: data ?? this.data,
       valor: valor ?? this.valor,
       contaId: contaId ?? this.contaId,
+      type: type ?? this.type,
     );
   }
 
@@ -44,6 +32,7 @@ class TransactionModel {
       'data': data.millisecondsSinceEpoch,
       'valor': valor,
       'contaId': contaId,
+      'type': type,
     };
   }
 
@@ -52,6 +41,7 @@ class TransactionModel {
       data: DateTime.fromMillisecondsSinceEpoch(map['data'] as int),
       valor: map['valor'] as double,
       contaId: map['contaId'] as int,
+      type: map['type'] as String,
     );
   }
 
@@ -59,4 +49,24 @@ class TransactionModel {
 
   factory TransactionModel.fromJson(String source) =>
       TransactionModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'TransactionModel(data: $data, valor: $valor, contaId: $contaId, type: $type)';
+  }
+
+  @override
+  bool operator ==(covariant TransactionModel other) {
+    if (identical(this, other)) return true;
+
+    return other.data == data &&
+        other.valor == valor &&
+        other.contaId == contaId &&
+        other.type == type;
+  }
+
+  @override
+  int get hashCode {
+    return data.hashCode ^ valor.hashCode ^ contaId.hashCode ^ type.hashCode;
+  }
 }
