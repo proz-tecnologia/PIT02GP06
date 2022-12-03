@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/utils/i_http_service.dart';

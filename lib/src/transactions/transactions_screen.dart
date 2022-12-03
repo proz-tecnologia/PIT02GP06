@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_page.dart';
-import 'package:pit02gp06/src/transactions/add_transaction_page.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
-import 'package:pit02gp06/src/widgets/title_widget.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 class TransactionsScreen extends StatefulWidget {
   final TransactionsController controller;
-  TransactionsScreen({super.key, required this.controller});
+  const TransactionsScreen({super.key, required this.controller});
 
   @override
   State<TransactionsScreen> createState() => _TransactionsScreenState();
@@ -34,9 +32,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             IconButton(
                 onPressed: () {
                   Navigator.of(context).push<TransactionModel?>(
-                      MaterialPageRoute(builder: (context) => CategoryPage()));
+                      MaterialPageRoute(
+                          builder: (context) => const CategoryPage()));
                 },
-                icon: Icon(Icons.settings)),
+                icon: const Icon(Icons.settings)),
           ],
         ),
         // IconButton(
@@ -57,7 +56,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           width: 100,
           child: DropdownButton(
               value: dropDownTypeValue,
-              items: [
+              items: const [
                 DropdownMenuItem(value: 0, child: Text("Receitas")),
                 DropdownMenuItem(value: 1, child: Text("Despesas")),
 //                DropdownMenuItem(value: 2, child: Text("Todas")),
@@ -76,7 +75,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   case TransactionsEmptyState:
                     return const Text("VAZIO!!!");
                   case TransactionsLoadState:
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   case TransactionsSuccessState:
                     return ListView.builder(
                         itemCount: (value as TransactionsSuccessState)
@@ -95,16 +94,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                           : AppColors.red1Color,
                                   leading: value.transactionsList[index].type ==
                                           "Income"
-                                      ? Icon(Icons.add)
-                                      : Icon(Icons.remove),
+                                      ? const Icon(Icons.add)
+                                      : const Icon(Icons.remove),
                                   title: Text(value
                                       .transactionsList[index].valor
                                       .toString()),
-                                  trailing: Container(
+                                  trailing: SizedBox(
                                     width: 100,
                                     child: Row(
                                       children: [
-                                        IconButton(
+                                        const IconButton(
                                           onPressed: null,
                                           icon: Icon(Icons.edit),
                                         ),
@@ -112,7 +111,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                           onPressed: () {
                                             widget.controller.delete(index);
                                           },
-                                          icon: Icon(Icons.delete),
+                                          icon: const Icon(Icons.delete),
                                         ),
                                       ],
                                     ),

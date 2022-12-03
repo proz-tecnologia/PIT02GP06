@@ -59,14 +59,14 @@ class _CategoryPageState extends State<CategoryPage> {
                       }
                     });
                   },
-                  icon: Icon(Icons.add)),
+                  icon: const Icon(Icons.add)),
             ],
           ),
           SizedBox(
             width: 100,
             child: DropdownButton(
                 value: dropDownTypeValue,
-                items: [
+                items: const [
                   DropdownMenuItem(value: 0, child: Text("Receitas")),
                   DropdownMenuItem(value: 1, child: Text("Despesas")),
                 ],
@@ -110,7 +110,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                       ),
                                       onPressed: () async {
                                         var color;
-                                        color = await SelectColorModal(context);
+                                        color = await selectColorModal(context);
                                         log("color retornada $color");
                                         if (color != null &&
                                             color.runtimeType == int) {

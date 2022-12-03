@@ -1,29 +1,29 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
-import 'package:pit02gp06/utils/app_text_styles.dart';
 
 import '../../models/transaction_model.dart';
+import '../category/category_bloc.dart';
 import '../transactions/add_transaction_page.dart';
 import 'new_transaction_dialog.dart';
 
 class BottomNavBar extends StatefulWidget {
   PageController pageController;
-  final transactionsController;
+  TransactionsController transactionsController;
+  final CategoryBloc categoryBloc;
   BottomNavBar(
       {super.key,
       required this.pageController,
-      required this.transactionsController});
+      required this.transactionsController,
+      required this.categoryBloc});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  @override
   int index = 0;
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     void changeIndex(value) {
@@ -48,7 +48,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 if (type != null) {
                   await Navigator.of(context)
                       .push<TransactionModel?>(MaterialPageRoute(
-                          builder: (context) => AddTransactionPage(type: type)))
+                          builder: (context) => AddTransactionPage(
+                                type: type,
+                              )))
                       .then((value) {
                     if (value != null &&
                         value.runtimeType == TransactionModel) {

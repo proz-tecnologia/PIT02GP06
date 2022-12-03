@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:pit02gp06/models/transaction_model.dart';
 
 import '../../models/category_model.dart';
 
