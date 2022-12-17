@@ -103,11 +103,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                         color: Color(categoryList[index].color),
                                       ),
                                       onPressed: () async {
-                                        var color;
-                                        color = await SelectColorModal(context);
+                                        Color color =
+                                            await SelectColorModal(context);
                                         log("color retornada $color");
-                                        if (color != null &&
-                                            color.runtimeType == int) {
+                                        if (color.runtimeType == int) {
                                           categoryList[index].color = color;
                                           widget.controller
                                               .edit(index, categoryList[index]);

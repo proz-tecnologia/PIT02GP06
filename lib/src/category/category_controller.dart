@@ -8,7 +8,7 @@ import 'category_states.dart';
 
 class CategoryController {
   ValueNotifier<CategoryState> state = ValueNotifier(CategoryEmptyState());
-  late final _repository;
+  late final CategoryRepository _repository;
 //  final instance;
 
   CategoryController() {

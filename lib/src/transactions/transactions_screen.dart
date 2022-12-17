@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/models/category_model.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_page.dart';
+import 'package:pit02gp06/src/category/category_states.dart';
+import 'package:pit02gp06/src/transactions/add_transaction_page.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
@@ -26,6 +29,18 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   TextEditingController newValueController = TextEditingController();
   Object dropDownTypeValue = 2;
   List<String> listType = ['Income', 'Expense', 'All'];
+
+  late List<CategoryModel> categoryList;
+  @override
+  void initState() {
+    if (widget.categoryController.state.value.runtimeType ==
+        CategorySuccessState) {
+      categoryList =
+          (widget.categoryController.state.value as CategorySuccessState)
+              .categoryList;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,35 +112,76 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                           return type != "All" &&
                                   type != value.transactionsList[index].type
                               ? SizedBox()
-                              : ListTile(
-                                  iconColor:
-                                      value.transactionsList[index].type ==
-                                              "Income"
-                                          ? AppColors.blue1Color
-                                          : AppColors.red1Color,
-                                  leading: value.transactionsList[index].type ==
-                                          "Income"
-                                      ? const Icon(Icons.add)
-                                      : const Icon(Icons.remove),
-                                  title: Text(value
-                                      .transactionsList[index].valor
-                                      .toString()),
-                                  trailing: Container(
-                                    width: 100,
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                          onPressed: null,
-                                          icon: Icon(Icons.edit),
+                              : Card(
+                                  child: ListTile(
+                                    minLeadingWidth: 4,
+                                    horizontalTitleGap: 5,
+                                    onTap: (() async {
+                                      //               Navigator.of(context).push(MaterialPageRoute(
+                                      // builder: (context) => CategoryPage(
+                                      //     controller: widget.categoryController)));
+
+                                      await Navigator.of(context)
+                                          .push<TransactionModel?>(
+                                              MaterialPageRoute(
+                                        builder: (context) =>
+                                            AddTransactionPage(
+                                          type: value
+                                              .transactionsList[index].type,
+                                          categoryController:
+                                              widget.categoryController,
+                                          transaction:
+                                              value.transactionsList[index],
                                         ),
-                                        IconButton(
-                                          onPressed: () {
-                                            widget.transactionController
-                                                .delete(index);
-                                          },
-                                          icon: Icon(Icons.delete),
-                                        ),
-                                      ],
+                                      ))
+                                          .then((value) {
+                                        if (value != null &&
+                                            value.runtimeType ==
+                                                TransactionModel) {
+                                          widget.transactionController
+                                              .edit(index, value);
+                                        }
+                                      });
+                                    }),
+                                    iconColor:
+                                        value.transactionsList[index].type ==
+                                                "Income"
+                                            ? AppColors.blue1Color
+                                            : AppColors.red1Color,
+                                    leading:
+                                        value.transactionsList[index].type ==
+                                                "Income"
+                                            ? const Icon(Icons.add)
+                                            : const Icon(Icons.remove),
+                                    title: Text(value
+                                        .transactionsList[index].valor
+                                        .toString()),
+                                    subtitle: Text(value.transactionsList[index]
+                                            .description ??
+                                        "vazio"),
+                                    trailing: Container(
+                                      width: 100,
+                                      child: Row(
+                                        children: [
+                                          Chip(
+                                            label: Text(categoryList[value
+                                                    .transactionsList[index]
+                                                    .categoryId]
+                                                .genre),
+                                          ),
+                                          IconButton(
+                                            onPressed: null,
+                                            icon: Icon(Icons.edit),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              widget.transactionController
+                                                  .delete(index);
+                                            },
+                                            icon: Icon(Icons.delete),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

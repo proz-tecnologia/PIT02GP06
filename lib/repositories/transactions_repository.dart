@@ -46,4 +46,10 @@ class TransactionsRepository {
     list.removeAt(index);
     await service.set(url: SharedPreferencesKeys.transactions, data: list);
   }
+
+  Future edit(int index, TransactionModel transactionModel) async {
+    List<TransactionModel> list = await loadTransactions();
+    list[index] = transactionModel;
+    await service.set(url: SharedPreferencesKeys.transactions, data: list);
+  }
 }

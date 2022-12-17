@@ -9,7 +9,7 @@ class CategoryRepository {
 
   CategoryRepository({required this.service});
   Future<List<CategoryModel>> loadList() async {
-    final List<CategoryModel> _dataList = [];
+    final List<CategoryModel> dataList = [];
     final String? dataString =
         await service.get(url: SharedPreferencesKeys.categorys);
     if (dataString != null && dataString.isNotEmpty) {
@@ -17,10 +17,10 @@ class CategoryRepository {
       final list =
           List.from(listJson).map((e) => CategoryModel.fromJson(e)).toList();
 //      return list;
-      _dataList.addAll(list);
+      dataList.addAll(list);
     }
-    if (_dataList.isEmpty) {
-      _dataList.addAll([
+    if (dataList.isEmpty) {
+      dataList.addAll([
         CategoryModel(genre: "Outros", color: 0xFF0F0297, type: "Expense"),
         CategoryModel(genre: "Outros", color: 0xFF0F0297, type: "Income"),
         CategoryModel(genre: "Mercado", color: 0xFF5A41FF, type: "Expense"),
@@ -45,28 +45,28 @@ class CategoryRepository {
       ]);
     }
 
-    return _dataList;
+    return dataList;
   }
 
   Future<List<CategoryModel>> add(CategoryModel categoryModel) async {
-    final List<CategoryModel> _dataList = await loadList();
-    _dataList.add(categoryModel);
-    await service.set(url: SharedPreferencesKeys.categorys, data: _dataList);
-    return _dataList;
+    final List<CategoryModel> dataList = await loadList();
+    dataList.add(categoryModel);
+    await service.set(url: SharedPreferencesKeys.categorys, data: dataList);
+    return dataList;
   }
 
   Future<List<CategoryModel>> remove(int index) async {
-    final List<CategoryModel> _dataList = await loadList();
-    _dataList.removeAt(index);
-    await service.set(url: SharedPreferencesKeys.categorys, data: _dataList);
-    return _dataList;
+    final List<CategoryModel> dataList = await loadList();
+    dataList.removeAt(index);
+    await service.set(url: SharedPreferencesKeys.categorys, data: dataList);
+    return dataList;
   }
 
   Future<List<CategoryModel>> edit(
       int index, CategoryModel categoryModel) async {
-    final List<CategoryModel> _dataList = await loadList();
-    _dataList[index] = categoryModel;
-    await service.set(url: SharedPreferencesKeys.categorys, data: _dataList);
-    return _dataList;
+    final List<CategoryModel> dataList = await loadList();
+    dataList[index] = categoryModel;
+    await service.set(url: SharedPreferencesKeys.categorys, data: dataList);
+    return dataList;
   }
 }

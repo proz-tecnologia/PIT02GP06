@@ -6,11 +6,15 @@ class TransactionModel {
   double valor;
   int contaId;
   String type;
+  int categoryId;
+  String? description;
   TransactionModel({
     required this.data,
     required this.valor,
     required this.contaId,
     required this.type,
+    required this.categoryId,
+    this.description,
   });
 
   TransactionModel copyWith({
@@ -18,12 +22,16 @@ class TransactionModel {
     double? valor,
     int? contaId,
     String? type,
+    int? categoryId,
+    String? description,
   }) {
     return TransactionModel(
       data: data ?? this.data,
       valor: valor ?? this.valor,
       contaId: contaId ?? this.contaId,
       type: type ?? this.type,
+      categoryId: categoryId ?? this.categoryId,
+      description: description ?? this.description,
     );
   }
 
@@ -33,6 +41,8 @@ class TransactionModel {
       'valor': valor,
       'contaId': contaId,
       'type': type,
+      'categoryId': categoryId,
+      'description': description,
     };
   }
 
@@ -42,6 +52,9 @@ class TransactionModel {
       valor: map['valor'] as double,
       contaId: map['contaId'] as int,
       type: map['type'] as String,
+      categoryId: map['categoryId'] as int,
+      description:
+          map['description'] != null ? map['description'] as String : null,
     );
   }
 
@@ -52,7 +65,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(data: $data, valor: $valor, contaId: $contaId, type: $type)';
+    return 'TransactionModel(data: $data, valor: $valor, contaId: $contaId, type: $type, categoryId: $categoryId, description: $description)';
   }
 
   @override
@@ -62,11 +75,18 @@ class TransactionModel {
     return other.data == data &&
         other.valor == valor &&
         other.contaId == contaId &&
-        other.type == type;
+        other.type == type &&
+        other.categoryId == categoryId &&
+        other.description == description;
   }
 
   @override
   int get hashCode {
-    return data.hashCode ^ valor.hashCode ^ contaId.hashCode ^ type.hashCode;
+    return data.hashCode ^
+        valor.hashCode ^
+        contaId.hashCode ^
+        type.hashCode ^
+        categoryId.hashCode ^
+        description.hashCode;
   }
 }
