@@ -4,11 +4,12 @@ import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_page.dart';
 import 'package:pit02gp06/src/category/category_states.dart';
-import 'package:pit02gp06/src/transactions/add_transaction_page.dart';
+import 'package:pit02gp06/src/transactions/form_transaction_page.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
 
 class TransactionsScreen extends StatefulWidget {
   final TransactionsController transactionController;
@@ -125,7 +126,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                           .push<TransactionModel?>(
                                               MaterialPageRoute(
                                         builder: (context) =>
-                                            AddTransactionPage(
+                                            FormTransactionPage(
                                           type: value
                                               .transactionsList[index].type,
                                           categoryController:
@@ -153,12 +154,20 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                 "Income"
                                             ? const Icon(Icons.add)
                                             : const Icon(Icons.remove),
-                                    title: Text(value
-                                        .transactionsList[index].valor
-                                        .toString()),
-                                    subtitle: Text(value.transactionsList[index]
-                                            .description ??
-                                        "vazio"),
+                                    title: Text(
+                                      value.transactionsList[index].valor
+                                          .toString(),
+                                      style: AppTextStyles.textTitle,
+                                    ),
+                                    subtitle: Row(
+                                      children: [
+                                        Text(
+                                            "${value.transactionsList[index].data.day}/${value.transactionsList[index].data.month}/${value.transactionsList[index].data.year}"),
+                                        Text(value.transactionsList[index]
+                                                .description ??
+                                            "vazio"),
+                                      ],
+                                    ),
                                     trailing: Container(
                                       width: 100,
                                       child: Row(

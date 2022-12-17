@@ -5,31 +5,33 @@ import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_states.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
 
 import '../../models/category_model.dart';
 import '../category/category_page.dart';
 import '../category/form_category_page.dart';
 import '../widgets/select_color_modal.dart';
 
-class AddTransactionPage extends StatefulWidget {
-  String type;
-  TransactionModel? transaction;
+class FormTransactionPage extends StatefulWidget {
+  final String type;
+  final TransactionModel? transaction;
   final CategoryController categoryController;
-  AddTransactionPage(
+  const FormTransactionPage(
       {super.key,
       required this.type,
       required this.categoryController,
       this.transaction});
 
   @override
-  State<AddTransactionPage> createState() => _AddTransactionPageState();
+  State<FormTransactionPage> createState() => _FormTransactionPageState();
 }
 
-class _AddTransactionPageState extends State<AddTransactionPage> {
+class _FormTransactionPageState extends State<FormTransactionPage> {
   final textValueController = TextEditingController();
   final textDesctiptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   int _selectedCategory = 0;
+  DateTime _data = DateTime.now();
   @override
   void initState() {
     // TODO: implement initState
@@ -39,15 +41,29 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     }
 
     if (widget.transaction != null) {
+      _data = widget.transaction!.data;
       textDesctiptionController.text = widget.transaction!.description ?? "";
       textValueController.text = widget.transaction!.valor.toString();
-      selectCategory(widget.transaction!.categoryId);
+      _selectCategory(widget.transaction!.categoryId);
     }
   }
 
-  void selectCategory(int index) {
+  void _selectCategory(int index) {
     setState(() {
       _selectedCategory = index;
+    });
+  }
+
+  void _dateDialog() {
+    showDatePicker(
+            context: context,
+            initialDate: _data,
+            firstDate: DateTime(2010),
+            lastDate: DateTime(2050))
+        .then((value) {
+      if (value != null) {
+        _data = value;
+      }
     });
   }
 
@@ -70,8 +86,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             ? AppColors.blue1Color
             : AppColors.red1Color,
         title: widget.type == "Income"
-            ? const Text("Nova Receita")
-            : const Text("Nova Despesa"),
+            ? const Text("Receita")
+            : const Text("Despesa"),
         centerTitle: true,
       ),
       body: Form(
@@ -83,21 +99,47 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
-              TextFormField(
-                autofocus: true,
-                keyboardType: TextInputType.number,
-                controller: textValueController,
-                validator: (value) {
-                  if (value == null ||
-                      value.isEmpty ||
-                      double.tryParse(value) == null) {
-                    return 'preencha com o valor da transação';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  label: Text('Valor'),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width * 0.46,
+                    child: TextFormField(
+                      autofocus: true,
+                      keyboardType: TextInputType.number,
+                      controller: textValueController,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            double.tryParse(value) == null) {
+                          return 'preencha com o valor da transação';
+                        }
+                        return null;
+                      },
+                      style: const TextStyle(fontSize: 30),
+                      decoration: const InputDecoration(
+                        label: Text('Valor'),
+                        prefixText: "R\$ ",
+                      ),
+                    ),
+                  ),
+                  Container(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width * 0.46,
+                      child: Column(
+                        children: [
+                          IconButton(
+                              iconSize: 40,
+                              onPressed: _dateDialog,
+                              icon: Icon(Icons.calendar_month)),
+                          Text(
+                            "${_data.day}/${_data.month}/${_data.year}",
+                            style: AppTextStyles.textTitle,
+                          ),
+                        ],
+                      )),
+                ],
               ),
               TextFormField(
                 autofocus: true,
@@ -113,8 +155,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 height: 32,
               ),
               Container(
-                height: 300,
-                width: 200,
+                height: 250,
                 child: ValueListenableBuilder(
                   valueListenable: widget.categoryController.state,
                   builder: (context, value, child) {
@@ -129,7 +170,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                             ? const SizedBox()
                             : OutlinedButton(
                                 onPressed: (() {
-                                  selectCategory(index);
+                                  _selectCategory(index);
                                 }),
                                 child: ListTile(
                                   leading: CircleAvatar(
@@ -228,15 +269,15 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                       ? () {
                           log('---> newNotePage -->  validate=true -> cria newNote');
 
-                          final newNote = TransactionModel(
-                              data: DateTime.now(),
+                          final dataModel = TransactionModel(
+                              data: _data,
                               valor: double.parse(textValueController.text),
                               contaId: 0,
                               type: widget.type,
                               categoryId: _selectedCategory,
                               description: textDesctiptionController.text);
                           log('---> newNotePage -->  navega devolta para home');
-                          Navigator.pop(context, newNote);
+                          Navigator.pop(context, dataModel);
                         }
                       : null,
                   style: ElevatedButton.styleFrom(

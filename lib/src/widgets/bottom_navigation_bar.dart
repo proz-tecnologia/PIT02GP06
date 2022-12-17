@@ -6,7 +6,7 @@ import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
 import '../../models/transaction_model.dart';
-import '../transactions/add_transaction_page.dart';
+import '../transactions/form_transaction_page.dart';
 import 'new_transaction_dialog.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -50,7 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 if (type != null) {
                   await Navigator.of(context)
                       .push<TransactionModel?>(MaterialPageRoute(
-                          builder: (context) => AddTransactionPage(
+                          builder: (context) => FormTransactionPage(
                               type: type,
                               categoryController: widget.categoryController)))
                       .then((value) {
