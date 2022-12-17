@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/category_model.dart';
-import 'package:pit02gp06/src/category/category_bloc.dart';
-import 'package:pit02gp06/src/category/category_events.dart';
+import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_states.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
 import 'package:pit02gp06/src/widgets/select_color_modal.dart';
@@ -12,7 +11,8 @@ import 'package:pit02gp06/utils/app_colors.dart';
 import 'form_category_page.dart';
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({super.key});
+  final CategoryController controller;
+  const CategoryPage({super.key, required this.controller});
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -20,18 +20,11 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
 //  final List<CategoryModel> categoryList = [];
-  late final CategoryBloc bloc;
-  @override
-  void initState() {
-    super.initState();
-    bloc = CategoryBloc();
-    bloc.inputCategory.add(LoadCategoryEvent());
-  }
+//  late final CategoryController controller;
 
   @override
   void dispose() {
     super.dispose();
-    bloc.inputCategory.close();
   }
 
   Object dropDownTypeValue = 0;
@@ -54,19 +47,18 @@ class _CategoryPageState extends State<CategoryPage> {
                                     int.parse(dropDownTypeValue.toString())])))
                         .then((value) {
                       if (value != null && value.runtimeType == CategoryModel) {
-                        bloc.inputCategory
-                            .add(AddCategoryEvent(category: value));
+                        widget.controller.add(value);
                       }
                     });
                   },
-                  icon: Icon(Icons.add)),
+                  icon: const Icon(Icons.add)),
             ],
           ),
           SizedBox(
             width: 100,
             child: DropdownButton(
                 value: dropDownTypeValue,
-                items: [
+                items: const [
                   DropdownMenuItem(value: 0, child: Text("Receitas")),
                   DropdownMenuItem(value: 1, child: Text("Despesas")),
                 ],
@@ -77,10 +69,12 @@ class _CategoryPageState extends State<CategoryPage> {
                 }),
           ),
           Expanded(
-            child: StreamBuilder<CategoryState>(
-                stream: bloc.stream,
-                builder: (context, snapshot) {
-                  final categoryList = snapshot.data?.categoryList ?? [];
+            child: ValueListenableBuilder(
+                valueListenable: widget.controller.state,
+                builder: (context, value, child) {
+                  final categoryList = value.runtimeType == CategorySuccessState
+                      ? (value as CategorySuccessState).categoryList
+                      : [];
                   return ListView.builder(
                     itemCount: categoryList.length,
                     itemBuilder: (context, index) {
@@ -115,11 +109,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                         if (color != null &&
                                             color.runtimeType == int) {
                                           categoryList[index].color = color;
-                                          bloc.inputCategory.add(
-                                              EditCategoryEvent(
-                                                  index: index,
-                                                  category:
-                                                      categoryList[index]));
+                                          widget.controller
+                                              .edit(index, categoryList[index]);
                                         }
                                       },
                                     ),
@@ -138,10 +129,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                           if (value != null &&
                                               value.runtimeType ==
                                                   CategoryModel) {
-                                            bloc.inputCategory.add(
-                                                EditCategoryEvent(
-                                                    index: index,
-                                                    category: value));
+                                            widget.controller
+                                                .edit(index, value);
                                           }
                                         });
                                       },
@@ -158,9 +147,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                               .showSnackBar(snackBar);
                                           return;
                                         }
-                                        bloc.inputCategory.add(
-                                            RemoveCategoryEvent(
-                                                category: categoryList[index]));
+                                        widget.controller.delete(index);
                                       },
                                       icon: const Icon(Icons.delete),
                                     ),

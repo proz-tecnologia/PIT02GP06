@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:pit02gp06/models/category_model.dart';
 import 'package:pit02gp06/utils/i_http_service.dart';
@@ -7,9 +6,10 @@ import 'package:pit02gp06/utils/shared_preferences_keys.dart';
 
 class CategoryRepository {
   final IHttpService service;
-  final List<CategoryModel> _dataList = [];
+
   CategoryRepository({required this.service});
   Future<List<CategoryModel>> loadList() async {
+    final List<CategoryModel> _dataList = [];
     final String? dataString =
         await service.get(url: SharedPreferencesKeys.categorys);
     if (dataString != null && dataString.isNotEmpty) {
@@ -49,22 +49,22 @@ class CategoryRepository {
   }
 
   Future<List<CategoryModel>> add(CategoryModel categoryModel) async {
-    await loadList();
+    final List<CategoryModel> _dataList = await loadList();
     _dataList.add(categoryModel);
     await service.set(url: SharedPreferencesKeys.categorys, data: _dataList);
     return _dataList;
   }
 
-  Future<List<CategoryModel>> remove(CategoryModel categoryModel) async {
-    await loadList();
-    _dataList.remove(categoryModel);
+  Future<List<CategoryModel>> remove(int index) async {
+    final List<CategoryModel> _dataList = await loadList();
+    _dataList.removeAt(index);
     await service.set(url: SharedPreferencesKeys.categorys, data: _dataList);
     return _dataList;
   }
 
   Future<List<CategoryModel>> edit(
       int index, CategoryModel categoryModel) async {
-    await loadList();
+    final List<CategoryModel> _dataList = await loadList();
     _dataList[index] = categoryModel;
     await service.set(url: SharedPreferencesKeys.categorys, data: _dataList);
     return _dataList;

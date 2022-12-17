@@ -2,10 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
+import 'package:pit02gp06/src/category/category_controller.dart';
+import 'package:pit02gp06/src/category/category_controller.dart';
+import 'package:pit02gp06/src/category/category_states.dart';
+import 'package:pit02gp06/utils/app_colors.dart';
 
 class AddTransactionPage extends StatefulWidget {
   String type;
-  AddTransactionPage({super.key, required this.type});
+  final CategoryController categoryController;
+  AddTransactionPage(
+      {super.key, required this.type, required this.categoryController});
 
   @override
   State<AddTransactionPage> createState() => _AddTransactionPageState();
@@ -14,12 +20,28 @@ class AddTransactionPage extends StatefulWidget {
 class _AddTransactionPageState extends State<AddTransactionPage> {
   final textController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+//    widget.categoryBloc.inputCategory.close();
+//    bloc.inputCategory.close();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // widget.categoryBloc.stream.listen((event) {
+    //   log("ADDTRANSACTION.widget.catBloc.stream é ${event.runtimeType}");
+    // });
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF00127A),
-        title: Text("Adicionar Transação de ${widget.type}"),
+        backgroundColor: widget.type == "Income"
+            ? AppColors.blue1Color
+            : AppColors.red1Color,
+        title: widget.type == "Income"
+            ? const Text("Nova Receita")
+            : const Text("Nova Despesa"),
         centerTitle: true,
       ),
       body: Form(
@@ -32,6 +54,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           child: ListView(
             children: [
               TextFormField(
+                autofocus: true,
                 keyboardType: TextInputType.number,
                 controller: textController,
                 validator: (value) {
@@ -43,11 +66,33 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   return null;
                 },
                 decoration: const InputDecoration(
-                  label: Text('Valor (Ex. 15.30 ou -8.99)'),
+                  label: Text('Valor (Ex. 19.99)'),
                 ),
               ),
               const SizedBox(
                 height: 32,
+              ),
+              Container(
+                height: 300,
+                width: 200,
+                child: ValueListenableBuilder(
+                  valueListenable: widget.categoryController.state,
+                  builder: (context, value, child) {
+                    final categoryList =
+                        value.runtimeType == CategorySuccessState
+                            ? (value as CategorySuccessState).categoryList
+                            : [];
+                    return ListView.builder(
+                      itemCount: categoryList.length,
+                      itemBuilder: (context, index) {
+                        return categoryList[index].type != widget.type
+                            ? const SizedBox()
+                            : Text(categoryList[index].genre +
+                                categoryList[index].type);
+                      },
+                    );
+                  },
+                ),
               ),
               ElevatedButton(
                   onPressed: _formKey.currentState?.validate() == true
@@ -64,20 +109,21 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF00127A),
+                    backgroundColor: widget.type == "Income"
+                        ? AppColors.blue1Color
+                        : AppColors.red1Color,
                     fixedSize: Size(MediaQuery.of(context).size.width / 2, 50),
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                            bottom: Radius.elliptical(80, 80))),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text("Salvar nota"),
+                      Text("Salvar"),
                       SizedBox(
                         width: 8,
                       ),
-                      Icon(Icons.save),
+                      Icon(Icons.arrow_right_outlined),
                     ],
                   ))
             ],

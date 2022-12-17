@@ -12,10 +12,12 @@ import 'new_transaction_dialog.dart';
 class BottomNavBar extends StatefulWidget {
   PageController pageController;
   final transactionsController;
+  final categoryController;
   BottomNavBar(
       {super.key,
       required this.pageController,
-      required this.transactionsController});
+      required this.transactionsController,
+      required this.categoryController});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -48,7 +50,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 if (type != null) {
                   await Navigator.of(context)
                       .push<TransactionModel?>(MaterialPageRoute(
-                          builder: (context) => AddTransactionPage(type: type)))
+                          builder: (context) => AddTransactionPage(
+                              type: type,
+                              categoryController: widget.categoryController)))
                       .then((value) {
                     if (value != null &&
                         value.runtimeType == TransactionModel) {
