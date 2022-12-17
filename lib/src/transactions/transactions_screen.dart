@@ -24,8 +24,8 @@ class TransactionsScreen extends StatefulWidget {
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
   TextEditingController newValueController = TextEditingController();
-  Object dropDownTypeValue = 0;
-  List<String> listType = ['Income', 'Expense'];
+  Object dropDownTypeValue = 2;
+  List<String> listType = ['Income', 'Expense', 'All'];
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +61,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           width: 100,
           child: DropdownButton(
               value: dropDownTypeValue,
-              items: [
-                const DropdownMenuItem(value: 0, child: Text("Receitas")),
-                const DropdownMenuItem(value: 1, child: Text("Despesas")),
-//                DropdownMenuItem(value: 2, child: Text("Todas")),
+              items: const [
+                DropdownMenuItem(value: 0, child: Text("Receitas")),
+                DropdownMenuItem(value: 1, child: Text("Despesas")),
+                DropdownMenuItem(value: 2, child: Text("Todas")),
               ],
               onChanged: (value) {
                 setState(() {
@@ -87,10 +87,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                             .transactionsList
                             .length,
                         itemBuilder: (context, index) {
-                          return listType[int.parse(
-                                      dropDownTypeValue.toString())] !=
-                                  value.transactionsList[index].type
-                              ? const SizedBox()
+                          final type =
+                              listType[int.parse(dropDownTypeValue.toString())];
+                          // return listType[int.parse(
+                          //             dropDownTypeValue.toString())] !=
+                          //         value.transactionsList[index].type
+                          //     ? const SizedBox()
+                          //     : ListTile(
+                          return type != "All" &&
+                                  type != value.transactionsList[index].type
+                              ? SizedBox()
                               : ListTile(
                                   iconColor:
                                       value.transactionsList[index].type ==
