@@ -16,8 +16,10 @@ class ButtonWidget extends StatelessWidget {
             color: color, borderRadius: BorderRadius.circular(20)),
         child: TextButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => BaseScreen())); // ROTA TESTE
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const BaseScreen())); // ROTA TESTE
           },
           child: Text(
             text,

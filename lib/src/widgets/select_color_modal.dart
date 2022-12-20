@@ -30,20 +30,18 @@ Future<dynamic> SelectColorModal(BuildContext context) async {
     0xC6FFFA00,
   ];
   List<Widget> colorWidgetList = [];
-  colorList.forEach(
-    (e) {
-      colorWidgetList.add(IconButton(
-          onPressed: () {
+  for (var e in colorList) {
+    colorWidgetList.add(IconButton(
+        onPressed: () {
 //            color = e;
-            Navigator.pop(context, e);
-          },
-          icon: Icon(
-            Icons.color_lens,
-            color: Color(e),
-          )));
-      log(e.toString());
-    },
-  );
+          Navigator.pop(context, e);
+        },
+        icon: Icon(
+          Icons.color_lens,
+          color: Color(e),
+        )));
+    log(e.toString());
+  }
 //  log(colorList.toString());
   return showModalBottomSheet(
       context: context,

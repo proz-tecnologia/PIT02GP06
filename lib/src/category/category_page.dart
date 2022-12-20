@@ -12,7 +12,9 @@ import 'form_category_page.dart';
 
 class CategoryPage extends StatefulWidget {
   final CategoryController controller;
-  const CategoryPage({super.key, required this.controller});
+  final String? type;
+  const CategoryPage(
+      {super.key, required this.controller, this.type = "Income"});
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -21,13 +23,19 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State<CategoryPage> {
 //  final List<CategoryModel> categoryList = [];
 //  late final CategoryController controller;
+  Object dropDownTypeValue = 0;
+
+  @override
+  void initState() {
+    if (widget.type == "Expense") dropDownTypeValue = 1;
+    super.initState();
+  }
 
   @override
   void dispose() {
     super.dispose();
   }
 
-  Object dropDownTypeValue = 0;
   List<String> listType = ['Income', 'Expense'];
   @override
   Widget build(BuildContext context) {
@@ -103,7 +111,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                         color: Color(categoryList[index].color),
                                       ),
                                       onPressed: () async {
-                                        Color color =
+                                        int color =
                                             await SelectColorModal(context);
                                         log("color retornada $color");
                                         if (color.runtimeType == int) {

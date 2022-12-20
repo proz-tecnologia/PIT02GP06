@@ -9,6 +9,7 @@ import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
 class TransactionsScreen extends StatefulWidget {
@@ -116,7 +117,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                               : Card(
                                   child: ListTile(
                                     minLeadingWidth: 4,
-                                    horizontalTitleGap: 5,
                                     onTap: (() async {
                                       //               Navigator.of(context).push(MaterialPageRoute(
                                       // builder: (context) => CategoryPage(
@@ -149,47 +149,45 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                 "Income"
                                             ? AppColors.blue1Color
                                             : AppColors.red1Color,
-                                    leading:
-                                        value.transactionsList[index].type ==
-                                                "Income"
-                                            ? const Icon(Icons.add)
-                                            : const Icon(Icons.remove),
+                                    leading: Container(
+                                      width: 6,
+                                      color:
+                                          value.transactionsList[index].type ==
+                                                  "Income"
+                                              ? AppColors.blue1Color
+                                              : AppColors.red1Color,
+                                    ),
                                     title: Text(
-                                      value.transactionsList[index].valor
-                                          .toString(),
+                                      AppFormatter.moneyWithRs(
+                                          value.transactionsList[index].valor),
                                       style: AppTextStyles.textTitle,
                                     ),
-                                    subtitle: Row(
+                                    subtitle: Wrap(
                                       children: [
-                                        Text(
-                                            "${value.transactionsList[index].data.day}/${value.transactionsList[index].data.month}/${value.transactionsList[index].data.year}"),
+                                        Text(AppFormatter
+                                            .dateExtenseOcultCurrentYear(value
+                                                .transactionsList[index].data)),
+                                        VerticalDivider(),
                                         Text(value.transactionsList[index]
                                                 .description ??
-                                            "vazio"),
+                                            ""),
                                       ],
                                     ),
-                                    trailing: Container(
-                                      width: 100,
-                                      child: Row(
-                                        children: [
-                                          Chip(
-                                            label: Text(categoryList[value
-                                                    .transactionsList[index]
-                                                    .categoryId]
-                                                .genre),
-                                          ),
-                                          IconButton(
-                                            onPressed: null,
-                                            icon: Icon(Icons.edit),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              widget.transactionController
-                                                  .delete(index);
-                                            },
-                                            icon: Icon(Icons.delete),
-                                          ),
-                                        ],
+                                    trailing: Expanded(
+//                                      width: 150,
+                                      child: Chip(
+                                        backgroundColor: Colors.grey.shade200,
+                                        avatar: Icon(
+                                          Icons.circle,
+                                          color: Color(categoryList[value
+                                                  .transactionsList[index]
+                                                  .categoryId]
+                                              .color),
+                                        ),
+                                        label: Text(categoryList[value
+                                                .transactionsList[index]
+                                                .categoryId]
+                                            .genre),
                                       ),
                                     ),
                                   ),
