@@ -51,8 +51,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   await Navigator.of(context)
                       .push<TransactionModel?>(MaterialPageRoute(
                           builder: (context) => FormTransactionPage(
-                              type: type,
-                              categoryController: widget.categoryController)))
+                                type: type,
+                                categoryController: widget.categoryController,
+                                transactionController:
+                                    widget.transactionsController,
+                              )))
                       .then((value) {
                     if (value != null &&
                         value.runtimeType == TransactionModel) {

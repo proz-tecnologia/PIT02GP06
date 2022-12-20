@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class TransactionModel {
   DateTime data;
+  String id;
   double valor;
   int contaId;
   String type;
@@ -10,6 +11,7 @@ class TransactionModel {
   String? description;
   TransactionModel({
     required this.data,
+    required this.id,
     required this.valor,
     required this.contaId,
     required this.type,
@@ -19,6 +21,7 @@ class TransactionModel {
 
   TransactionModel copyWith({
     DateTime? data,
+    String? id,
     double? valor,
     int? contaId,
     String? type,
@@ -27,6 +30,7 @@ class TransactionModel {
   }) {
     return TransactionModel(
       data: data ?? this.data,
+      id: id ?? this.id,
       valor: valor ?? this.valor,
       contaId: contaId ?? this.contaId,
       type: type ?? this.type,
@@ -38,6 +42,7 @@ class TransactionModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'data': data.millisecondsSinceEpoch,
+      'id': id,
       'valor': valor,
       'contaId': contaId,
       'type': type,
@@ -49,6 +54,7 @@ class TransactionModel {
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
       data: DateTime.fromMillisecondsSinceEpoch(map['data'] as int),
+      id: map['id'] as String,
       valor: map['valor'] as double,
       contaId: map['contaId'] as int,
       type: map['type'] as String,
@@ -65,7 +71,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(data: $data, valor: $valor, contaId: $contaId, type: $type, categoryId: $categoryId, description: $description)';
+    return 'TransactionModel(data: $data, id: $id, valor: $valor, contaId: $contaId, type: $type, categoryId: $categoryId, description: $description)';
   }
 
   @override
@@ -73,6 +79,7 @@ class TransactionModel {
     if (identical(this, other)) return true;
 
     return other.data == data &&
+        other.id == id &&
         other.valor == valor &&
         other.contaId == contaId &&
         other.type == type &&
@@ -83,6 +90,7 @@ class TransactionModel {
   @override
   int get hashCode {
     return data.hashCode ^
+        id.hashCode ^
         valor.hashCode ^
         contaId.hashCode ^
         type.hashCode ^

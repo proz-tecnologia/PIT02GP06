@@ -90,6 +90,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               }),
         ),
         Expanded(
+          flex: 1,
           child: ValueListenableBuilder(
               valueListenable: widget.transactionController.state,
               builder: (context, value, child) {
@@ -100,7 +101,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     return const CircularProgressIndicator();
                   case TransactionsSuccessState:
                     return ListView.builder(
-                        reverse: true,
+//                        reverse: true,
                         itemCount: (value as TransactionsSuccessState)
                             .transactionsList
                             .length,
@@ -132,6 +133,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                               .transactionsList[index].type,
                                           categoryController:
                                               widget.categoryController,
+                                          transactionController:
+                                              widget.transactionController,
                                           transaction:
                                               value.transactionsList[index],
                                         ),

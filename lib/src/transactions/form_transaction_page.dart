@@ -4,23 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_states.dart';
+import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../models/category_model.dart';
 import '../category/category_page.dart';
-import '../category/form_category_page.dart';
-import '../widgets/select_color_modal.dart';
 
 class FormTransactionPage extends StatefulWidget {
   final String type;
   final TransactionModel? transaction;
   final CategoryController categoryController;
+  final TransactionsController transactionController;
   const FormTransactionPage(
       {super.key,
       required this.type,
       required this.categoryController,
+      required this.transactionController,
       this.transaction});
 
   @override
@@ -90,6 +91,25 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
             ? const Text("Receita")
             : const Text("Despesa"),
         centerTitle: true,
+        actions: widget.transaction != null
+            ? [
+                IconButton(
+                  color: AppColors.whiteColor,
+                  onPressed: () async {
+                    await widget.transactionController
+                        .delete(widget.transaction!.id);
+                    final snackBar = SnackBar(
+                        content: Text(
+                            "transação ${widget.transaction!.id} apagada!"));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                  ),
+                ),
+              ]
+            : [],
       ),
       body: Form(
         key: _formKey,
@@ -348,6 +368,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                           log('---> newNotePage -->  validate=true -> cria newNote');
 
                           final dataModel = TransactionModel(
+                              id: widget.transaction?.id ?? const Uuid().v4(),
                               data: _data,
                               valor: double.parse(textValueController.text),
                               contaId: 0,

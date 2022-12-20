@@ -16,6 +16,7 @@ class TransactionsRepository {
       final listTransactions = List.from(listJsonTransactions)
           .map((e) => TransactionModel.fromJson(e))
           .toList();
+      listTransactions.sort((b, a) => a.data.compareTo(b.data));
       return listTransactions;
     }
     return [];
@@ -41,9 +42,15 @@ class TransactionsRepository {
     await service.set(url: SharedPreferencesKeys.transactions, data: list);
   }
 
-  Future remove(int index) async {
+  Future remove(String id) async {
     List<TransactionModel> list = await loadTransactions();
-    list.removeAt(index);
+    for (var element in list) {
+      if (element.id == id) {
+        list.remove(element);
+        break;
+      }
+    }
+    //list.remove(value);
     await service.set(url: SharedPreferencesKeys.transactions, data: list);
   }
 

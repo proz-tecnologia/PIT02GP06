@@ -22,9 +22,9 @@ class TransactionsController {
     state.value = TransactionsSuccessState(transactionsList: transactionsList);
   }
 
-  void delete(int index) async {
+  Future delete(String id) async {
     state.value = TransactionsLoadState();
-    await _repository.remove(index);
+    await _repository.remove(id);
     List<TransactionModel> list = await _repository.loadTransactions();
     state.value = TransactionsSuccessState(transactionsList: list);
   }
