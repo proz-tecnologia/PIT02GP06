@@ -5,6 +5,7 @@ import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_states.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
 import '../../models/category_model.dart';
@@ -134,7 +135,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                               onPressed: _dateDialog,
                               icon: Icon(Icons.calendar_month)),
                           Text(
-                            "${_data.day}/${_data.month}/${_data.year}",
+                            AppFormatter.date(_data),
                             style: AppTextStyles.textTitle,
                           ),
                         ],

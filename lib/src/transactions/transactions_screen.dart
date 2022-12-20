@@ -100,6 +100,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     return const CircularProgressIndicator();
                   case TransactionsSuccessState:
                     return ListView.builder(
+                        reverse: true,
                         itemCount: (value as TransactionsSuccessState)
                             .transactionsList
                             .length,
