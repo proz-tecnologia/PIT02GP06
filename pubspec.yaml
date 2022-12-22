@@ -38,6 +38,7 @@ dependencies:
   graphic: ^0.10.7
   shared_preferences: ^2.0.15
   mask_text_input_formatter: ^2.4.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

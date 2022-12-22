@@ -11,6 +11,7 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         TextFormField(
           keyboardType: item?.keyboardType ?? TextInputType.text,
@@ -21,9 +22,7 @@ class TextFieldWidget extends StatelessWidget {
                     ? "Digite um valor"
                     : null;
               },
-          inputFormatters: item?.keyboardType == TextInputType.datetime
-              ? [dateTimeMask]
-              : null,
+          inputFormatters: item?.formatter,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             labelText: item?.label,

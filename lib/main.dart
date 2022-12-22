@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/src/category/category_page.dart';
 import 'package:pit02gp06/src/home/home_page.dart';
 import 'package:pit02gp06/src/page/base_screen.dart';
+import 'package:pit02gp06/src/page/credit_card_register_screen.dart';
+import 'package:pit02gp06/src/page/view_model/credit_card_register_view_model.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 void main() {
@@ -19,7 +22,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: BaseScreen(),
+        body: CreditCardRegisterScreen(
+          viewModel: CreditCardRegisterViewModel(),
+          onRegister: (_) => print('REGISTRAR CLICADO'),
+        ),
         backgroundColor: AppColors.backgroundColor,
       ),
     );
