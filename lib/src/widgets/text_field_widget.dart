@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
 
-import '../common/masks.dart';
-
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({super.key, this.item});
 

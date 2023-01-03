@@ -79,6 +79,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
     if (widget.viewModel.model != null) _fillValues(textFieldItemsMap);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo,
         title: Text(vm.model == null ? vm.registerTitle : vm.editTitle),
         centerTitle: true,
         actions: [
@@ -93,6 +94,11 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
           child: Form(
             key: _formKey,
             child: Column(children: [
+              Image.asset(
+                'lib/images/credit_card.png',
+                height: 100,
+              ),
+              const SizedBox(height: 10),
               TextFieldWidget(item: textFieldItemsMap[nicknameKey]),
               TextFieldWidget(item: textFieldItemsMap[flagKey]),
               TextFieldWidget(item: textFieldItemsMap[limitKey]),
@@ -100,12 +106,15 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
               TextFieldWidget(item: textFieldItemsMap[closeDateKey]),
               TextFieldWidget(item: textFieldItemsMap[dueDateKey]),
               const SizedBox(height: 10),
-              ElevatedButton(
+              MaterialButton(
+                color: Colors.indigoAccent,
                 onPressed: () => _register(textFieldItemsMap),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                      vm.model == null ? vm.registerButton : vm.editButton),
+                    vm.model == null ? vm.registerButton : vm.editButton,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
               )
             ]),
