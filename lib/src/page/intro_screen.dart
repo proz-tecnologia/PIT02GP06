@@ -1,39 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:pit02gp06/src/widgets/button_secondary.dart';
-import 'package:pit02gp06/src/widgets/button_widget.dart';
-import 'package:pit02gp06/utils/app_colors.dart';
-import 'package:pit02gp06/utils/app_text_styles.dart';
 
-class IntroScreen extends StatefulWidget {
-  const IntroScreen({super.key});
+import '../../utils/app_colors.dart';
+import '../../utils/app_text_styles.dart';
 
-  @override
-  State<IntroScreen> createState() => _IntroScreenState();
-}
+class IntroScreen extends StatelessWidget {
+  const IntroScreen({
+    super.key,
+    required this.onCreateAccount,
+    required this.onRegistered,
+  });
 
-class _IntroScreenState extends State<IntroScreen> {
+  final VoidCallback onCreateAccount;
+  final VoidCallback onRegistered;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(48.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'My-F',
-              style: AppTextStyles.textBrand,
+            Image.asset(
+              'lib/images/logo.png',
+              height: 150,
             ),
-            Text(
-              'A ferramenta mais prática para te ajudar a gerir o seu dinheiro e alcançar seus objetivos!',
-              style: AppTextStyles.textIntro,
+            Image.asset(
+              'lib/images/cards.png',
+              height: 200,
             ),
-            ButtonWidget(
-              text: 'Criar uma conta',
-              color: AppColors.secondaryColor,
+            const SizedBox(height: 16),
+            const Divider(
+              color: Colors.black,
+              thickness: 0.5,
             ),
-            ButtonSecondary(
-              text: 'Já sou cadastrado',
-              style: AppTextStyles.textButtonSecondaryBlue,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Text(
+                'A ferramenta mais prática para te ajudar a gerir o seu dinheiro e alcançar seus objetivos!',
+                style: AppTextStyles.textIntro,
+              ),
             ),
+            const Divider(
+              color: Colors.black,
+              thickness: 0.5,
+            ),
+            const SizedBox(height: 32),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  color: AppColors.secondaryColor),
+              child: ListTile(
+                  onTap: onCreateAccount,
+                  title: const Text(
+                    'Criar uma conta',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_circle_right,
+                    color: Colors.white,
+                    size: 35,
+                  )),
+            ),
+            const SizedBox(height: 32),
+            TextButton(
+              onPressed: onRegistered,
+              child: const Text('Já sou cadastrado'),
+            )
           ],
         ),
       ),
