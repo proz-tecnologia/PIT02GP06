@@ -15,59 +15,61 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(48.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'lib/images/logo.png',
-              height: 150,
-            ),
-            Image.asset(
-              'lib/images/cards.png',
-              height: 200,
-            ),
-            const SizedBox(height: 16),
-            const Divider(
-              color: Colors.black,
-              thickness: 0.5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: Text(
-                'A ferramenta mais prática para te ajudar a gerir o seu dinheiro e alcançar seus objetivos!',
-                style: AppTextStyles.textIntro,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(48.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'lib/images/logo.png',
+                height: 120,
               ),
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 0.5,
-            ),
-            const SizedBox(height: 32),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
-                  color: AppColors.secondaryColor),
-              child: ListTile(
-                  onTap: onCreateAccount,
-                  title: const Text(
-                    'Criar uma conta',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  trailing: const Icon(
-                    Icons.arrow_circle_right,
-                    color: Colors.white,
-                    size: 35,
-                  )),
-            ),
-            const SizedBox(height: 32),
-            TextButton(
-              onPressed: onRegistered,
-              child: const Text('Já sou cadastrado'),
-            )
-          ],
+              Image.asset(
+                'lib/images/cards.png',
+                height: 150,
+              ),
+              const SizedBox(height: 16),
+              const Divider(
+                color: Colors.black,
+                thickness: 0.5,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: Text(
+                  'A ferramenta mais prática para te ajudar a gerir o seu dinheiro e alcançar seus objetivos!',
+                  style: AppTextStyles.textIntro,
+                ),
+              ),
+              const Divider(
+                color: Colors.black,
+                thickness: 0.5,
+              ),
+              const SizedBox(height: 32),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
+                    color: AppColors.secondaryColor),
+                child: ListTile(
+                    onTap: onCreateAccount,
+                    title: const Text(
+                      'Criar uma conta',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    trailing: const Icon(
+                      Icons.arrow_circle_right,
+                      color: Colors.white,
+                      size: 35,
+                    )),
+              ),
+              const SizedBox(height: 32),
+              TextButton(
+                onPressed: onRegistered,
+                child: const Text('Já sou cadastrado'),
+              )
+            ],
+          ),
         ),
       ),
     );
