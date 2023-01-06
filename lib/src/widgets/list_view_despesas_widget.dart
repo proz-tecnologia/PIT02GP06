@@ -30,7 +30,10 @@ class _ListViewDespesasState extends State<ListViewDespesas> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      widget.listCategorias[index]['genre'].toString(),
+                      widget.listCategorias[index]['genre'].toString().length >
+                              10
+                          ? "${widget.listCategorias[index]['genre'].toString().substring(0, 8)}..."
+                          : widget.listCategorias[index]['genre'].toString(),
                       style: AppTextStyles.textBalance,
                     ),
                   ),

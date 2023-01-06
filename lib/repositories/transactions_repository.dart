@@ -20,20 +20,6 @@ class TransactionsRepository {
       return listTransactions;
     }
     return [];
-//    log("_repository: listString: ${listString.toString()}");
-    // return [
-    //   ExpenseModel(data: DateTime.now(), valor: -23, contaId: 0),
-    //   IncomeModel(data: DateTime.now(), valor: 20, contaId: 0),
-    //   IncomeModel(data: DateTime.now(), valor: 30, contaId: 0),
-    //   ExpenseModel(data: DateTime.now(), valor: -80, contaId: 0),
-    //   IncomeModel(data: DateTime.now(), valor: 100, contaId: 0),
-    //   ExpenseModel(data: DateTime.now(), valor: -70, contaId: 0),
-    //   IncomeModel(data: DateTime.now(), valor: 50, contaId: 0),
-    //   ExpenseModel(data: DateTime.now(), valor: -23, contaId: 0),
-    //   IncomeModel(data: DateTime.now(), valor: 20, contaId: 0),
-    //   IncomeModel(data: DateTime.now(), valor: 30, contaId: 0),
-    //   ExpenseModel(data: DateTime.now(), valor: -80, contaId: 0),
-    // ];
   }
 
   Future add(TransactionModel transaction) async {
