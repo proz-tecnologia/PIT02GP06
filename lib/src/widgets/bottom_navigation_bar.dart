@@ -1,19 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
-import 'package:pit02gp06/utils/app_text_styles.dart';
 
 import '../../models/transaction_model.dart';
 import '../transactions/form_transaction_page.dart';
 import 'new_transaction_dialog.dart';
 
 class BottomNavBar extends StatefulWidget {
-  PageController pageController;
-  final transactionsController;
-  final categoryController;
-  BottomNavBar(
+  final PageController pageController;
+  final TransactionsController transactionsController;
+  final CategoryController categoryController;
+  const BottomNavBar(
       {super.key,
       required this.pageController,
       required this.transactionsController,
@@ -24,8 +22,8 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  @override
   int index = 0;
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     void changeIndex(value) {

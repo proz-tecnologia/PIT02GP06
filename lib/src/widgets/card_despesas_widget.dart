@@ -10,7 +10,7 @@ class CardDespesasWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 160,
       width: MediaQuery.of(context).size.width,
       child: Card(
@@ -22,7 +22,7 @@ class CardDespesasWidget extends StatelessWidget {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
-            Container(
+            const SizedBox(
               height: 140,
               width: 140,
               child: CentralPieChart(data: [
@@ -32,10 +32,10 @@ class CardDespesasWidget extends StatelessWidget {
                 {'genre': 'Outros', 'sold': 50, 'color': 0xFFE6F201},
               ]),
             ),
-            Container(
+            SizedBox(
               height: 160,
               width: 200,
-              child: ListViewDespesas(listCategorias: [
+              child: ListViewDespesas(listCategorias: const [
                 {'genre': 'Lazer', 'sold': 200, 'color': 0xFF5A41FF},
                 {'genre': 'Transporteeeeee', 'sold': 130, 'color': 0xFF0F0297},
                 {'genre': 'Casa', 'sold': 300, 'color': 0xFFE10F00},

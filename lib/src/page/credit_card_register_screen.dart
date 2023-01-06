@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';

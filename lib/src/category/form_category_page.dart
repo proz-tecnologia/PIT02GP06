@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../../models/category_model.dart';
 
 class FormCategoryPage extends StatefulWidget {
-  CategoryModel? category;
-  String type;
-  FormCategoryPage({required this.type, super.key, this.category});
+  final CategoryModel? category;
+  final String type;
+  const FormCategoryPage({required this.type, super.key, this.category});
 
   @override
   State<FormCategoryPage> createState() => _FormCategoryPageState();
@@ -58,14 +58,12 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
               ElevatedButton(
                   onPressed: _formKey.currentState?.validate() == true
                       ? () {
-                          log('---> newNotePage -->  validate=true -> cria newNote');
                           final category = CategoryModel(
                               genre: textController.text,
                               color: widget.category != null
                                   ? widget.category!.color
                                   : 0xFF0F0297,
                               type: widget.type);
-                          log('---> newNotePage -->  navega devolta para home');
                           Navigator.pop(context, category);
                         }
                       : null,

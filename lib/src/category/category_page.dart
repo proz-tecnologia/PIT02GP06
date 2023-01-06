@@ -112,7 +112,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                       ),
                                       onPressed: () async {
                                         int color =
-                                            await SelectColorModal(context);
+                                            await selectColorModal(context);
                                         log("color retornada $color");
                                         if (color.runtimeType == int) {
                                           categoryList[index].color = color;

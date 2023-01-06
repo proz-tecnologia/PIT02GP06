@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
@@ -36,7 +34,6 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
   DateTime _data = DateTime.now();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (widget.type == "Income") {
       _selectedCategory = 1;
@@ -72,16 +69,10 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
   @override
   void dispose() {
     super.dispose();
-//    widget.categoryBloc.inputCategory.close();
-//    bloc.inputCategory.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    // widget.categoryBloc.stream.listen((event) {
-    //   log("ADDTRANSACTION.widget.catBloc.stream é ${event.runtimeType}");
-    // });
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: widget.type == "Income"
@@ -123,7 +114,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 100,
                     width: MediaQuery.of(context).size.width * 0.46,
                     child: TextFormField(
@@ -145,7 +136,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                       height: 100,
                       width: MediaQuery.of(context).size.width * 0.46,
                       child: Column(
@@ -153,7 +144,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                           IconButton(
                               iconSize: 40,
                               onPressed: _dateDialog,
-                              icon: Icon(Icons.calendar_month)),
+                              icon: const Icon(Icons.calendar_month)),
                           Text(
                             AppFormatter.date(_data),
                             style: AppTextStyles.textTitle,
@@ -257,116 +248,9 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                       })
                     : [],
               ),
-              // const SizedBox(
-              //   height: 32,
-              // ),
-              // Container(
-              //   height: 250,
-              //   child: ValueListenableBuilder(
-              //     valueListenable: widget.categoryController.state,
-              //     builder: (context, value, child) {
-              //       final categoryList =
-              //           value.runtimeType == CategorySuccessState
-              //               ? (value as CategorySuccessState).categoryList
-              //               : [];
-              //       return ListView.builder(
-              //         itemCount: categoryList.length,
-              //         itemBuilder: (context, index) {
-              //           return categoryList[index].type != widget.type
-              //               ? const SizedBox()
-              //               : OutlinedButton(
-              //                   onPressed: (() {
-              //                     _selectCategory(index);
-              //                   }),
-              //                   child: ListTile(
-              //                     leading: CircleAvatar(
-              //                       backgroundColor:
-              //                           Color(categoryList[index].color),
-              //                       child: ClipRRect(
-              //                         child: _selectedCategory == index
-              //                             ? const Icon(Icons.check)
-              //                             : Text(categoryList[index]
-              //                                 .genre
-              //                                 .substring(0, 1)),
-              //                       ),
-              //                     ),
-              //                     title: Text(categoryList[index].genre),
-              //                     trailing: SizedBox(
-              //                       width: 150,
-              //                       child: Row(
-              //                         children: [
-              //                           IconButton(
-              //                             icon: Icon(
-              //                               Icons.color_lens,
-              //                               color: Color(
-              //                                   categoryList[index].color),
-              //                             ),
-              //                             onPressed: () async {
-              //                               var color =
-              //                                   await SelectColorModal(context);
-              //                               log("color retornada $color");
-              //                               if (color != null &&
-              //                                   color.runtimeType == int) {
-              //                                 categoryList[index].color = color;
-              //                                 widget.categoryController.edit(
-              //                                     index, categoryList[index]);
-              //                               }
-              //                             },
-              //                           ),
-              //                           IconButton(
-              //                             onPressed: () async {
-              //                               await Navigator.of(context)
-              //                                   .push<CategoryModel?>(
-              //                                       MaterialPageRoute(
-              //                                           builder: (context) =>
-              //                                               FormCategoryPage(
-              //                                                   type:
-              //                                                       widget.type,
-              //                                                   category:
-              //                                                       categoryList[
-              //                                                           index])))
-              //                                   .then((value) {
-              //                                 if (value != null &&
-              //                                     value.runtimeType ==
-              //                                         CategoryModel) {
-              //                                   widget.categoryController
-              //                                       .edit(index, value);
-              //                                 }
-              //                               });
-              //                             },
-              //                             icon: const Icon(Icons.edit),
-              //                           ),
-              //                           IconButton(
-              //                             onPressed: () {
-              //                               if (index < 2) {
-              //                                 const snackBar = SnackBar(
-              //                                   content: Text(
-              //                                       'Este ítem não pode ser excluído!'),
-              //                                 );
-              //                                 ScaffoldMessenger.of(context)
-              //                                     .showSnackBar(snackBar);
-              //                                 return;
-              //                               }
-              //                               widget.categoryController
-              //                                   .delete(index);
-              //                             },
-              //                             icon: const Icon(Icons.delete),
-              //                           ),
-              //                         ],
-              //                       ),
-              //                     ),
-              //                   ),
-              //                 );
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
               ElevatedButton(
                   onPressed: _formKey.currentState?.validate() == true
                       ? () {
-                          log('---> newNotePage -->  validate=true -> cria newNote');
-
                           final dataModel = TransactionModel(
                               id: widget.transaction?.id ?? const Uuid().v4(),
                               data: _data,
@@ -375,7 +259,6 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                               type: widget.type,
                               categoryId: _selectedCategory,
                               description: textDesctiptionController.text);
-                          log('---> newNotePage -->  navega devolta para home');
                           Navigator.pop(context, dataModel);
                         }
                       : null,

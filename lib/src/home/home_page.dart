@@ -8,13 +8,11 @@ import 'package:pit02gp06/src/widgets/list_view_credit_cards.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'dart:developer';
 
-import '../widgets/central_pie_chart.dart';
-import '../widgets/list_view_despesas_widget.dart';
 import '../widgets/title_widget.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key, required this.controller});
-  HomeController controller;
+  const HomePage({super.key, required this.controller});
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {

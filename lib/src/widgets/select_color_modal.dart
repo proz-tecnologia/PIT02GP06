@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-Future<dynamic> SelectColorModal(BuildContext context) async {
+Future<dynamic> selectColorModal(BuildContext context) async {
   List<int> colorList = [
     0xFF006C00,
     0xFF008401,

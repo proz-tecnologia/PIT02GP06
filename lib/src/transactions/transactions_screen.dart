@@ -15,7 +15,7 @@ import 'package:pit02gp06/utils/app_text_styles.dart';
 class TransactionsScreen extends StatefulWidget {
   final TransactionsController transactionController;
   final CategoryController categoryController;
-  TransactionsScreen(
+  const TransactionsScreen(
       {super.key,
       required this.transactionController,
       required this.categoryController});
@@ -115,7 +115,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                           //     : ListTile(
                           return type != "All" &&
                                   type != value.transactionsList[index].type
-                              ? SizedBox()
+                              ? const SizedBox()
                               : Card(
                                   child: ListTile(
                                     minLeadingWidth: 4,
@@ -171,7 +171,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                         Text(AppFormatter
                                             .dateExtenseOcultCurrentYear(value
                                                 .transactionsList[index].data)),
-                                        VerticalDivider(),
+                                        const VerticalDivider(),
                                         Text(value.transactionsList[index]
                                                 .description ??
                                             ""),
