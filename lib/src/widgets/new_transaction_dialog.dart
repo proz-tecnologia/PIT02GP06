@@ -8,7 +8,7 @@ Future<String?> showNewTransactionDialog(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color(0x00000000),
+          backgroundColor: const Color(0x00000000),
           content: Row(children: [
             ElevatedButton(
                 onPressed: () {
@@ -28,10 +28,10 @@ Future<String?> showNewTransactionDialog(BuildContext context) {
                       "Receita",
                       style: AppTextStyles.textCreditCardValueBalance,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.monetization_on,
                       size: 50,
                     ),
@@ -55,10 +55,10 @@ Future<String?> showNewTransactionDialog(BuildContext context) {
                       "Despesa",
                       style: AppTextStyles.textCreditCardValueBalance,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.money_off_csred,
                       size: 50,
                     ),

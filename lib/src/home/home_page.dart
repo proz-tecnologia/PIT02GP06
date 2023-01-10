@@ -11,8 +11,8 @@ import 'dart:developer';
 import '../widgets/title_widget.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key, required this.controller});
-  HomeController controller;
+  const HomePage({super.key, required this.controller});
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
