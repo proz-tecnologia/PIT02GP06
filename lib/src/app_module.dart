@@ -7,7 +7,7 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        //ModuleRoute('/', module: SplashModule()),
+        //TODO: implementar ModuleRoute('/', module: SplashModule()),
         ModuleRoute('/', module: HomeModule()),
       ];
 }

@@ -45,9 +45,12 @@ class HomePage extends StatelessWidget {
                 },
               ),
               TitleWidget(title: "Cartões de Crédito"),
-              const ListViewCreditCards(),
+              ListViewCreditCards(),
               TitleWidget(title: "Despesas"),
               const CardDespesasWidget(),
+              SizedBox(
+                height: 16,
+              ),
             ],
           ),
         ),

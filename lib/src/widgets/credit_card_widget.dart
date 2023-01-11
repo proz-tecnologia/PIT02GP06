@@ -76,7 +76,7 @@ class CreditCardWidget extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    "R\$ $valorAberto",
+                    valorAberto,
                     style: AppTextStyles.textCreditCardValueBalance,
                   ),
                 ],

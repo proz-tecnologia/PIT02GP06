@@ -1,3 +1,4 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -146,6 +147,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
           closeDate: inputFormat.parse(map[closeDateKey]!.controller.text),
           dueDate: inputFormat.parse(map[dueDateKey]!.controller.text));
       widget.onRegister(creditCardModel);
+      Modular.to.pop();
     } catch (e) {
       print('erro nos dados = $e');
     }
