@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/category_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
@@ -12,7 +10,6 @@ import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import '../transactions/transactions_controller.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});

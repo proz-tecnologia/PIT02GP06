@@ -41,12 +41,12 @@ class ListViewCreditCards extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: listCreditCards.length + 1,
           itemBuilder: ((context, index) {
-            if (index < listCreditCards.length)
+            if (index < listCreditCards.length) {
               return CreditCardWidget(
                   apelido: listCreditCards[index].nickname,
                   valorAberto:
                       AppFormatter.moneyWithRs(listCreditCards[index].spent));
-            else {
+            } else {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(

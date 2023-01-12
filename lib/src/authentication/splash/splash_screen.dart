@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/src/authentication/splash/splash_controller.dart';
 import 'package:pit02gp06/src/authentication/splash/splash_state.dart';
@@ -59,29 +55,30 @@ class _SplashScreenState extends State<SplashScreen> {
               ValueListenableBuilder(
                 valueListenable: controller.state,
                 builder: (context, value, child) {
-                  if (value.runtimeType == SplashStateInitial)
+                  if (value.runtimeType == SplashStateInitial) {
                     return CircularProgressIndicator(
                       color: AppColors.grey1Color,
                     );
-                  else if (value.runtimeType == SplashStateLoading)
+                  } else if (value.runtimeType == SplashStateLoading) {
                     return CircularProgressIndicator(
                         color: AppColors.blue1Color);
-                  else if (value.runtimeType == SplashStateAuthenticated)
+                  } else if (value.runtimeType == SplashStateAuthenticated) {
                     return Icon(
                       Icons.check,
                       color: AppColors.blue1Color,
                     );
-                  else if (value.runtimeType == SplashStateUnauthenticated)
+                  } else if (value.runtimeType == SplashStateUnauthenticated) {
                     return Icon(Icons.not_interested,
                         color: AppColors.red1Color);
-                  else
+                  } else {
                     return Icon(Icons.error, color: AppColors.red1Color);
+                  }
                 },
               ),
               SizedBox(
                 height: height * 0.20,
               ),
-              Text('by Group Six'),
+              const Text('by Group Six'),
             ],
           ),
         ),

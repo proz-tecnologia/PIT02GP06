@@ -9,10 +9,10 @@ class SplashController {
     init();
   }
   init() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     state.value = SplashStateLoading();
     await initFirebase();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     state.value = SplashStateAuthenticated(
         user: UserModel(
             uuid: 'dfdfffdgfdfg', name: 'User Name', balance: 1000.15));
