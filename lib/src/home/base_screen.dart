@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/category_model.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
@@ -10,6 +12,7 @@ import 'package:pit02gp06/src/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import '../transactions/transactions_controller.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -26,6 +29,10 @@ class _BaseScreenState extends State<BaseScreen> {
   List<CategoryModel> categoryList = [];
   @override
   void initState() {
+//todo: move initFirebase process to splash
+
+    initFirebase();
+
 //    categoryController.init();
 
     transactionController.state.addListener(() {
@@ -36,6 +43,23 @@ class _BaseScreenState extends State<BaseScreen> {
       }
     });
     super.initState();
+  }
+
+  Future<void> initFirebase() async {
+    String apiKey = 'AIzaSyB0XDagU-SQzf1NXOJJUIoSpReFeuvDaXc';
+    String appId = '1:166374888908:android:bd53ec09407a9775c17969';
+
+    String messagingSenderId = '166374888908';
+    String projectId = 'my-f-2ab0b';
+
+    var fireApp = await Firebase.initializeApp(
+        options: FirebaseOptions(
+      apiKey: apiKey,
+      appId: appId,
+      messagingSenderId: messagingSenderId,
+      projectId: projectId,
+    ));
+    log(fireApp.name);
   }
 
   @override

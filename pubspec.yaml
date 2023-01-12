@@ -43,6 +43,7 @@ dependencies:
   uuid: ^3.0.7
   flutter_modular: ^5.0.3
   intl: 
+  firebase_core: ^2.4.1
 
 dev_dependencies:
   flutter_test:
