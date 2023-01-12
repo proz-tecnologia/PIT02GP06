@@ -118,7 +118,6 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                     height: 100,
                     width: MediaQuery.of(context).size.width * 0.46,
                     child: TextFormField(
-                      autofocus: true,
                       keyboardType: TextInputType.number,
                       controller: textValueController,
                       validator: (value) {
@@ -154,7 +153,6 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                 ],
               ),
               TextFormField(
-                autofocus: true,
                 controller: textDesctiptionController,
                 validator: (value) {
                   return null;

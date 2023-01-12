@@ -31,8 +31,6 @@ class _BaseScreenState extends State<BaseScreen> {
   void initState() {
 //todo: move initFirebase process to splash
 
-    initFirebase();
-
 //    categoryController.init();
 
     transactionController.state.addListener(() {
@@ -43,23 +41,6 @@ class _BaseScreenState extends State<BaseScreen> {
       }
     });
     super.initState();
-  }
-
-  Future<void> initFirebase() async {
-    String apiKey = 'AIzaSyB0XDagU-SQzf1NXOJJUIoSpReFeuvDaXc';
-    String appId = '1:166374888908:android:bd53ec09407a9775c17969';
-
-    String messagingSenderId = '166374888908';
-    String projectId = 'my-f-2ab0b';
-
-    var fireApp = await Firebase.initializeApp(
-        options: FirebaseOptions(
-      apiKey: apiKey,
-      appId: appId,
-      messagingSenderId: messagingSenderId,
-      projectId: projectId,
-    ));
-    log(fireApp.name);
   }
 
   @override
