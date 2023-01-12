@@ -4,5 +4,5 @@ import 'package:pit02gp06/src/app_module.dart';
 import 'package:pit02gp06/src/app_widget.dart';
 
 void main() {
-  return runApp(ModularApp(module: AppModule(), child: AppWidget()));
+  return runApp(ModularApp(module: AppModule(), child: const AppWidget()));
 }

@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
               ListViewCreditCards(),
               TitleWidget(title: "Despesas"),
               const CardDespesasWidget(),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
             ],

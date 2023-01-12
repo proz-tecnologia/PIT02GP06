@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
@@ -149,7 +151,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
       widget.onRegister(creditCardModel);
       Modular.to.pop();
     } catch (e) {
-      print('erro nos dados = $e');
+      log('erro nos dados = $e');
     }
   }
 }
