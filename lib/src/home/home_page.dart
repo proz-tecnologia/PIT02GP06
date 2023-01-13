@@ -29,9 +29,7 @@ class HomePage extends StatelessWidget {
           valueListenable: controller.state,
           builder: (context, value, child) {
             return HeaderUserCard(
-              userName: value is HomeSuccessState
-                  ? "${value.user.name} (${AppFormatter.money(value.user.balance)})"
-                  : '--',
+              userName: value is HomeSuccessState ? value.user.name : '--',
             );
           },
         ),
