@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
+import 'package:pit02gp06/src/authentication/auth_repository.dart';
 import 'package:pit02gp06/src/category/category_controller.dart';
 import 'package:pit02gp06/src/category/category_states.dart';
 import 'package:pit02gp06/src/transactions/transactions_controller.dart';
@@ -40,9 +42,9 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
     }
 
     if (widget.transaction != null) {
-      _data = widget.transaction!.data;
+      _data = widget.transaction!.date;
       textDesctiptionController.text = widget.transaction!.description ?? "";
-      textValueController.text = widget.transaction!.valor.toString();
+      textValueController.text = widget.transaction!.value.toString();
       _selectCategory(widget.transaction!.categoryId);
     }
   }
@@ -88,7 +90,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                   color: AppColors.whiteColor,
                   onPressed: () async {
                     await widget.transactionController
-                        .delete(widget.transaction!.id);
+                        .delete(widget.transaction!.id!);
                     final snackBar = SnackBar(
                         content: Text(
                             "transação ${widget.transaction!.id} apagada!"));
@@ -248,15 +250,29 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
               ),
               ElevatedButton(
                   onPressed: _formKey.currentState?.validate() == true
-                      ? () {
+                      ? () async {
+                          final user =
+                              await Modular.get<AuthRepository>().getUser();
                           final dataModel = TransactionModel(
-                              id: widget.transaction?.id ?? const Uuid().v4(),
-                              data: _data,
-                              valor: double.parse(textValueController.text),
-                              contaId: 0,
+                              id: widget.transaction?.id,
+                              date: _data,
+                              value: double.parse(textValueController.text),
+                              uid: user.uid,
                               type: widget.type,
                               categoryId: _selectedCategory,
                               description: textDesctiptionController.text);
+                          widget.transactionController.save(dataModel);
+                          user.balance = widget.type == 'Income'
+                              ? user.balance += dataModel.value
+                              : user.balance -= dataModel.value;
+                          //caso seja edição, removendo valor antigo
+                          if (widget.transaction != null) {
+                            user.balance = widget.type == 'Income'
+                                ? user.balance -= widget.transaction!.value
+                                : user.balance += widget.transaction!.value;
+                          }
+                          Modular.get<AuthRepository>().setUser(user);
+
                           Navigator.pop(context, dataModel);
                         }
                       : null,

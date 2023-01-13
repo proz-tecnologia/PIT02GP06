@@ -2,37 +2,37 @@
 import 'dart:convert';
 
 class TransactionModel {
-  DateTime data;
-  String id;
-  double valor;
-  int contaId;
+  String uid;
+  String? id;
+  DateTime date;
+  double value;
   String type;
   int categoryId;
   String? description;
   TransactionModel({
-    required this.data,
-    required this.id,
-    required this.valor,
-    required this.contaId,
+    required this.uid,
+    this.id,
+    required this.date,
+    required this.value,
     required this.type,
     required this.categoryId,
     this.description,
   });
 
   TransactionModel copyWith({
-    DateTime? data,
+    String? uid,
     String? id,
-    double? valor,
-    int? contaId,
+    DateTime? date,
+    double? value,
     String? type,
     int? categoryId,
     String? description,
   }) {
     return TransactionModel(
-      data: data ?? this.data,
+      uid: uid ?? this.uid,
       id: id ?? this.id,
-      valor: valor ?? this.valor,
-      contaId: contaId ?? this.contaId,
+      date: date ?? this.date,
+      value: value ?? this.value,
       type: type ?? this.type,
       categoryId: categoryId ?? this.categoryId,
       description: description ?? this.description,
@@ -41,10 +41,10 @@ class TransactionModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'data': data.millisecondsSinceEpoch,
+      'uid': uid,
       'id': id,
-      'valor': valor,
-      'contaId': contaId,
+      'date': date.millisecondsSinceEpoch,
+      'value': value,
       'type': type,
       'categoryId': categoryId,
       'description': description,
@@ -53,10 +53,10 @@ class TransactionModel {
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
-      data: DateTime.fromMillisecondsSinceEpoch(map['data'] as int),
-      id: map['id'] as String,
-      valor: map['valor'] as double,
-      contaId: map['contaId'] as int,
+      uid: map['uid'] as String,
+      id: map['id'] != null ? map['id'] as String : null,
+      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      value: map['value'] as double,
       type: map['type'] as String,
       categoryId: map['categoryId'] as int,
       description:
@@ -71,17 +71,17 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(data: $data, id: $id, valor: $valor, contaId: $contaId, type: $type, categoryId: $categoryId, description: $description)';
+    return 'TransactionModel(uid: $uid, id: $id, date: $date, value: $value, type: $type, categoryId: $categoryId, description: $description)';
   }
 
   @override
   bool operator ==(covariant TransactionModel other) {
     if (identical(this, other)) return true;
 
-    return other.data == data &&
+    return other.uid == uid &&
         other.id == id &&
-        other.valor == valor &&
-        other.contaId == contaId &&
+        other.date == date &&
+        other.value == value &&
         other.type == type &&
         other.categoryId == categoryId &&
         other.description == description;
@@ -89,10 +89,10 @@ class TransactionModel {
 
   @override
   int get hashCode {
-    return data.hashCode ^
+    return uid.hashCode ^
         id.hashCode ^
-        valor.hashCode ^
-        contaId.hashCode ^
+        date.hashCode ^
+        value.hashCode ^
         type.hashCode ^
         categoryId.hashCode ^
         description.hashCode;
