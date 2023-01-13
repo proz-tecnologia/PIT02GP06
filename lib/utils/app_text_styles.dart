@@ -51,4 +51,18 @@ class AppTextStyles {
 // text intro (logo)
   static TextStyle get textBrand =>
       TextStyle(fontSize: 65, fontFamily: 'Karla', color: AppColors.grey3Color);
+
+// text chip
+  static TextStyle get textChip => TextStyle(
+      fontSize: 16,
+      fontFamily: 'Karla',
+      fontWeight: FontWeight.bold,
+      color: AppColors.grey3Color);
+
+// text chip
+  static TextStyle get textChipSelected => TextStyle(
+      fontSize: 16,
+      fontFamily: 'Karla',
+      fontWeight: FontWeight.bold,
+      color: AppColors.whiteColor);
 }
