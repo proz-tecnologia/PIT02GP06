@@ -1,11 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'central_pie_chart.dart';
 import 'list_view_despesas_widget.dart';
 
 class CardDespesasWidget extends StatelessWidget {
-  const CardDespesasWidget({
+  final List<Map<String, Object>> data;
+  CardDespesasWidget({
     Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -22,25 +25,17 @@ class CardDespesasWidget extends StatelessWidget {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 140,
               width: 140,
-              child: CentralPieChart(data: [
-                {'genre': 'Lazer', 'sold': 200, 'color': 0xFF5A41FF},
-                {'genre': 'Transporte', 'sold': 130, 'color': 0xFF0F0297},
-                {'genre': 'Casa', 'sold': 300, 'color': 0xFFE10F00},
-                {'genre': 'Outros', 'sold': 50, 'color': 0xFFE6F201},
-              ]),
+              child: CentralPieChart(
+                data: data,
+              ),
             ),
             SizedBox(
               height: 160,
-              width: 200,
-              child: ListViewDespesas(listCategorias: const [
-                {'genre': 'Lazer', 'sold': 200, 'color': 0xFF5A41FF},
-                {'genre': 'Transporteeeeee', 'sold': 130, 'color': 0xFF0F0297},
-                {'genre': 'Casa', 'sold': 300, 'color': 0xFFE10F00},
-                {'genre': 'Outros', 'sold': 50, 'color': 0xFFE6F201},
-              ]),
+              width: 250,
+              child: ListViewDespesas(listCategorias: data),
             ),
           ],
         ),

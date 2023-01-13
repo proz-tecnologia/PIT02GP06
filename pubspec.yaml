@@ -44,6 +44,7 @@ dependencies:
   flutter_modular: ^5.0.3
   intl: 
   firebase_core: ^2.4.1
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:

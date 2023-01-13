@@ -53,13 +53,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                 categoryController: widget.categoryController,
                                 transactionController:
                                     widget.transactionsController,
-                              )))
-                      .then((value) {
-                    if (value != null &&
-                        value.runtimeType == TransactionModel) {
-                      widget.transactionsController.add(value);
-                    }
-                  });
+                              )));
                 }
               },
               backgroundColor: AppColors.blue1Color,

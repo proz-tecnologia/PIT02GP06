@@ -29,17 +29,24 @@ class TransactionsController {
     state.value = TransactionsSuccessState(transactionsList: list);
   }
 
-  void add(TransactionModel transaction) async {
+  void save(TransactionModel transaction) async {
     state.value = TransactionsLoadState();
-    await _repository.add(transaction);
+    await _repository.save(transaction);
     List<TransactionModel> list = await _repository.loadTransactions();
     state.value = TransactionsSuccessState(transactionsList: list);
   }
 
-  void edit(int index, TransactionModel category) async {
-    state.value = TransactionsLoadState();
-    await _repository.edit(index, category);
-    List<TransactionModel> list = await _repository.loadTransactions();
-    state.value = TransactionsSuccessState(transactionsList: list);
-  }
+  // void add(TransactionModel transaction) async {
+  //   state.value = TransactionsLoadState();
+  //   await _repository.add(transaction);
+  //   List<TransactionModel> list = await _repository.loadTransactions();
+  //   state.value = TransactionsSuccessState(transactionsList: list);
+  // }
+
+  // void edit(int index, TransactionModel category) async {
+  //   state.value = TransactionsLoadState();
+  //   await _repository.edit(index, category);
+  //   List<TransactionModel> list = await _repository.loadTransactions();
+  //   state.value = TransactionsSuccessState(transactionsList: list);
+  // }
 }

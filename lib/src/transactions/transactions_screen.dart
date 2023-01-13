@@ -138,15 +138,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                           transaction:
                                               value.transactionsList[index],
                                         ),
-                                      ))
-                                          .then((value) {
-                                        if (value != null &&
-                                            value.runtimeType ==
-                                                TransactionModel) {
-                                          widget.transactionController
-                                              .edit(index, value);
-                                        }
-                                      });
+                                      ));
                                     }),
                                     iconColor:
                                         value.transactionsList[index].type ==
@@ -163,14 +155,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                     ),
                                     title: Text(
                                       AppFormatter.moneyWithRs(
-                                          value.transactionsList[index].valor),
+                                          value.transactionsList[index].value),
                                       style: AppTextStyles.textTitle,
                                     ),
                                     subtitle: Wrap(
                                       children: [
                                         Text(AppFormatter
                                             .dateExtenseOcultCurrentYear(value
-                                                .transactionsList[index].data)),
+                                                .transactionsList[index].date)),
                                         const VerticalDivider(),
                                         Text(value.transactionsList[index]
                                                 .description ??
