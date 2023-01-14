@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../common/colors.dart';
+import 'package:pit02gp06/utils/app_colors.dart';
 
 class BalanceCard extends StatefulWidget {
   const BalanceCard({
@@ -56,12 +55,13 @@ class _BalanceCardState extends State<BalanceCard> {
                                 ? Icons.visibility_off_outlined
                                 : Icons.visibility_outlined,
                             size: 25,
-                            color: const Color(0xFF47525E),
+                            color: AppColors.grey1Color,
                           )),
                       const SizedBox(height: 5),
                       Text(
                         "Saldo",
-                        style: TextStyle(fontSize: 18, color: textColorDefault),
+                        style: TextStyle(
+                            fontSize: 18, color: AppColors.grey1Color),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -69,7 +69,7 @@ class _BalanceCardState extends State<BalanceCard> {
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
-                            color: textColorDefault),
+                            color: AppColors.grey1Color),
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -101,7 +101,7 @@ class _BalanceCardState extends State<BalanceCard> {
       children: [
         Text(
           title,
-          style: TextStyle(color: textColorDefault),
+          style: TextStyle(color: AppColors.grey1Color),
         ),
         const SizedBox(height: 5),
         Container(

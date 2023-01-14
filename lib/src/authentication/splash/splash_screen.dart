@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     controller.state.addListener(() {
       if (controller.state.value.runtimeType == SplashStateAuthenticated) {
-        Modular.to.pushReplacementNamed('/home');
+        Modular.to.pushReplacementNamed('/intro');
       }
     });
     super.initState();

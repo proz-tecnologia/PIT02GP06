@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
       children: [
         TextFormField(
           keyboardType: item?.keyboardType ?? TextInputType.text,
+          obscureText: item?.isPassword ?? false,
           controller: item?.controller,
           validator: item?.validator ??
               (String? value) {
@@ -22,7 +23,16 @@ class TextFieldWidget extends StatelessWidget {
               },
           inputFormatters: item?.formatter,
           decoration: InputDecoration(
-            border: const OutlineInputBorder(),
+            prefixIcon: item?.icon != null
+                ? Icon(
+                    item?.icon,
+                    size: 18,
+                  )
+                : null,
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            )),
             labelText: item?.label,
           ),
         ),
