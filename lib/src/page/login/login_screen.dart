@@ -10,11 +10,21 @@ class LoginScreen extends StatelessWidget {
     required this.onRecover,
   });
 
-  final VoidCallback onEnter;
+  final Function(String, String) onEnter;
   final VoidCallback onRecover;
 
   @override
   Widget build(BuildContext context) {
+    final emailItem = TextFieldItem(
+      label: 'Email',
+      icon: Icons.email_outlined,
+    );
+    final passwordItem = TextFieldItem(
+      label: 'Senha',
+      icon: Icons.lock_outline,
+      isPassword: true,
+    );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -35,28 +45,26 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               TextFieldWidget(
-                item: TextFieldItem(label: 'Email', icon: Icons.email_outlined),
+                item: emailItem,
               ),
               const SizedBox(height: 8),
               TextFieldWidget(
-                item: TextFieldItem(
-                  label: 'Senha',
-                  icon: Icons.lock_outline,
-                  isPassword: true,
-                ),
+                item: passwordItem,
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: onEnter,
+                      onPressed: () => onEnter(
+                        emailItem.controller.text,
+                        passwordItem.controller.text,
+                      ),
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(18),
                           backgroundColor: AppColors.secondaryColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(12), // <-- Radius
+                            borderRadius: BorderRadius.circular(12),
                           )),
                       child: const Text(
                         'Entrar',
@@ -68,7 +76,9 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               TextButton(
-                  onPressed: onRecover, child: const Text('Recuperar senha')),
+                onPressed: onRecover,
+                child: const Text('Recuperar senha'),
+              ),
               const SizedBox(height: 20),
               const Divider()
             ],
