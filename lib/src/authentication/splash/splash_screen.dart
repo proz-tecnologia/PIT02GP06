@@ -45,10 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   "lib/images/logo_my_f_transparente.png",
                 ),
               ),
-              Text(
-                "inserir bordão aqui",
-                style: AppTextStyles.textIntro,
-              ),
               SizedBox(
                 height: height * 0.1,
               ),
@@ -78,7 +74,6 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                 height: height * 0.20,
               ),
-              const Text('by Group Six'),
             ],
           ),
         ),

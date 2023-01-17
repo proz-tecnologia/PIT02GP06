@@ -8,7 +8,6 @@ import 'package:pit02gp06/src/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
-import 'package:uuid/uuid.dart';
 
 import '../category/category_page.dart';
 
@@ -91,11 +90,20 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                   onPressed: () async {
                     await widget.transactionController
                         .delete(widget.transaction!.id!);
+
+                    final user = await Modular.get<AuthRepository>().getUser();
+
+                    user.balance = widget.type == 'Income'
+                        ? user.balance -= widget.transaction!.value
+                        : user.balance += widget.transaction!.value;
+
+                    Modular.get<AuthRepository>().setUser(user);
+
                     final snackBar = SnackBar(
                         content: Text(
                             "transação ${widget.transaction!.id} apagada!"));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    Navigator.pop(context);
+                    Navigator.pop(context, widget.transaction!);
                   },
                   icon: const Icon(
                     Icons.delete,
