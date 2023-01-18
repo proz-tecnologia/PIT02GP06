@@ -24,7 +24,7 @@ class TransactionsController {
 
   Future delete(String id) async {
     state.value = TransactionsLoadState();
-    await _repository.remove(id);
+    await _repository.delete(id);
     List<TransactionModel> list = await _repository.loadTransactions();
     state.value = TransactionsSuccessState(transactionsList: list);
   }
