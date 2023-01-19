@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/repositories/transactions_repository.dart';
 import 'package:pit02gp06/src/transactions/transactions_state.dart';
@@ -8,14 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TransactionsController {
   ValueNotifier<TransactionsState> state =
       ValueNotifier(TransactionsEmptyState());
-  final _repository = TransactionsRepository();
+  final _repository = Modular.get<TransactionsRepository>();
   TransactionsController() {
     state.value = TransactionsLoadState();
     init();
   }
   void init() async {
-    final instance = await SharedPreferences.getInstance();
-//    _repository = TransactionsRepository();
     List<TransactionModel> transactionsList =
         await _repository.loadTransactions();
     state.value = TransactionsSuccessState(transactionsList: transactionsList);

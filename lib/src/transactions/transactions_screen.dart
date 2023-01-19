@@ -12,6 +12,8 @@ import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
+import '../widgets/show_loading_dialog.dart';
+
 class TransactionsScreen extends StatefulWidget {
   final TransactionsController transactionController;
   final CategoryController categoryController;
@@ -46,21 +48,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   int categoryIntColorById(String categoryId) {
     int color = 0;
-    categoryList.forEach((element) {
+    for (var element in categoryList) {
       if (element.id == categoryId) {
         color = element.color;
       }
-    });
+    }
     return color;
   }
 
   String categoryGenreById(String categoryId) {
     String genre = "Category";
-    categoryList.forEach((element) {
+    for (var element in categoryList) {
       if (element.id == categoryId) {
         genre = element.genre;
       }
-    });
+    }
     return genre;
   }
 
@@ -80,20 +82,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 icon: const Icon(Icons.settings)),
           ],
         ),
-        // IconButton(
-        //     onPressed: () async {
-        //       await Navigator.of(context)
-        //           .push<TransactionModel?>(MaterialPageRoute(
-        //               builder: (context) => AddTransactionPage(
-        //                     type: "Expense",
-        //                   )))
-        //           .then((value) {
-        //         if (value != null && value.runtimeType == TransactionModel) {
-        //           widget.controller.add(value);
-        //         }
-        //       });
-        //     },
-        //     icon: Icon(Icons.add)),
         SizedBox(
           width: 100,
           child: DropdownButton(
