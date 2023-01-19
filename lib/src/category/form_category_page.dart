@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pit02gp06/src/category/category_controller.dart';
 
 import '../../models/category_model.dart';
+import '../authentication/auth_repository.dart';
 
 class FormCategoryPage extends StatefulWidget {
   final CategoryModel? category;
@@ -55,13 +58,20 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
               ),
               ElevatedButton(
                   onPressed: _formKey.currentState?.validate() == true
-                      ? () {
+                      ? () async {
+                          final user =
+                              await Modular.get<AuthRepository>().getUser();
                           final category = CategoryModel(
-                              genre: textController.text,
-                              color: widget.category != null
-                                  ? widget.category!.color
-                                  : 0xFF0F0297,
-                              type: widget.type);
+                            uid: user.uid,
+                            genre: textController.text,
+                            color: widget.category != null
+                                ? widget.category!.color
+                                : 0xFF0F0297,
+                            type: widget.type,
+                          );
+
+                          Modular.get<CategoryController>().save(category);
+
                           Navigator.pop(context, category);
                         }
                       : null,

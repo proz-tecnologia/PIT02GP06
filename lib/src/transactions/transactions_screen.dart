@@ -44,6 +44,26 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     super.initState();
   }
 
+  int categoryIntColorById(String categoryId) {
+    int color = 0;
+    categoryList.forEach((element) {
+      if (element.id == categoryId) {
+        color = element.color;
+      }
+    });
+    return color;
+  }
+
+  String categoryGenreById(String categoryId) {
+    String genre = "Category";
+    categoryList.forEach((element) {
+      if (element.id == categoryId) {
+        genre = element.genre;
+      }
+    });
+    return genre;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -175,15 +195,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                         backgroundColor: Colors.grey.shade200,
                                         avatar: Icon(
                                           Icons.circle,
-                                          color: Color(categoryList[value
-                                                  .transactionsList[index]
-                                                  .categoryId]
-                                              .color),
+                                          color: Color(categoryIntColorById(
+                                              value.transactionsList[index]
+                                                  .categoryId)),
                                         ),
-                                        label: Text(categoryList[value
-                                                .transactionsList[index]
-                                                .categoryId]
-                                            .genre),
+                                        label: Text(categoryGenreById(value
+                                            .transactionsList[index]
+                                            .categoryId)),
                                       ),
                                     ),
                                   ),

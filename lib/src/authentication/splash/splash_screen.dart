@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/src/authentication/splash/splash_controller.dart';
 import 'package:pit02gp06/src/authentication/splash/splash_state.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
-import 'package:pit02gp06/utils/app_text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -8,15 +8,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TransactionsController {
   ValueNotifier<TransactionsState> state =
       ValueNotifier(TransactionsEmptyState());
-  late final _repository;
+  final _repository = TransactionsRepository();
   TransactionsController() {
     state.value = TransactionsLoadState();
     init();
   }
   void init() async {
     final instance = await SharedPreferences.getInstance();
-    _repository = TransactionsRepository(
-        service: SharedPreferencesService(instance: instance));
+//    _repository = TransactionsRepository();
     List<TransactionModel> transactionsList =
         await _repository.loadTransactions();
     state.value = TransactionsSuccessState(transactionsList: transactionsList);

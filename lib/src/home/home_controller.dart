@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pit02gp06/models/pie_chart_model.dart';
 import 'package:pit02gp06/models/resume_model.dart';
 import 'package:pit02gp06/src/authentication/auth_repository.dart';
 import 'package:pit02gp06/src/home/home_state.dart';
@@ -38,39 +39,28 @@ class HomeController {
 
   List<Map<String, Object>> expenseByCategory(
       List<TransactionModel> transactions, List<CategoryModel> categoryes) {
-    List<Map<String, Object>> data = [];
+    Map<String, PieChartModel> data = {};
     List<Map<String, Object>> expenseData = [];
 
-    categoryes.forEach((category) {
-      Map<String, Object> pieObj = {
-        'genre': category.genre,
-        'sold': 0.0,
-        'color': category.color,
-        'type': category.type,
-      };
-      data.add(pieObj);
-    });
+    for (var category in categoryes) {
+      PieChartModel pieObj = PieChartModel(
+          genre: category.genre,
+          sold: 0.0,
+          color: category.color,
+          type: category.type);
+      data.addAll({category.id!: pieObj});
+    }
 
-    transactions.forEach((transaction) {
-      Map<String, Object> pieObj = data[transaction.categoryId];
-      double sold = (pieObj['sold'] as double);
-      sold += transaction.value;
-      pieObj['sold'] = sold;
-      data[transaction.categoryId] = pieObj;
-    });
-
-    data.forEach((pieObj) {
-      if (pieObj['type'] == "Expense" && (pieObj['sold'] as double) > 0) {
-        expenseData.add(pieObj);
+    for (var transaction in transactions) {
+      data[transaction.categoryId]!.sold += transaction.value;
+    }
+    data.forEach((key, value) {
+      if (value.type == "Expense" && value.sold > 0) {
+        expenseData.add(
+            {'genre': value.genre, 'sold': value.sold, 'color': value.color});
       }
     });
 
-    // data = [
-    //   {'genre': 'Lazer', 'sold': 200, 'color': 0xFF5A41FF},
-    //   {'genre': 'Transporteeeeee', 'sold': 130, 'color': 0xFF0F0297},
-    //   {'genre': 'Casa', 'sold': 300, 'color': 0xFFE10F00},
-    //   {'genre': 'Outros', 'sold': 50, 'color': 0xFFE6F201},
-    // ];
     return expenseData;
   }
 }
