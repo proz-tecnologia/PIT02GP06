@@ -31,14 +31,11 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
   final textValueController = TextEditingController();
   final textDesctiptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  int _selectedCategory = 0;
+  String _selectedCategory = "";
   DateTime _data = DateTime.now();
   @override
   void initState() {
     super.initState();
-    if (widget.type == "Income") {
-      _selectedCategory = 1;
-    }
 
     if (widget.transaction != null) {
       _data = widget.transaction!.date;
@@ -48,9 +45,9 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
     }
   }
 
-  void _selectCategory(int index) {
+  void _selectCategory(String categoryId) {
     setState(() {
-      _selectedCategory = index;
+      _selectedCategory = categoryId;
     });
   }
 
@@ -88,6 +85,8 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                 IconButton(
                   color: AppColors.whiteColor,
                   onPressed: () async {
+                    widget.categoryController
+                        .decrementCount(widget.transaction!.categoryId);
                     await widget.transactionController
                         .delete(widget.transaction!.id!);
 
@@ -212,13 +211,21 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                             ? const SizedBox()
                             : GestureDetector(
                                 onTap: (() {
-                                  _selectCategory(index);
+                                  _selectCategory((widget.categoryController
+                                          .state.value as CategorySuccessState)
+                                      .categoryList[index]
+                                      .id!);
                                 }),
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(4, 0, 4, 0),
                                   child: Chip(
-                                    backgroundColor: _selectedCategory == index
+                                    backgroundColor: _selectedCategory ==
+                                            (widget.categoryController.state
+                                                        .value
+                                                    as CategorySuccessState)
+                                                .categoryList[index]
+                                                .id!
                                         ? widget.type == "Income"
                                             ? AppColors.blue1Color
                                             : AppColors.red1Color
@@ -231,7 +238,12 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                                           .categoryList[index]
                                           .color),
                                       child: ClipRRect(
-                                        child: _selectedCategory == index
+                                        child: _selectedCategory ==
+                                                (widget.categoryController.state
+                                                            .value
+                                                        as CategorySuccessState)
+                                                    .categoryList[index]
+                                                    .id!
                                             ? const Icon(Icons.check)
                                             : Text((widget.categoryController
                                                         .state.value
@@ -246,7 +258,12 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                                               as CategorySuccessState)
                                           .categoryList[index]
                                           .genre,
-                                      style: _selectedCategory == index
+                                      style: _selectedCategory ==
+                                              (widget.categoryController.state
+                                                          .value
+                                                      as CategorySuccessState)
+                                                  .categoryList[index]
+                                                  .id!
                                           ? AppTextStyles.textChipSelected
                                           : AppTextStyles.textChip,
                                     ),
@@ -261,6 +278,18 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                       ? () async {
                           final user =
                               await Modular.get<AuthRepository>().getUser();
+
+                          if (widget.transaction == null) {
+                            widget.categoryController
+                                .incrementCount(_selectedCategory);
+                          } else if (widget.transaction!.categoryId !=
+                              _selectedCategory) {
+                            widget.categoryController
+                                .decrementCount(widget.transaction!.categoryId);
+                            widget.categoryController
+                                .incrementCount(_selectedCategory);
+                          }
+
                           final dataModel = TransactionModel(
                               id: widget.transaction?.id,
                               date: _data,

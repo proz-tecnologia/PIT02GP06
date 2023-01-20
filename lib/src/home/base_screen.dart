@@ -21,10 +21,10 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  final transactionController = TransactionsController();
+  final transactionController = Modular.get<TransactionsController>();
   final homeController = Modular.get<HomeController>();
   final pageController = PageController();
-  final categoryController = CategoryController();
+  final categoryController = Modular.get<CategoryController>();
   List<CategoryModel> categoryList = [];
   @override
   void initState() {

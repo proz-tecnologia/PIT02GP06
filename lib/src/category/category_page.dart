@@ -55,7 +55,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                     int.parse(dropDownTypeValue.toString())])))
                         .then((value) {
                       if (value != null && value.runtimeType == CategoryModel) {
-                        widget.controller.add(value);
+                        widget.controller.save(value);
                       }
                     });
                   },
@@ -117,7 +117,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                         if (color.runtimeType == int) {
                                           categoryList[index].color = color;
                                           widget.controller
-                                              .edit(index, categoryList[index]);
+                                              .save(categoryList[index]);
                                         }
                                       },
                                     ),
@@ -136,8 +136,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                           if (value != null &&
                                               value.runtimeType ==
                                                   CategoryModel) {
-                                            widget.controller
-                                                .edit(index, value);
+                                            widget.controller.save(value);
                                           }
                                         });
                                       },
@@ -145,16 +144,17 @@ class _CategoryPageState extends State<CategoryPage> {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        if (index < 2) {
+                                        if (categoryList[index].count > 0) {
                                           const snackBar = SnackBar(
                                             content: Text(
-                                                'Este ítem não pode ser excluído!'),
+                                                "Esta categoria não pode ser excluída pois contém transações!"),
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
                                           return;
                                         }
-                                        widget.controller.delete(index);
+                                        widget.controller
+                                            .delete(categoryList[index].id);
                                       },
                                       icon: const Icon(Icons.delete),
                                     ),

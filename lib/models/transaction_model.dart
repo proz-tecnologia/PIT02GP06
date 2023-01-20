@@ -7,7 +7,7 @@ class TransactionModel {
   DateTime date;
   double value;
   String type;
-  int categoryId;
+  String categoryId;
   String? description;
   TransactionModel({
     required this.uid,
@@ -25,7 +25,7 @@ class TransactionModel {
     DateTime? date,
     double? value,
     String? type,
-    int? categoryId,
+    String? categoryId,
     String? description,
   }) {
     return TransactionModel(
@@ -58,7 +58,7 @@ class TransactionModel {
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       value: map['value'] as double,
       type: map['type'] as String,
-      categoryId: map['categoryId'] as int,
+      categoryId: map['categoryId'] as String,
       description:
           map['description'] != null ? map['description'] as String : null,
     );

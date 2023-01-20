@@ -18,30 +18,34 @@ class CategoryController {
   void init() async {
     final instance = await SharedPreferences.getInstance();
 
-    _repository = CategoryRepository(
-        service: SharedPreferencesService(instance: instance));
+    _repository = CategoryRepository();
     List<CategoryModel> categoryList = await _repository.loadList();
     state.value = CategorySuccessState(categoryList: categoryList);
   }
 
-  void delete(int index) async {
+  void delete(String id) async {
     state.value = CategoryLoadState();
-    List<CategoryModel> list = await _repository.remove(index);
-    //List<CategoryModel> list = await _repository.loadList();
+    await _repository.delete(id);
+    List<CategoryModel> list = await _repository.loadList();
     state.value = CategorySuccessState(categoryList: list);
   }
 
-  void add(CategoryModel category) async {
+  void save(CategoryModel category) async {
     state.value = CategoryLoadState();
-    List<CategoryModel> list = await _repository.add(category);
-    // List<CategoryModel> list = await _repository.loadList();
+    await _repository.save(category);
+    List<CategoryModel> list = await _repository.loadList();
     state.value = CategorySuccessState(categoryList: list);
   }
 
-  void edit(int index, CategoryModel category) async {
-    state.value = CategoryLoadState();
-    List<CategoryModel> list = await _repository.edit(index, category);
-    //List<CategoryModel> list = await _repository.loadList();
-    state.value = CategorySuccessState(categoryList: list);
+  void incrementCount(String categoryId) async {
+    final category = await _repository.loadDoc(categoryId);
+    category.incrementCount();
+    save(category);
+  }
+
+  void decrementCount(String categoryId) async {
+    final category = await _repository.loadDoc(categoryId);
+    category.decrementCount();
+    save(category);
   }
 }
