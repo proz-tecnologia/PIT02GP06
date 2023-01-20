@@ -13,7 +13,7 @@ class ListViewCreditCards extends StatelessWidget {
   //TODO: implementar CreditCardController
   final List<CreditCardModel> listCreditCards = [
     CreditCardModel(
-        accountId: '1',
+        uid: 'test',
         flag: 'master',
         nickname: 'nubank',
         limit: 3000.00,
@@ -21,7 +21,7 @@ class ListViewCreditCards extends StatelessWidget {
         closeDate: DateTime(2023, 01, 15),
         dueDate: DateTime(2023, 01, 20)),
     CreditCardModel(
-        accountId: '2',
+        uid: 'test',
         flag: 'elo',
         nickname: 'caixa',
         limit: 1500.00,
@@ -62,7 +62,8 @@ class ListViewCreditCards extends StatelessWidget {
                       log(creditCardModel.nickname);
                     }
 
-                    Modular.to.pushNamed('/credit_card_register', arguments: {
+                    Modular.to
+                        .pushNamed('/home/credit_card_register', arguments: {
                       'viewModel': viewModel,
                       'onRegister': onRegister,
                     });
