@@ -2,7 +2,8 @@
 import 'dart:convert';
 
 class CreditCardModel {
-  String accountId;
+  String? id;
+  String uid;
   String flag;
   String nickname;
   double limit;
@@ -10,7 +11,8 @@ class CreditCardModel {
   DateTime closeDate;
   DateTime dueDate;
   CreditCardModel({
-    required this.accountId,
+    this.id,
+    required this.uid,
     required this.flag,
     required this.nickname,
     required this.limit,
@@ -20,7 +22,8 @@ class CreditCardModel {
   });
 
   CreditCardModel copyWith({
-    String? accountId,
+    String? id,
+    String? uid,
     String? flag,
     String? nickname,
     double? limit,
@@ -29,7 +32,8 @@ class CreditCardModel {
     DateTime? dueDate,
   }) {
     return CreditCardModel(
-      accountId: accountId ?? this.accountId,
+      id: id ?? this.id,
+      uid: uid ?? this.uid,
       flag: flag ?? this.flag,
       nickname: nickname ?? this.nickname,
       limit: limit ?? this.limit,
@@ -41,7 +45,8 @@ class CreditCardModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'accountId': accountId,
+      'id': id,
+      'uid': uid,
       'flag': flag,
       'nickname': nickname,
       'limit': limit,
@@ -53,7 +58,8 @@ class CreditCardModel {
 
   factory CreditCardModel.fromMap(Map<String, dynamic> map) {
     return CreditCardModel(
-      accountId: map['accountId'] as String,
+      id: map['id'] != null ? map['id'] as String : null,
+      uid: map['uid'] as String,
       flag: map['flag'] as String,
       nickname: map['nickname'] as String,
       limit: map['limit'] as double,
@@ -69,10 +75,16 @@ class CreditCardModel {
       CreditCardModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
+  String toString() {
+    return 'CreditCardModel(id: $id, uid: $uid, flag: $flag, nickname: $nickname, limit: $limit, spent: $spent, closeDate: $closeDate, dueDate: $dueDate)';
+  }
+
+  @override
   bool operator ==(covariant CreditCardModel other) {
     if (identical(this, other)) return true;
 
-    return other.accountId == accountId &&
+    return other.id == id &&
+        other.uid == uid &&
         other.flag == flag &&
         other.nickname == nickname &&
         other.limit == limit &&
@@ -83,17 +95,13 @@ class CreditCardModel {
 
   @override
   int get hashCode {
-    return accountId.hashCode ^
+    return id.hashCode ^
+        uid.hashCode ^
         flag.hashCode ^
         nickname.hashCode ^
         limit.hashCode ^
         spent.hashCode ^
         closeDate.hashCode ^
         dueDate.hashCode;
-  }
-
-  @override
-  String toString() {
-    return 'CreditCardModel(accountId: $accountId, flag: $flag, nickname: $nickname, limit: $limit, spent: $spent, closeDate: $closeDate, dueDate: $dueDate)';
   }
 }
