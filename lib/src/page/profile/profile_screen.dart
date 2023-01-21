@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Padding(
         padding: EdgeInsets.all(52.0),
         child: Column(children: [
-          // IMAGEM
+          // IMAGE
           Container(
             height: 125,
             width: 125,
@@ -47,21 +47,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fit: BoxFit.fitWidth,
                 )),
           ),
+          // NAME
           Text(
             'Nome Exemplo',
             style: AppTextStyles.textNameProfileScreen,
           ),
+          // EMAIL
           Text(
             'email@exemplo.com.br',
             style: AppTextStyles.textEmailProfileScreen,
           ),
+          // TEXT "MEUS DADOS"
           Text(
             'Meus dados',
             style: AppTextStyles.textButtonSecondaryBlue,
           ),
+          // INPUT FULL NAME
           TextFieldWidget(
             item: nameItem,
           ),
+          // DATE
           Container(
             height: 55,
             decoration: BoxDecoration(
@@ -90,17 +95,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
+          // PHONE
           TextFieldWidget(
             item: phoneItem,
           ),
+          // GENDER
           ValueListenableBuilder(
               valueListenable: dropValue,
               builder: (BuildContext context, String value, _) {
                 return SizedBox(
-                  width: 280,
+                  width: 290,
                   child: DropdownButtonFormField<String>(
                       isExpanded: true,
-                      hint: const Text('Não informado'),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      ),
+                      hint: const Text('Gênero'),
                       value: (value.isEmpty) ? null : value,
                       onChanged: (choice) =>
                           dropValue.value = choice.toString(),
