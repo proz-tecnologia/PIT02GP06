@@ -36,7 +36,7 @@ class AppTextStyles {
 // button widget (criar uma conta, entrar)
 
   static TextStyle get textButtonWidget =>
-      TextStyle(fontSize: 20, color: AppColors.whiteColor);
+      TextStyle(fontSize: 17, color: AppColors.whiteColor);
 
 // button secondary (já sou cadastrado, recuperar a senha, criar conta)
   static TextStyle get textButtonSecondaryBlue => TextStyle(
