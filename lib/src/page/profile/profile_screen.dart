@@ -122,7 +122,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ))
                           .toList()),
                 );
-              })
+              }),
+          // BUTTON
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                minimumSize: const Size(290, 50),
+                padding: const EdgeInsets.all(18),
+                backgroundColor: AppColors.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                )),
+            child: Text(
+              "Salvar",
+              style: AppTextStyles.textButtonWidget,
+            ),
+          ),
         ]),
       )),
     );
