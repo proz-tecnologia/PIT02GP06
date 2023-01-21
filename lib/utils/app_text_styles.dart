@@ -65,4 +65,10 @@ class AppTextStyles {
       fontFamily: 'Karla',
       fontWeight: FontWeight.bold,
       color: AppColors.whiteColor);
+
+  static TextStyle get textNameProfileScreen => TextStyle(
+      fontSize: 25, fontFamily: 'Karla', color: AppColors.primaryColor);
+
+  static TextStyle get textEmailProfileScreen =>
+      TextStyle(fontSize: 15, color: AppColors.grey2Color);
 }
