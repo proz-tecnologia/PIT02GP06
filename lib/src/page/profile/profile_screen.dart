@@ -12,6 +12,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  DateTime? _dateTime = null;
+
   @override
   Widget build(BuildContext context) {
     final nameItem = TextFieldItem(
@@ -35,6 +37,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
           TextFieldWidget(
             item: nameItem,
           ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(width: 1),
+                borderRadius: BorderRadius.circular(12)),
+            child: Row(
+              children: [
+                IconButton(
+                    iconSize: 30,
+                    onPressed: () {
+                      showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(2001),
+                              lastDate: DateTime(2222))
+                          .then((date) {
+                        setState(() {
+                          _dateTime = date!;
+                        });
+                      });
+                    },
+                    icon: const Icon(Icons.calendar_month)),
+                Text(_dateTime == null
+                    ? 'Data de Nascimento'
+                    : _dateTime.toString()),
+              ],
+            ),
+          )
         ]),
       )),
     );
