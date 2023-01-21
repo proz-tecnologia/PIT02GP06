@@ -40,7 +40,7 @@ class AppTextStyles {
 
 // button secondary (já sou cadastrado, recuperar a senha, criar conta)
   static TextStyle get textButtonSecondaryBlue => TextStyle(
-      fontSize: 20, fontFamily: 'Karla', color: AppColors.secondaryColor);
+      fontSize: 18, fontFamily: 'Karla', color: AppColors.secondaryColor);
   static TextStyle get textButtonSecondaryGrey => TextStyle(
       fontSize: 20, fontFamily: 'Karla', color: AppColors.primaryColor);
 
