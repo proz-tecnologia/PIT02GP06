@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/category_model.dart';
-import 'package:pit02gp06/src/category/category_controller.dart';
-import 'package:pit02gp06/src/category/category_states.dart';
+import 'package:pit02gp06/src/home_module/category/category_controller.dart';
+import 'package:pit02gp06/src/home_module/category/category_states.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
 import 'package:pit02gp06/src/widgets/select_color_modal.dart';
 import 'package:pit02gp06/utils/app_colors.dart';

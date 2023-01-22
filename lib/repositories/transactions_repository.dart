@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/utils/shared_preferences_keys.dart';
 
-import '../src/authentication/auth_repository.dart';
+import '../src/authentication_module/auth_repository.dart';
 
 class TransactionsRepository {
   TransactionsRepository();

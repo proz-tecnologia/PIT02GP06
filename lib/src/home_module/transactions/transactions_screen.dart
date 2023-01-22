@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/category_model.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
-import 'package:pit02gp06/src/category/category_controller.dart';
-import 'package:pit02gp06/src/category/category_page.dart';
-import 'package:pit02gp06/src/category/category_states.dart';
-import 'package:pit02gp06/src/transactions/form_transaction_page.dart';
-import 'package:pit02gp06/src/transactions/transactions_controller.dart';
-import 'package:pit02gp06/src/transactions/transactions_state.dart';
+import 'package:pit02gp06/src/home_module/category/category_controller.dart';
+import 'package:pit02gp06/src/home_module/category/category_page.dart';
+import 'package:pit02gp06/src/home_module/category/category_states.dart';
+import 'package:pit02gp06/src/home_module/transactions/form_transaction_page.dart';
+import 'package:pit02gp06/src/home_module/transactions/transactions_controller.dart';
+import 'package:pit02gp06/src/home_module/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/custom_app_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
-import '../widgets/show_loading_dialog.dart';
+import '../../widgets/show_loading_dialog.dart';
 
 class TransactionsScreen extends StatefulWidget {
   final TransactionsController transactionController;

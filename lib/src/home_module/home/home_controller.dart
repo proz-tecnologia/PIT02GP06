@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/pie_chart_model.dart';
 import 'package:pit02gp06/models/resume_model.dart';
-import 'package:pit02gp06/src/authentication/auth_repository.dart';
-import 'package:pit02gp06/src/home/home_state.dart';
+import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
+import 'package:pit02gp06/src/home_module/home/home_state.dart';
 
-import '../../models/category_model.dart';
-import '../../models/transaction_model.dart';
+import '../../../models/category_model.dart';
+import '../../../models/transaction_model.dart';
 
 class HomeController {
   final state = ValueNotifier<HomeState>(HomeEmptyState());

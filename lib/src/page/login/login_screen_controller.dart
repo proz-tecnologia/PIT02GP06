@@ -4,7 +4,7 @@ import 'package:pit02gp06/repositories/fire_user_repository.dart';
 import 'package:pit02gp06/src/page/login/login_screen.dart';
 
 import '../../../repositories/fire_auth_repository.dart';
-import '../../authentication/auth_repository.dart';
+import '../../authentication_module/auth_repository.dart';
 
 class LoginScreenController extends StatelessWidget {
   const LoginScreenController(

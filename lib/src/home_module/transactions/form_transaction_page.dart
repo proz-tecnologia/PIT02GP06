@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
-import 'package:pit02gp06/src/authentication/auth_repository.dart';
-import 'package:pit02gp06/src/category/category_controller.dart';
-import 'package:pit02gp06/src/category/category_states.dart';
-import 'package:pit02gp06/src/transactions/transactions_controller.dart';
+import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
+import 'package:pit02gp06/src/home_module/category/category_controller.dart';
+import 'package:pit02gp06/src/home_module/category/category_states.dart';
+import 'package:pit02gp06/src/home_module/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
@@ -59,7 +59,9 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
             lastDate: DateTime(2050))
         .then((value) {
       if (value != null) {
-        _data = value;
+        setState(() {
+          _data = value;
+        });
       }
     });
   }

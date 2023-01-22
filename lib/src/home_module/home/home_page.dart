@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/src/authentication/auth_repository.dart';
-import 'package:pit02gp06/src/home/home_controller.dart';
-import 'package:pit02gp06/src/home/home_state.dart';
+import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
+import 'package:pit02gp06/src/home_module/home/home_controller.dart';
+import 'package:pit02gp06/src/home_module/home/home_state.dart';
 import 'package:pit02gp06/src/widgets/balance_card.dart';
 import 'package:pit02gp06/src/widgets/card_despesas_widget.dart';
 import 'package:pit02gp06/src/widgets/header_user_card.dart';
@@ -11,8 +11,8 @@ import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'dart:developer';
 
-import '../../models/user_model.dart';
-import '../widgets/title_widget.dart';
+import '../../../models/user_model.dart';
+import '../../widgets/title_widget.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

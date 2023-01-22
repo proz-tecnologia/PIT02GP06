@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/src/category/category_controller.dart';
+import 'package:pit02gp06/src/home_module/category/category_controller.dart';
 
-import '../../models/category_model.dart';
-import '../authentication/auth_repository.dart';
+import '../../../models/category_model.dart';
+import '../../authentication_module/auth_repository.dart';
 
 class FormCategoryPage extends StatefulWidget {
   final CategoryModel? category;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pit02gp06/src/category/category_controller.dart';
-import 'package:pit02gp06/src/transactions/transactions_controller.dart';
+import 'package:pit02gp06/src/home_module/category/category_controller.dart';
+import 'package:pit02gp06/src/home_module/transactions/transactions_controller.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 import '../../models/transaction_model.dart';
-import '../transactions/form_transaction_page.dart';
+import '../home_module/transactions/form_transaction_page.dart';
 import 'new_transaction_dialog.dart';
 
 class BottomNavBar extends StatefulWidget {

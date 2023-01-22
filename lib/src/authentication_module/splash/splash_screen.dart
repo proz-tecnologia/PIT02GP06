@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/src/authentication/splash/splash_controller.dart';
-import 'package:pit02gp06/src/authentication/splash/splash_state.dart';
+import 'package:pit02gp06/src/authentication_module/splash/splash_controller.dart';
+import 'package:pit02gp06/src/authentication_module/splash/splash_state.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {

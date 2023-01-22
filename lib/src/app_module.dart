@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/src/authentication/authentication_module.dart';
-import 'package:pit02gp06/src/home/home_module.dart';
+import 'package:pit02gp06/src/authentication_module/authentication_module.dart';
+import 'package:pit02gp06/src/home_module/home_module.dart';
 import 'package:pit02gp06/src/page/intro/intro_screen_controller.dart';
 
-import 'authentication/auth_repository.dart';
+import 'authentication_module/auth_repository.dart';
 import 'page/login/login_screen_controller.dart';
 
 class AppModule extends Module {

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/category_model.dart';
-import 'package:pit02gp06/src/category/category_controller.dart';
-import 'package:pit02gp06/src/category/category_states.dart';
-import 'package:pit02gp06/src/home/home_controller.dart';
-import 'package:pit02gp06/src/home/home_page.dart';
-import 'package:pit02gp06/src/page/details_screen.dart';
-import 'package:pit02gp06/src/page/profile.screen.dart';
-import 'package:pit02gp06/src/transactions/transactions_screen.dart';
-import 'package:pit02gp06/src/transactions/transactions_state.dart';
+import 'package:pit02gp06/src/home_module/category/category_controller.dart';
+import 'package:pit02gp06/src/home_module/category/category_states.dart';
+import 'package:pit02gp06/src/home_module/home/home_controller.dart';
+import 'package:pit02gp06/src/home_module/home/home_page.dart';
+import 'package:pit02gp06/src/home_module/details/details_screen.dart';
+import 'package:pit02gp06/src/home_module/profile/profile.screen.dart';
+import 'package:pit02gp06/src/home_module/transactions/transactions_screen.dart';
+import 'package:pit02gp06/src/home_module/transactions/transactions_state.dart';
 import 'package:pit02gp06/src/widgets/bottom_navigation_bar.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
-import '../transactions/transactions_controller.dart';
+import 'transactions/transactions_controller.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
