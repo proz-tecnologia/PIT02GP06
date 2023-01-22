@@ -38,8 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(children: [
           // IMAGE
           Container(
-            height: 125,
-            width: 125,
+            height: 115,
+            width: 115,
             decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -57,44 +57,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'email@exemplo.com.br',
             style: AppTextStyles.textEmailProfileScreen,
           ),
+          const SizedBox(height: 20),
           // TEXT "MEUS DADOS"
-          Text(
-            'Meus dados',
-            style: AppTextStyles.textButtonSecondaryBlue,
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'Meus dados',
+              style: AppTextStyles.textButtonSecondaryBlue,
+            ),
           ),
+          Divider(
+            color: AppColors.secondaryColor,
+            thickness: 0.5,
+          ),
+          const SizedBox(height: 10),
           // INPUT FULL NAME
           TextFieldWidget(
             item: nameItem,
           ),
           // DATE
           Container(
-            height: 55,
+            height: 58,
             decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                borderRadius: BorderRadius.circular(12)),
-            child: Row(
-              children: [
-                IconButton(
-                    iconSize: 30,
-                    onPressed: () {
-                      showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2001),
-                              lastDate: DateTime(2222))
-                          .then((date) {
-                        setState(() {
-                          _dateTime = date!;
+                border: Border.all(width: 1, color: AppColors.grey2Color),
+                borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    _dateTime == null
+                        ? 'Data de Nascimento'
+                        : _dateTime.toString(),
+                    style: AppTextStyles.textFieldProfileScreen,
+                  ),
+                  IconButton(
+                      color: AppColors.grey3Color,
+                      iconSize: 30,
+                      onPressed: () {
+                        showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2001),
+                                lastDate: DateTime(2222))
+                            .then((date) {
+                          setState(() {
+                            _dateTime = date!;
+                          });
                         });
-                      });
-                    },
-                    icon: const Icon(Icons.calendar_month)),
-                Text(_dateTime == null
-                    ? 'Data de Nascimento'
-                    : _dateTime.toString()),
-              ],
+                      },
+                      icon: const Icon(Icons.calendar_month)),
+                ],
+              ),
             ),
           ),
+          const SizedBox(height: 10),
           // PHONE
           TextFieldWidget(
             item: phoneItem,
@@ -105,6 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (BuildContext context, String value, _) {
                 return SizedBox(
                   width: 290,
+                  height: 58,
                   child: DropdownButtonFormField<String>(
                       isExpanded: true,
                       decoration: InputDecoration(
@@ -118,11 +137,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       items: dropOptions
                           .map((op) => DropdownMenuItem(
                                 value: op,
-                                child: Text(op),
+                                child: Text(
+                                  op,
+                                  style: AppTextStyles.textFieldProfileScreen,
+                                ),
                               ))
                           .toList()),
                 );
               }),
+          const SizedBox(height: 10),
           // BUTTON
           ElevatedButton(
             onPressed: () {},
