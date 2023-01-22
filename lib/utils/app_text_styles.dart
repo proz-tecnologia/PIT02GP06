@@ -71,4 +71,7 @@ class AppTextStyles {
 
   static TextStyle get textEmailProfileScreen =>
       TextStyle(fontSize: 15, color: AppColors.grey2Color);
+
+  static TextStyle get textFieldProfileScreen => // Saldo, Receitas e Despesas
+      TextStyle(fontSize: 17, fontFamily: 'Karla', color: AppColors.grey1Color);
 }
