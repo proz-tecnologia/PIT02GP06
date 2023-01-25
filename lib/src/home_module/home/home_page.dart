@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
           valueListenable: controller.state,
           builder: (context, value, child) {
             return HeaderUserCard(
-              userName: value is HomeSuccessState ? value.user.name : '--',
+              userName: value is HomeSuccessState ? value.user.name! : '--',
             );
           },
         ),

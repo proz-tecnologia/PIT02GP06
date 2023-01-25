@@ -30,59 +30,78 @@ class LoginScreen extends StatelessWidget {
         elevation: 0,
         foregroundColor: AppColors.secondaryColor,
         backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(52.0),
-          child: Column(
-            children: [
-              const Text(
-                'Acesse sua conta',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+      body: Container(
+        color: Colors.white,
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: const EdgeInsets.all(52.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Column(
+                      children: [
+                        const Text(
+                          'Acesse sua conta',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        TextFieldWidget(
+                          item: emailItem,
+                        ),
+                        const SizedBox(height: 8),
+                        TextFieldWidget(
+                          item: passwordItem,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () => onEnter(
+                                  emailItem.controller.text,
+                                  passwordItem.controller.text,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(12),
+                                    backgroundColor: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    )),
+                                child: const Text(
+                                  'Entrar',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        TextButton(
+                          onPressed: onRecover,
+                          child: const Text('Recuperar senha'),
+                        ),
+                        const SizedBox(height: 20),
+                        const Divider(),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 32),
-              TextFieldWidget(
-                item: emailItem,
-              ),
-              const SizedBox(height: 8),
-              TextFieldWidget(
-                item: passwordItem,
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => onEnter(
-                        emailItem.controller.text,
-                        passwordItem.controller.text,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(18),
-                          backgroundColor: AppColors.secondaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          )),
-                      child: const Text(
-                        'Entrar',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-              TextButton(
-                onPressed: onRecover,
-                child: const Text('Recuperar senha'),
-              ),
-              const SizedBox(height: 20),
-              const Divider()
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
