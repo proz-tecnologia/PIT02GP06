@@ -9,7 +9,6 @@ class AppColors {
   static Color get grey2Color => const Color(0xFF808080);
   static Color get grey3Color => const Color(0xFF343F4B);
   static Color get grey4Color => const Color(0xFFF8F8F8);
-
   static Color get red1Color => const Color(0xFFDB353E); // Despesas
   static Color get whiteColor =>
       const Color(0xFFFFFFFF); // Background dos cards
@@ -24,4 +23,5 @@ class AppColors {
   static Color get blue5Color => const Color(0xFF1E38FA);
   static Color get backgroundColor =>
       const Color(0xFFF5F6FF); // Background do app
+  static Color get chipGreyColor => const Color(0xFFE0E0E0);
 }

@@ -32,6 +32,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
   final textDesctiptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String _selectedCategory = "";
+  String? _selectedCreditCard;
   DateTime _data = DateTime.now();
   @override
   void initState() {
@@ -201,7 +202,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                               child: Chip(
                                 avatar: const Icon(Icons.settings),
                                 label: const Text("Config. categorias"),
-                                backgroundColor: Colors.grey.shade200,
+                                backgroundColor: AppColors.chipGreyColor,
                               ));
                         }
 
@@ -231,7 +232,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                                         ? widget.type == "Income"
                                             ? AppColors.blue1Color
                                             : AppColors.red1Color
-                                        : Colors.grey.shade200,
+                                        : AppColors.chipGreyColor,
                                     avatar: CircleAvatar(
                                       backgroundColor: Color((widget
                                               .categoryController
@@ -276,7 +277,8 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                     : [],
               ),
               ElevatedButton(
-                  onPressed: _formKey.currentState?.validate() == true
+                  onPressed: _formKey.currentState?.validate() == true &&
+                          _selectedCategory.isNotEmpty
                       ? () async {
                           final user =
                               await Modular.get<AuthRepository>().getUser();

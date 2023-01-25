@@ -13,10 +13,16 @@ import 'dart:developer';
 
 import '../../../models/user_model.dart';
 import '../../widgets/title_widget.dart';
+import '../credit_card/credit_card_controller.dart';
+import '../transactions/transactions_controller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final controller = Modular.get<HomeController>();
+  Future<void> _refresh() async {
+    Modular.get<TransactionsController>().init();
+    Modular.get<CreditCardController>().init();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,62 +40,65 @@ class HomePage extends StatelessWidget {
           },
         ),
         Expanded(
-          child: ListView(
-            children: [
-              Icon(
-                Icons.menu,
-                color: AppColors.grey1Color,
-              ),
-              ValueListenableBuilder(
-                valueListenable: controller.state,
-                builder: (context, value, child) {
-                  return BalanceCard(
-                    balance: value is HomeSuccessState
-                        ? value.resume.balance.toStringAsFixed(2)
-                        : "-.--",
-                    income: value is HomeSuccessState
-                        ? value.resume.income.toStringAsFixed(2)
-                        : "-.--",
-                    spend: value is HomeSuccessState
-                        ? value.resume.spend.toStringAsFixed(2)
-                        : "-.--",
-                  );
-                },
-              ),
-              TitleWidget(title: "Cartões de Crédito"),
-              ListViewCreditCards(),
-              TitleWidget(title: "Despesas"),
-              ValueListenableBuilder(
-                valueListenable: controller.state,
-                builder: (context, value, child) {
-                  return value is HomeSuccessState
-                      ? value.listExpenseByCategory.length >= 2
-                          ? CardDespesasWidget(
-                              data: value.listExpenseByCategory,
-                            )
-                          : Card(
-                              elevation: 4,
-                              margin: const EdgeInsets.all(8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child:
-                                  Text('Sem dados suficientes para gráficos!'),
-                            )
-                      : Card(
-                          elevation: 4,
-                          margin: const EdgeInsets.all(8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: LinearProgressIndicator(),
-                        );
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
+          child: RefreshIndicator(
+            onRefresh: _refresh,
+            child: ListView(
+              children: [
+                Icon(
+                  Icons.menu,
+                  color: AppColors.grey1Color,
+                ),
+                ValueListenableBuilder(
+                  valueListenable: controller.state,
+                  builder: (context, value, child) {
+                    return BalanceCard(
+                      balance: value is HomeSuccessState
+                          ? value.resume.balance.toStringAsFixed(2)
+                          : "-.--",
+                      income: value is HomeSuccessState
+                          ? value.resume.income.toStringAsFixed(2)
+                          : "-.--",
+                      spend: value is HomeSuccessState
+                          ? value.resume.spend.toStringAsFixed(2)
+                          : "-.--",
+                    );
+                  },
+                ),
+                TitleWidget(title: "Cartões de Crédito"),
+                ListViewCreditCards(),
+                TitleWidget(title: "Despesas"),
+                ValueListenableBuilder(
+                  valueListenable: controller.state,
+                  builder: (context, value, child) {
+                    return value is HomeSuccessState
+                        ? value.listExpenseByCategory.length >= 2
+                            ? CardDespesasWidget(
+                                data: value.listExpenseByCategory,
+                              )
+                            : Card(
+                                elevation: 4,
+                                margin: const EdgeInsets.all(8),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Text(
+                                    'Sem dados suficientes para gráficos!'),
+                              )
+                        : Card(
+                            elevation: 4,
+                            margin: const EdgeInsets.all(8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: LinearProgressIndicator(),
+                          );
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
           ),
         ),
       ],

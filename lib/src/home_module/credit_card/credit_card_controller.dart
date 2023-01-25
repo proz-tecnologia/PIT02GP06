@@ -7,11 +7,13 @@ import 'package:pit02gp06/src/home_module/credit_card/credit_card_state.dart';
 class CreditCardController {
   ValueNotifier<CreditCardState> state = ValueNotifier(CreditCardEmptyState());
   CreditCardController() {
-    state.value = CreditCardLoadState();
     init();
   }
   void init() async {
+    state.value = CreditCardLoadState();
+    await Future.delayed(const Duration(seconds: 1));
     final repository = Modular.get<CreditCardRepository>();
+
     List<CreditCardModel> list = await repository.loadList();
     if (list.isEmpty) {
       state.value = CreditCardEmptyState();
