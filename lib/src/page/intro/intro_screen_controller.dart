@@ -8,8 +8,8 @@ class IntroScreenController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntroScreen(
-      onCreateAccount: () {},
-      onRegistered: () => Modular.to.pushReplacementNamed('/login'),
+      onCreateAccount: () => Modular.to.pushNamed('/register'),
+      onRegistered: () => Modular.to.pushNamed('/login'),
     );
   }
 }
