@@ -25,8 +25,8 @@ class CreditCardRepository {
         nickname: doc['nickname'],
         limit: doc['limit'],
         spent: doc['spent'],
-        closeDate: doc['closeDate'],
-        dueDate: doc['dueDate'],
+        closeDate: (doc['closeDate'] as Timestamp).toDate(),
+        dueDate: (doc['dueDate'] as Timestamp).toDate(),
       ));
     }
     list.sort((b, a) => a.spent.compareTo(b.spent));
