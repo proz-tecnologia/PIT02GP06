@@ -9,6 +9,7 @@ import 'package:pit02gp06/src/widgets/header_user_card.dart';
 import 'package:pit02gp06/src/widgets/list_view_credit_cards.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
 import 'dart:developer';
 
 import '../../../models/user_model.dart';
@@ -81,8 +82,13 @@ class HomePage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
-                                child: Text(
-                                    'Sem dados suficientes para gráficos!'),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    'Dados insuficientes para apresentação gráfica!',
+                                    style: AppTextStyles.textBalance,
+                                  ),
+                                ),
                               )
                         : Card(
                             elevation: 4,
@@ -90,7 +96,7 @@ class HomePage extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                            child: LinearProgressIndicator(),
+                            child: const LinearProgressIndicator(),
                           );
                   },
                 ),

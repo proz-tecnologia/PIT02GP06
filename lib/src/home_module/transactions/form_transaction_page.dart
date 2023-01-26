@@ -196,21 +196,24 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                 height: 32,
               ),
               if (widget.type == 'Expense')
-                SizedBox(
-                  height: 100,
-                  child: ValueListenableBuilder(
-                    valueListenable: creditCardController.state,
-                    builder: (context, value, child) {
-                      switch (value.runtimeType) {
-                        case CreditCardLoadState:
-                          return LinearProgressIndicator(
+                ValueListenableBuilder(
+                  valueListenable: creditCardController.state,
+                  builder: (context, value, child) {
+                    switch (value.runtimeType) {
+                      case CreditCardLoadState:
+                        return SizedBox(
+                          height: 100,
+                          child: LinearProgressIndicator(
                             backgroundColor: AppColors.backgroundColor,
                             color: AppColors.whiteColor,
-                          );
-                        case CreditCardSuccessState:
-                          final listCreditCards =
-                              (value as CreditCardSuccessState).list;
-                          return ListView.builder(
+                          ),
+                        );
+                      case CreditCardSuccessState:
+                        final listCreditCards =
+                            (value as CreditCardSuccessState).list;
+                        return SizedBox(
+                          height: 100,
+                          child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: listCreditCards.length + 1,
                               itemBuilder: ((context, index) {
@@ -226,19 +229,13 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                                       selectedCreditCard:
                                           _selectedCreditCardId);
                                 }
-                              }));
+                              })),
+                        );
 
-                        default:
-                          return ButtonCountSelect(
-                              selectCreditCard: _selectCreditCard,
-                              selectedCreditCard: _selectedCreditCardId);
-                      }
-                    },
-                  ),
-                ),
-              if (widget.type == 'Expense')
-                const SizedBox(
-                  height: 32,
+                      default:
+                        return const SizedBox();
+                    }
+                  },
                 ),
               Wrap(
                 alignment: WrapAlignment.spaceBetween,
