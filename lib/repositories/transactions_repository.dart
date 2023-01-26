@@ -24,6 +24,7 @@ class TransactionsRepository {
         date: (doc['date'] as Timestamp).toDate(),
         value: doc['value'],
         description: doc['description'],
+        creditCardId: doc['creditCardId'],
         categoryId: doc['categoryId'],
         id: doc.id,
       ));
@@ -42,6 +43,7 @@ class TransactionsRepository {
       'value': transaction.value,
       'type': transaction.type,
       'categoryId': transaction.categoryId,
+      'creditCardId': transaction.creditCardId,
       'description': transaction.description,
     });
   }

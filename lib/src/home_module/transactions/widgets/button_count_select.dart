@@ -16,7 +16,7 @@ class ButtonCountSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 100,
       child: GestureDetector(
         onTap: () {
@@ -29,7 +29,7 @@ class ButtonCountSelect extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('À vista'),
+              const Text('À vista'),
               Text(
                 'Conta',
                 style: _selectedCreditCard == null

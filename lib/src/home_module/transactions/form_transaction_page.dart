@@ -51,6 +51,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
       textDesctiptionController.text = widget.transaction!.description ?? "";
       textValueController.text = widget.transaction!.value.toString();
       _selectCategory(widget.transaction!.categoryId);
+      _selectCreditCard(widget.transaction!.creditCardId);
     }
   }
 
@@ -358,6 +359,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                               uid: user.uid,
                               type: widget.type,
                               categoryId: _selectedCategory,
+                              creditCardId: _selectedCreditCard,
                               description: textDesctiptionController.text);
                           widget.transactionController.save(dataModel);
                           user.balance = widget.type == 'Income'

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pit02gp06/models/user_model.dart';
 import 'package:pit02gp06/utils/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,6 +7,7 @@ import 'package:uuid/uuid.dart';
 class AuthRepository {
   Future<UserModel> getUser() async {
     UserModel user;
+
     final prefs = await SharedPreferences.getInstance();
     final codedUser = prefs.getString(SharedPreferencesKeys.user);
     if (codedUser == null) {
@@ -18,11 +20,16 @@ class AuthRepository {
     }
 //    final jsonUser = jsonDecode(codedUser);
     user = UserModel.fromJson(codedUser);
+
     return user;
   }
 
   void setUser(UserModel user) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(SharedPreferencesKeys.user, user.toJson());
+    FirebaseFirestore.instance
+        .collection(SharedPreferencesKeys.user)
+        .doc(user.uid)
+        .set(user.toMap());
   }
 }

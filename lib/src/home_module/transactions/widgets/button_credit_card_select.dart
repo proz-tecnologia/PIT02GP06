@@ -50,7 +50,7 @@ class ButtonCreditCardSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 100,
       child: GestureDetector(
         onTap: () {
@@ -63,7 +63,7 @@ class ButtonCreditCardSelect extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Crédito'),
+              const Text('Crédito'),
               Text(
                 creditCard.nickname,
                 style: _selectedCreditCard == creditCard.id
