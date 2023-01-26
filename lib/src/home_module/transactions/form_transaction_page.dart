@@ -115,7 +115,11 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                         : user.balance += widget.transaction!.value;
 
                     Modular.get<AuthRepository>().setUser(user);
-
+                    if (widget.transaction!.creditCardId != null) {
+                      await creditCardController.decrementCount(
+                          widget.transaction!.creditCardId!,
+                          widget.transaction!.value);
+                    }
                     final snackBar = SnackBar(
                         content: Text(
                             "transação ${widget.transaction!.id} apagada!"));

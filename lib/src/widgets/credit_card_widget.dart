@@ -37,7 +37,7 @@ class CreditCardWidget extends StatelessWidget {
         }
     }
   }
-
+  final today = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,7 +68,7 @@ class CreditCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Fatura em aberto",
+                    "fecha ${creditCard.closeDate.day}, vence ${creditCard.dueDate.day}",
                     style: AppTextStyles.textCreditCard,
                   ),
                   const SizedBox(
