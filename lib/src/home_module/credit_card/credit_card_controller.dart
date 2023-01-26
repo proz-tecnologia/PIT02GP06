@@ -22,7 +22,7 @@ class CreditCardController {
     }
   }
 
-  void save(CreditCardModel creditCard) async {
+  Future<void> save(CreditCardModel creditCard) async {
     final repository = Modular.get<CreditCardRepository>();
     state.value = CreditCardLoadState();
     await repository.save(creditCard);
@@ -31,24 +31,25 @@ class CreditCardController {
     state.value = CreditCardSuccessState(list: list);
   }
 
-//   void delete(String id) async {
-//     state.value = CategoryLoadState();
-//     await _repository.delete(id);
-//     List<CategoryModel> list = await _repository.loadList();
-//     state.value = CategorySuccessState(categoryList: list);
-//   }
+  void delete(String id) async {
+    final repository = Modular.get<CreditCardRepository>();
+    state.value = CreditCardLoadState();
+    await repository.delete(id);
+    List<CreditCardModel> list = await repository.loadList();
+    state.value = CreditCardSuccessState(list: list);
+  }
 
-//   void incrementCount(String categoryId) async {
-//     final category = await _repository.loadDoc(categoryId);
-//     category.incrementCount();
-//     save(category);
-//   }
+  Future<void> incrementCount(String creditCardId, double value) async {
+    final repository = Modular.get<CreditCardRepository>();
+    final creditCard = await repository.loadDoc(creditCardId);
+    creditCard.spent += value;
+    await save(creditCard);
+  }
 
-//   void decrementCount(String categoryId) async {
-//     final category = await _repository.loadDoc(categoryId);
-//     category.decrementCount();
-//     save(category);
-//   }
-// }
-
+  Future<void> decrementCount(String creditCardId, double value) async {
+    final repository = Modular.get<CreditCardRepository>();
+    final creditCard = await repository.loadDoc(creditCardId);
+    creditCard.spent -= value;
+    await save(creditCard);
+  }
 }

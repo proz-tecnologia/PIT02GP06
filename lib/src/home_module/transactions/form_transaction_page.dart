@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
 import 'package:pit02gp06/src/home_module/category/category_controller.dart';
 import 'package:pit02gp06/src/home_module/category/category_states.dart';
+import 'package:pit02gp06/src/home_module/credit_card/credit_card_controller.dart';
+import 'package:pit02gp06/src/home_module/credit_card/credit_card_state.dart';
 import 'package:pit02gp06/src/home_module/transactions/transactions_controller.dart';
+import 'package:pit02gp06/src/home_module/transactions/widgets/button_count_select.dart';
+import 'package:pit02gp06/src/home_module/transactions/widgets/button_credit_card_select.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
+import '../../widgets/credit_card_widget.dart';
 import '../category/category_page.dart';
+import '../credit_card/add_credit_card_button.dart';
 
 class FormTransactionPage extends StatefulWidget {
   final String type;
@@ -28,11 +35,12 @@ class FormTransactionPage extends StatefulWidget {
 }
 
 class _FormTransactionPageState extends State<FormTransactionPage> {
+  final creditCardController = Modular.get<CreditCardController>();
   final textValueController = TextEditingController();
   final textDesctiptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String _selectedCategory = "";
-  String? _selectedCreditCard;
+  String? _selectedCreditCardId;
   DateTime _data = DateTime.now();
   @override
   void initState() {
@@ -43,12 +51,19 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
       textDesctiptionController.text = widget.transaction!.description ?? "";
       textValueController.text = widget.transaction!.value.toString();
       _selectCategory(widget.transaction!.categoryId);
+      _selectCreditCard(widget.transaction!.creditCardId);
     }
   }
 
   void _selectCategory(String categoryId) {
     setState(() {
       _selectedCategory = categoryId;
+    });
+  }
+
+  void _selectCreditCard(String? creditCardId) {
+    setState(() {
+      _selectedCreditCardId = creditCardId;
     });
   }
 
@@ -100,7 +115,11 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                         : user.balance += widget.transaction!.value;
 
                     Modular.get<AuthRepository>().setUser(user);
-
+                    if (widget.transaction!.creditCardId != null) {
+                      await creditCardController.decrementCount(
+                          widget.transaction!.creditCardId!,
+                          widget.transaction!.value);
+                    }
                     final snackBar = SnackBar(
                         content: Text(
                             "transação ${widget.transaction!.id} apagada!"));
@@ -176,6 +195,48 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
               const SizedBox(
                 height: 32,
               ),
+              if (widget.type == 'Expense')
+                ValueListenableBuilder(
+                  valueListenable: creditCardController.state,
+                  builder: (context, value, child) {
+                    switch (value.runtimeType) {
+                      case CreditCardLoadState:
+                        return SizedBox(
+                          height: 100,
+                          child: LinearProgressIndicator(
+                            backgroundColor: AppColors.backgroundColor,
+                            color: AppColors.whiteColor,
+                          ),
+                        );
+                      case CreditCardSuccessState:
+                        final listCreditCards =
+                            (value as CreditCardSuccessState).list;
+                        return SizedBox(
+                          height: 100,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: listCreditCards.length + 1,
+                              itemBuilder: ((context, index) {
+                                if (index > 0) {
+                                  return ButtonCreditCardSelect(
+                                      selectCreditCard: _selectCreditCard,
+                                      creditCard: listCreditCards[index - 1],
+                                      selectedCreditCard:
+                                          _selectedCreditCardId);
+                                } else {
+                                  return ButtonCountSelect(
+                                      selectCreditCard: _selectCreditCard,
+                                      selectedCreditCard:
+                                          _selectedCreditCardId);
+                                }
+                              })),
+                        );
+
+                      default:
+                        return const SizedBox();
+                    }
+                  },
+                ),
               Wrap(
                 alignment: WrapAlignment.spaceBetween,
                 children: widget.categoryController.state.value.runtimeType ==
@@ -301,16 +362,26 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                               uid: user.uid,
                               type: widget.type,
                               categoryId: _selectedCategory,
+                              creditCardId: _selectedCreditCardId,
                               description: textDesctiptionController.text);
                           widget.transactionController.save(dataModel);
                           user.balance = widget.type == 'Income'
                               ? user.balance += dataModel.value
                               : user.balance -= dataModel.value;
+                          if (_selectedCreditCardId != null) {
+                            await creditCardController.incrementCount(
+                                _selectedCreditCardId!, dataModel.value);
+                          }
                           //caso seja edição, removendo valor antigo
                           if (widget.transaction != null) {
                             user.balance = widget.type == 'Income'
                                 ? user.balance -= widget.transaction!.value
                                 : user.balance += widget.transaction!.value;
+                            if (widget.transaction!.creditCardId != null) {
+                              await creditCardController.decrementCount(
+                                  widget.transaction!.creditCardId!,
+                                  widget.transaction!.value);
+                            }
                           }
                           Modular.get<AuthRepository>().setUser(user);
 
@@ -342,3 +413,38 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
     );
   }
 }
+
+// class ButtonCountSelect extends StatelessWidget {
+//   const ButtonCountSelect({
+//     Key? key,
+//     required String? selectedCreditCard,
+//   }) : _selectedCreditCard = selectedCreditCard, super(key: key);
+
+//   final String? _selectedCreditCard;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 100,
+//       child: Card(
+//         color: _selectedCreditCard == null
+//             ? AppColors.red1Color
+//             : AppColors.chipGreyColor,
+//         child: Column(
+//           mainAxisAlignment:
+//               MainAxisAlignment.spaceAround,
+//           children: [
+//             Text('À vista'),
+//             Text(
+//               'Conta',
+//               style: _selectedCreditCard == null
+//                   ? AppTextStyles.textChipSelected
+//                   : AppTextStyles.textChip,
+//             ),
+//             Icon(Icons.attach_money),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+

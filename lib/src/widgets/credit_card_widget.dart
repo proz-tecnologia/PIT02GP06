@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
@@ -15,6 +17,7 @@ class CreditCardWidget extends StatelessWidget {
   };
   late Widget iconBandeira;
   final CreditCardModel creditCard;
+  final today = DateTime.now();
   CreditCardWidget({
     super.key,
     required this.creditCard,
@@ -36,8 +39,14 @@ class CreditCardWidget extends StatelessWidget {
           );
         }
     }
-  }
 
+    int dif = creditCard.dueDate.difference(creditCard.closeDate).inDays;
+    log("_______Cartão ${creditCard.nickname}______");
+    log("Fechamento ${creditCard.closeDate}");
+    log("Vencimento ${creditCard.dueDate}");
+    log("- dif $dif");
+    log("_____________________________");
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,7 +77,7 @@ class CreditCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Fatura em aberto",
+                    "fecha ${creditCard.closeDate.day}, vence ${creditCard.dueDate.day}",
                     style: AppTextStyles.textCreditCard,
                   ),
                   const SizedBox(

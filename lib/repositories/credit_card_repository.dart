@@ -12,7 +12,7 @@ class CreditCardRepository {
     final user = await Modular.get<AuthRepository>().getUser();
 
     final collections = FirebaseFirestore.instance
-        .collection(SharedPreferencesKeys.credit_cards)
+        .collection(SharedPreferencesKeys.creditCards)
         .where('uid', isEqualTo: user.uid);
 
     var result = await collections.get();
@@ -33,9 +33,26 @@ class CreditCardRepository {
     return list;
   }
 
+  Future<CreditCardModel> loadDoc(String id) async {
+    final collections = FirebaseFirestore.instance
+        .collection(SharedPreferencesKeys.creditCards);
+    final doc = await collections.doc(id).get();
+    final creditCard = CreditCardModel(
+      id: id,
+      uid: doc['uid'],
+      flag: doc['flag'],
+      nickname: doc['nickname'],
+      limit: doc['limit'],
+      spent: doc['spent'],
+      closeDate: (doc['closeDate'] as Timestamp).toDate(),
+      dueDate: (doc['dueDate'] as Timestamp).toDate(),
+    );
+    return creditCard;
+  }
+
   Future<void> save(CreditCardModel creditCard) async {
     FirebaseFirestore.instance
-        .collection(SharedPreferencesKeys.credit_cards)
+        .collection(SharedPreferencesKeys.creditCards)
         .doc(creditCard.id)
         .set({
       'uid': creditCard.uid,
@@ -50,7 +67,7 @@ class CreditCardRepository {
 
   Future<void> delete(String id) async {
     await FirebaseFirestore.instance
-        .collection(SharedPreferencesKeys.credit_cards)
+        .collection(SharedPreferencesKeys.creditCards)
         .doc(id)
         .delete();
   }
