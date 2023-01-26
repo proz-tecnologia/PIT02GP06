@@ -45,6 +45,7 @@ dependencies:
   intl: 
   firebase_core: ^2.4.1
   cloud_firestore:
+  firebase_auth: ^4.2.5
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,7 @@ flutter:
     - family: Karla
       fonts:
         - asset: lib/fonts/Karla-Regular.ttf
+        - asset: lib/fonts/Karla-Bold.ttf
         #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

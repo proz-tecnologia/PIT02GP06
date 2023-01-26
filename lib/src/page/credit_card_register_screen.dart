@@ -8,7 +8,10 @@ import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/src/common/masks.dart';
 import 'package:pit02gp06/src/page/view_model/credit_card_register_view_model.dart';
+import 'package:pit02gp06/src/widgets/show_loading_dialog.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
+
+import '../authentication_module/auth_repository.dart';
 
 class CreditCardRegisterScreen extends StatefulWidget {
   const CreditCardRegisterScreen({
@@ -136,12 +139,15 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
         widget.viewModel.model?.spent.toString() ?? '';
   }
 
-  void _register(Map<String, TextFieldItem> map) {
+  void _register(Map<String, TextFieldItem> map) async {
     if (!(_formKey.currentState?.validate() ?? true)) return;
     try {
+      showLoadingDialog(context);
+      final user = await Modular.get<AuthRepository>().getUser();
+
       var inputFormat = DateFormat('dd');
       final creditCardModel = CreditCardModel(
-          accountId: "0",
+          uid: user.uid,
           flag: map[flagKey]!.controller.text,
           nickname: map[nicknameKey]!.controller.text,
           limit: double.parse(map[limitKey]!.controller.text),
@@ -149,6 +155,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
           closeDate: inputFormat.parse(map[closeDateKey]!.controller.text),
           dueDate: inputFormat.parse(map[dueDateKey]!.controller.text));
       widget.onRegister(creditCardModel);
+      Modular.to.pop(); //fechar LoadingDialog
       Modular.to.pop();
     } catch (e) {
       log('erro nos dados = $e');

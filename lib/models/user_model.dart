@@ -3,22 +3,30 @@ import 'dart:convert';
 
 class UserModel {
   String uid;
-  String name;
+  String? name;
+  String? phone;
+  String? email;
   double balance;
   UserModel({
     required this.uid,
-    required this.name,
+    this.name,
+    this.phone,
+    this.email,
     required this.balance,
   });
 
   UserModel copyWith({
     String? uid,
     String? name,
+    String? phone,
+    String? email,
     double? balance,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
       name: name ?? this.name,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
       balance: balance ?? this.balance,
     );
   }
@@ -27,6 +35,8 @@ class UserModel {
     return <String, dynamic>{
       'uid': uid,
       'name': name,
+      'phone': phone,
+      'email': email,
       'balance': balance,
     };
   }
@@ -35,6 +45,8 @@ class UserModel {
     return UserModel(
       uid: map['uid'] as String,
       name: map['name'] as String,
+      phone: map['phone'] != null ? map['phone'] as String : null,
+      email: map['email'] != null ? map['email'] as String : null,
       balance: map['balance'] as double,
     );
   }
@@ -45,13 +57,18 @@ class UserModel {
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'UserModel(uid: $uid, name: $name, balance: $balance)';
+  String toString() =>
+      'UserModel(uid: $uid, name: $name, phone: $phone, email: $email, balance: $balance)';
 
   @override
   bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
 
-    return other.uid == uid && other.name == name && other.balance == balance;
+    return other.uid == uid &&
+        other.name == name &&
+        other.phone == phone &&
+        other.email == email &&
+        other.balance == balance;
   }
 
   @override

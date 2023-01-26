@@ -7,8 +7,9 @@ class TransactionModel {
   DateTime date;
   double value;
   String type;
-  int categoryId;
+  String categoryId;
   String? description;
+  String? creditCardId;
   TransactionModel({
     required this.uid,
     this.id,
@@ -17,6 +18,7 @@ class TransactionModel {
     required this.type,
     required this.categoryId,
     this.description,
+    this.creditCardId,
   });
 
   TransactionModel copyWith({
@@ -25,8 +27,9 @@ class TransactionModel {
     DateTime? date,
     double? value,
     String? type,
-    int? categoryId,
+    String? categoryId,
     String? description,
+    String? creditCardId,
   }) {
     return TransactionModel(
       uid: uid ?? this.uid,
@@ -36,6 +39,7 @@ class TransactionModel {
       type: type ?? this.type,
       categoryId: categoryId ?? this.categoryId,
       description: description ?? this.description,
+      creditCardId: creditCardId ?? this.creditCardId,
     );
   }
 
@@ -48,6 +52,7 @@ class TransactionModel {
       'type': type,
       'categoryId': categoryId,
       'description': description,
+      'creditCardId': creditCardId,
     };
   }
 
@@ -58,9 +63,11 @@ class TransactionModel {
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       value: map['value'] as double,
       type: map['type'] as String,
-      categoryId: map['categoryId'] as int,
+      categoryId: map['categoryId'] as String,
       description:
           map['description'] != null ? map['description'] as String : null,
+      creditCardId:
+          map['creditCardId'] != null ? map['creditCardId'] as String : null,
     );
   }
 
@@ -71,7 +78,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(uid: $uid, id: $id, date: $date, value: $value, type: $type, categoryId: $categoryId, description: $description)';
+    return 'TransactionModel(uid: $uid, id: $id, date: $date, value: $value, type: $type, categoryId: $categoryId, description: $description, creditCardId: $creditCardId)';
   }
 
   @override
@@ -84,7 +91,8 @@ class TransactionModel {
         other.value == value &&
         other.type == type &&
         other.categoryId == categoryId &&
-        other.description == description;
+        other.description == description &&
+        other.creditCardId == creditCardId;
   }
 
   @override
@@ -95,6 +103,7 @@ class TransactionModel {
         value.hashCode ^
         type.hashCode ^
         categoryId.hashCode ^
-        description.hashCode;
+        description.hashCode ^
+        creditCardId.hashCode;
   }
 }

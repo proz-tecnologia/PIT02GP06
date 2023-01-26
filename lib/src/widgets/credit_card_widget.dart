@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
 // ignore: must_be_immutable
@@ -11,21 +15,20 @@ class CreditCardWidget extends StatelessWidget {
     "american": "American Express",
     "outro": "Outro",
   };
-  String bandeira = "";
-  String apelido;
-  String valorAberto;
   late Widget iconBandeira;
-  CreditCardWidget(
-      {super.key,
-      required this.apelido,
-      required this.valorAberto,
-      this.bandeira = ""}) {
-    switch (bandeira) {
+  final CreditCardModel creditCard;
+  final today = DateTime.now();
+  CreditCardWidget({
+    super.key,
+    required this.creditCard,
+  }) {
+    switch (creditCard.flag) {
       case "master":
       case "visa":
       case "elo":
       case "american":
-        iconBandeira = Image.asset("lib/images/$bandeira.png", height: 16);
+        iconBandeira =
+            Image.asset("lib/images/${creditCard.flag}.png", height: 16);
         break;
       default:
         {
@@ -34,11 +37,16 @@ class CreditCardWidget extends StatelessWidget {
             color: AppColors.whiteColor,
             size: 20,
           );
-          bandeira = "outro";
         }
     }
-  }
 
+    int dif = creditCard.dueDate.difference(creditCard.closeDate).inDays;
+    log("_______Cartão ${creditCard.nickname}______");
+    log("Fechamento ${creditCard.closeDate}");
+    log("Vencimento ${creditCard.dueDate}");
+    log("- dif $dif");
+    log("_____________________________");
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -59,7 +67,7 @@ class CreditCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    mapBrands[bandeira]!,
+                    creditCard.flag,
                     style: AppTextStyles.textCreditCard,
                   ),
                   iconBandeira,
@@ -69,14 +77,14 @@ class CreditCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Fatura em aberto",
+                    "fecha ${creditCard.closeDate.day}, vence ${creditCard.dueDate.day}",
                     style: AppTextStyles.textCreditCard,
                   ),
                   const SizedBox(
                     height: 6,
                   ),
                   Text(
-                    valorAberto,
+                    AppFormatter.moneyWithRs(creditCard.spent),
                     style: AppTextStyles.textCreditCardValueBalance,
                   ),
                 ],
@@ -85,7 +93,7 @@ class CreditCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    apelido,
+                    creditCard.nickname,
                     style: AppTextStyles.textCreditCard,
                   ),
                   Icon(

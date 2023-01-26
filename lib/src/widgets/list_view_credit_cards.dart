@@ -3,79 +3,61 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/credit_card_model.dart';
+import 'package:pit02gp06/src/home_module/credit_card/credit_card_controller.dart';
+import 'package:pit02gp06/src/home_module/credit_card/credit_card_state.dart';
 import 'package:pit02gp06/src/page/view_model/credit_card_register_view_model.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 
+import '../home_module/credit_card/add_credit_card_button.dart';
 import 'credit_card_widget.dart';
 
-class ListViewCreditCards extends StatelessWidget {
-  //TODO: implementar CreditCardController
-  final List<CreditCardModel> listCreditCards = [
-    CreditCardModel(
-        accountId: '1',
-        flag: 'master',
-        nickname: 'nubank',
-        limit: 3000.00,
-        spent: 1300,
-        closeDate: DateTime(2023, 01, 15),
-        dueDate: DateTime(2023, 01, 20)),
-    CreditCardModel(
-        accountId: '2',
-        flag: 'elo',
-        nickname: 'caixa',
-        limit: 1500.00,
-        spent: 800,
-        closeDate: DateTime(2023, 01, 2),
-        dueDate: DateTime(2023, 01, 8)),
-  ];
+class ListViewCreditCards extends StatefulWidget {
   ListViewCreditCards({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ListViewCreditCards> createState() => _ListViewCreditCardsState();
+}
+
+class _ListViewCreditCardsState extends State<ListViewCreditCards> {
+  final _controller = Modular.get<CreditCardController>();
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 180,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: listCreditCards.length + 1,
-          itemBuilder: ((context, index) {
-            if (index < listCreditCards.length) {
-              return CreditCardWidget(
-                  apelido: listCreditCards[index].nickname,
-                  valorAberto:
-                      AppFormatter.moneyWithRs(listCreditCards[index].spent));
-            } else {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.whiteColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                  ),
-                  onPressed: () {
-                    var viewModel = CreditCardRegisterViewModel();
-                    onRegister(CreditCardModel creditCardModel) {
-                      //todo: call controller save function
-                      log(creditCardModel.nickname);
-                    }
-
-                    Modular.to.pushNamed('/credit_card_register', arguments: {
-                      'viewModel': viewModel,
-                      'onRegister': onRegister,
-                    });
-                  },
-                  child: Icon(
-                    Icons.add,
-                    color: AppColors.grey2Color,
-                    size: 50,
-                  ),
+      child: ValueListenableBuilder(
+        valueListenable: _controller.state,
+        builder: (context, value, child) {
+          switch (value.runtimeType) {
+            case CreditCardLoadState:
+              return Card(
+                child: LinearProgressIndicator(
+                  backgroundColor: AppColors.backgroundColor,
+                  color: AppColors.whiteColor,
                 ),
               );
-            }
-          })),
+            case CreditCardSuccessState:
+              final listCreditCards = (value as CreditCardSuccessState).list;
+              return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: listCreditCards.length + 1,
+                  itemBuilder: ((context, index) {
+                    if (index < listCreditCards.length) {
+                      return CreditCardWidget(
+                          creditCard: listCreditCards[index]);
+                    } else {
+                      return AddCreditCardButton();
+                    }
+                  }));
+
+            default:
+              return AddCreditCardButton();
+          }
+        },
+      ),
     );
   }
 }
