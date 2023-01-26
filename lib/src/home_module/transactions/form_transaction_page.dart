@@ -40,7 +40,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
   final textDesctiptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String _selectedCategory = "";
-  String? _selectedCreditCard;
+  String? _selectedCreditCardId;
   DateTime _data = DateTime.now();
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
 
   void _selectCreditCard(String? creditCardId) {
     setState(() {
-      _selectedCreditCard = creditCardId;
+      _selectedCreditCardId = creditCardId;
     });
   }
 
@@ -214,18 +214,20 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                                   return ButtonCreditCardSelect(
                                       selectCreditCard: _selectCreditCard,
                                       creditCard: listCreditCards[index - 1],
-                                      selectedCreditCard: _selectedCreditCard);
+                                      selectedCreditCard:
+                                          _selectedCreditCardId);
                                 } else {
                                   return ButtonCountSelect(
                                       selectCreditCard: _selectCreditCard,
-                                      selectedCreditCard: _selectedCreditCard);
+                                      selectedCreditCard:
+                                          _selectedCreditCardId);
                                 }
                               }));
 
                         default:
                           return ButtonCountSelect(
                               selectCreditCard: _selectCreditCard,
-                              selectedCreditCard: _selectedCreditCard);
+                              selectedCreditCard: _selectedCreditCardId);
                       }
                     },
                   ),
@@ -359,17 +361,26 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                               uid: user.uid,
                               type: widget.type,
                               categoryId: _selectedCategory,
-                              creditCardId: _selectedCreditCard,
+                              creditCardId: _selectedCreditCardId,
                               description: textDesctiptionController.text);
                           widget.transactionController.save(dataModel);
                           user.balance = widget.type == 'Income'
                               ? user.balance += dataModel.value
                               : user.balance -= dataModel.value;
+                          if (_selectedCreditCardId != null) {
+                            await creditCardController.incrementCount(
+                                _selectedCreditCardId!, dataModel.value);
+                          }
                           //caso seja edição, removendo valor antigo
                           if (widget.transaction != null) {
                             user.balance = widget.type == 'Income'
                                 ? user.balance -= widget.transaction!.value
                                 : user.balance += widget.transaction!.value;
+                            if (widget.transaction!.creditCardId != null) {
+                              await creditCardController.decrementCount(
+                                  widget.transaction!.creditCardId!,
+                                  widget.transaction!.value);
+                            }
                           }
                           Modular.get<AuthRepository>().setUser(user);
 
