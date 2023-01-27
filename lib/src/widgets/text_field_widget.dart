@@ -3,17 +3,18 @@ import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key, this.item});
+  const TextFieldWidget({super.key, this.item, required this.borderColor});
 
   final TextFieldItem? item;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
       children: [
         TextFormField(
-          style: const TextStyle(fontSize: 13, fontFamily: "Karla"),
+          style: const TextStyle(fontSize: 18, fontFamily: "Karla"),
           keyboardType: item?.keyboardType ?? TextInputType.text,
           obscureText: item?.isPassword ?? false,
           controller: item?.controller,
@@ -28,19 +29,19 @@ class TextFieldWidget extends StatelessWidget {
             filled: true,
             fillColor: AppColors.grey4Color,
             contentPadding:
-                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
             prefixIcon: item?.icon != null
                 ? Icon(
                     item?.icon,
                     size: 18,
                   )
                 : null,
-            enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
+            enabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(16),
                 ),
                 borderSide: BorderSide(
-                  color: Colors.transparent,
+                  color: borderColor,
                 )),
             focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
