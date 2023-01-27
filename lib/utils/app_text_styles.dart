@@ -36,11 +36,11 @@ class AppTextStyles {
 // button widget (criar uma conta, entrar)
 
   static TextStyle get textButtonWidget =>
-      TextStyle(fontSize: 20, color: AppColors.whiteColor);
+      TextStyle(fontSize: 17, color: AppColors.whiteColor);
 
 // button secondary (já sou cadastrado, recuperar a senha, criar conta)
   static TextStyle get textButtonSecondaryBlue => TextStyle(
-      fontSize: 20, fontFamily: 'Karla', color: AppColors.secondaryColor);
+      fontSize: 18, fontFamily: 'Karla', color: AppColors.secondaryColor);
   static TextStyle get textButtonSecondaryGrey => TextStyle(
       fontSize: 20, fontFamily: 'Karla', color: AppColors.primaryColor);
 
@@ -65,4 +65,13 @@ class AppTextStyles {
       fontFamily: 'Karla',
       fontWeight: FontWeight.bold,
       color: AppColors.whiteColor);
+
+  static TextStyle get textNameProfileScreen => TextStyle(
+      fontSize: 25, fontFamily: 'Karla', color: AppColors.primaryColor);
+
+  static TextStyle get textEmailProfileScreen =>
+      TextStyle(fontSize: 15, color: AppColors.grey2Color);
+
+  static TextStyle get textFieldProfileScreen => // Saldo, Receitas e Despesas
+      TextStyle(fontSize: 17, fontFamily: 'Karla', color: AppColors.grey1Color);
 }
