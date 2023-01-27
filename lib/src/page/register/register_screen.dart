@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pit02gp06/models/user_model.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
 
 import '../../../models/text_field_item.dart';
 import '../../../utils/app_colors.dart';
@@ -63,34 +64,41 @@ class RegisterScreen extends StatelessWidget {
                     Form(
                       child: Column(
                         children: [
-                          const Text(
-                            'Crie uma conta',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
+                          // TEXT "CRIE UMA CONTA"
+                          Text('Crie uma conta',
+                              style: AppTextStyles.textTitle2),
                           const SizedBox(height: 32),
+                          // INPUT FULL NAME
                           TextFieldWidget(
                             item: fullNameItem,
+                            borderColor: AppColors.grey4Color,
                           ),
                           const SizedBox(height: 8),
+                          // INPUT PHONE
                           TextFieldWidget(
                             item: phoneItem,
+                            borderColor: AppColors.grey4Color,
                           ),
                           const SizedBox(height: 8),
+                          // INPUT EMAIL
                           TextFieldWidget(
                             item: emailItem,
+                            borderColor: AppColors.grey4Color,
                           ),
                           const SizedBox(height: 8),
+                          // INPUT PASSWORD 1
                           TextFieldWidget(
                             item: passwordItem,
+                            borderColor: AppColors.grey4Color,
                           ),
                           const SizedBox(height: 8),
+                          // INPUT PASSWORD 2
                           TextFieldWidget(
                             item: repeatPasswordItem,
+                            borderColor: AppColors.grey4Color,
                           ),
                           const SizedBox(height: 16),
+                          // BUTTON "CRIAR CONTA"
                           Row(
                             children: [
                               Expanded(
@@ -104,14 +112,14 @@ class RegisterScreen extends StatelessWidget {
                                           balance: 0),
                                       passwordItem.controller.text),
                                   style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(12),
+                                      padding: const EdgeInsets.all(18),
                                       backgroundColor: Colors.black,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       )),
-                                  child: const Text(
+                                  child: Text(
                                     'Criar conta',
-                                    style: TextStyle(color: Colors.white),
+                                    style: AppTextStyles.textButtonWidget,
                                   ),
                                 ),
                               )
@@ -125,8 +133,6 @@ class RegisterScreen extends StatelessWidget {
                               style: TextStyle(color: AppColors.blue5Color),
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          const Divider(),
                         ],
                       ),
                     ),
