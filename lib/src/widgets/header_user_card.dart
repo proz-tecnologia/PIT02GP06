@@ -45,7 +45,7 @@ class HeaderUserCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Olá",
+                      "Olá,",
                       style: AppTextStyles.textHello,
                     ),
                     const SizedBox(height: 4),
