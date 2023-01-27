@@ -11,6 +11,7 @@ import 'package:pit02gp06/src/page/view_model/credit_card_register_view_model.da
 import 'package:pit02gp06/src/widgets/show_loading_dialog.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
 
+import '../../utils/app_colors.dart';
 import '../authentication_module/auth_repository.dart';
 
 class CreditCardRegisterScreen extends StatefulWidget {
@@ -105,12 +106,30 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
                 height: 100,
               ),
               const SizedBox(height: 10),
-              TextFieldWidget(item: textFieldItemsMap[nicknameKey]),
-              TextFieldWidget(item: textFieldItemsMap[flagKey]),
-              TextFieldWidget(item: textFieldItemsMap[limitKey]),
-              TextFieldWidget(item: textFieldItemsMap[spentKey]),
-              TextFieldWidget(item: textFieldItemsMap[closeDateKey]),
-              TextFieldWidget(item: textFieldItemsMap[dueDateKey]),
+              TextFieldWidget(
+                item: textFieldItemsMap[nicknameKey],
+                borderColor: AppColors.grey4Color,
+              ),
+              TextFieldWidget(
+                item: textFieldItemsMap[flagKey],
+                borderColor: AppColors.grey4Color,
+              ),
+              TextFieldWidget(
+                item: textFieldItemsMap[limitKey],
+                borderColor: AppColors.grey4Color,
+              ),
+              TextFieldWidget(
+                item: textFieldItemsMap[spentKey],
+                borderColor: AppColors.grey4Color,
+              ),
+              TextFieldWidget(
+                item: textFieldItemsMap[closeDateKey],
+                borderColor: AppColors.grey4Color,
+              ),
+              TextFieldWidget(
+                item: textFieldItemsMap[dueDateKey],
+                borderColor: AppColors.grey4Color,
+              ),
               const SizedBox(height: 10),
               MaterialButton(
                 color: Colors.indigoAccent,
