@@ -56,7 +56,8 @@ class FireAuthRepository {
 
       await FirebaseFirestore.instance
           .collection(_collection)
-          .add(model.toMap());
+          .doc(credential.user?.uid)
+          .set(model.toMap());
 
       return ApiResponse.result(result: model);
     } on FirebaseAuthException catch (e) {
@@ -70,5 +71,6 @@ class FireAuthRepository {
       return ApiResponse.result(
           error: "Houve um erro desconhecido. Tente depois.");
     }
+    return null;
   }
 }

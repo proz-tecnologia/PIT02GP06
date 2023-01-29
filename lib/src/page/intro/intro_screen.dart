@@ -66,7 +66,10 @@ class IntroScreen extends StatelessWidget {
               const SizedBox(height: 32),
               TextButton(
                 onPressed: onRegistered,
-                child: const Text('Já sou cadastrado'),
+                child: Text(
+                  'Já sou cadastrado',
+                  style: TextStyle(color: AppColors.blue5Color),
+                ),
               )
             ],
           ),

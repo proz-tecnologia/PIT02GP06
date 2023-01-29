@@ -4,14 +4,15 @@ import 'package:pit02gp06/src/widgets/text_field_widget.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({
-    super.key,
-    required this.onEnter,
-    required this.onRecover,
-  });
+  const LoginScreen(
+      {super.key,
+      required this.onEnter,
+      required this.onRecover,
+      required this.onCreateAccount});
 
   final Function(String, String) onEnter;
   final VoidCallback onRecover;
+  final VoidCallback onCreateAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +92,17 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         TextButton(
                           onPressed: onRecover,
-                          child: const Text('Recuperar senha'),
+                          child: Text(
+                            'Recuperar senha',
+                            style: TextStyle(color: AppColors.blue5Color),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: onCreateAccount,
+                          child: Text(
+                            'Criar uma conta',
+                            style: TextStyle(color: AppColors.blue5Color),
+                          ),
                         ),
                         const SizedBox(height: 20),
                         const Divider(),

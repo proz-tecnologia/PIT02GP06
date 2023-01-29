@@ -4,6 +4,7 @@ import 'package:pit02gp06/src/page/login/login_screen.dart';
 
 import '../../../repositories/fire_auth_repository.dart';
 import '../../authentication_module/auth_repository.dart';
+import '../../common/show_dialog.dart';
 
 class LoginScreenController extends StatelessWidget {
   const LoginScreenController({super.key, FireAuthRepository? authRepository})
@@ -13,7 +14,19 @@ class LoginScreenController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginScreen(onEnter: _onEnter, onRecover: () {});
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (args != null && args is String) {
+        showMyFDialog(context, args);
+      }
+    });
+
+    return LoginScreen(
+      onEnter: _onEnter,
+      onRecover: () {},
+      onCreateAccount: _onCreateAccount,
+    );
   }
 
   Future<void> _onEnter(String email, String password) async {
@@ -24,5 +37,9 @@ class LoginScreenController extends StatelessWidget {
 
       Modular.to.pushReplacementNamed('/home');
     }
+  }
+
+  void _onCreateAccount() {
+    Modular.to.pushReplacementNamed('/register');
   }
 }
