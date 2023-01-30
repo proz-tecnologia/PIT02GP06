@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/models/user_model.dart';
 import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
 import 'package:pit02gp06/src/authentication_module/splash/splash_state.dart';
 

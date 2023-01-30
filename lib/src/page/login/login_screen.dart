@@ -5,14 +5,15 @@ import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({
-    super.key,
-    required this.onEnter,
-    required this.onRecover,
-  });
+  const LoginScreen(
+      {super.key,
+      required this.onEnter,
+      required this.onRecover,
+      required this.onCreateAccount});
 
   final Function(String, String) onEnter;
   final VoidCallback onRecover;
+  final VoidCallback onCreateAccount;
 
   @override
   Widget build(BuildContext context) {
