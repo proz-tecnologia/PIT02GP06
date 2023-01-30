@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen(
@@ -51,22 +52,25 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        const Text(
+                        // TEXT "ACESSE"
+                        Text(
                           'Acesse sua conta',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
+                          style: AppTextStyles.textTitle2,
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 50),
+                        // INPUT EMAIL
                         TextFieldWidget(
                           item: emailItem,
+                          borderColor: AppColors.grey4Color,
                         ),
                         const SizedBox(height: 8),
+                        // INPUT PASSWORD
                         TextFieldWidget(
                           item: passwordItem,
+                          borderColor: AppColors.grey4Color,
                         ),
                         const SizedBox(height: 16),
+                        // BUTTON "ENTRAR"
                         Row(
                           children: [
                             Expanded(
@@ -76,36 +80,36 @@ class LoginScreen extends StatelessWidget {
                                   passwordItem.controller.text,
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(12),
-                                    backgroundColor: Colors.black,
+                                    padding: const EdgeInsets.all(18),
+                                    backgroundColor: AppColors.primaryColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     )),
-                                child: const Text(
+                                child: Text(
                                   'Entrar',
-                                  style: TextStyle(color: Colors.white),
+                                  style: AppTextStyles.textButtonWidget,
                                 ),
                               ),
                             )
                           ],
                         ),
                         const SizedBox(height: 20),
+                        // TEXT "RECUPERAR SENHA"
                         TextButton(
                           onPressed: onRecover,
                           child: Text(
                             'Recuperar senha',
-                            style: TextStyle(color: AppColors.blue5Color),
+                            style: AppTextStyles.textRegisterAndCreate,
                           ),
                         ),
+                        // TEXT "CRIAR CONTA"
                         TextButton(
-                          onPressed: onCreateAccount,
+                          onPressed: onRecover,
                           child: Text(
-                            'Criar uma conta',
-                            style: TextStyle(color: AppColors.blue5Color),
+                            'Criar conta',
+                            style: AppTextStyles.textRecoverPassword,
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        const Divider(),
                       ],
                     ),
                   ],

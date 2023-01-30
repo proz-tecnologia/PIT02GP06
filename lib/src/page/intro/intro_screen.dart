@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_text_styles.dart';
 
@@ -24,15 +23,15 @@ class IntroScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'lib/images/logo.png',
-                height: 120,
+                height: 110,
               ),
               Image.asset(
                 'lib/images/cards.png',
-                height: 150,
+                height: 200,
               ),
               const SizedBox(height: 16),
-              const Divider(
-                color: Colors.black,
+              Divider(
+                color: AppColors.grey2Color,
                 thickness: 0.5,
               ),
               Padding(
@@ -42,20 +41,22 @@ class IntroScreen extends StatelessWidget {
                   style: AppTextStyles.textIntro,
                 ),
               ),
-              const Divider(
-                color: Colors.black,
+              Divider(
+                color: AppColors.grey2Color,
                 thickness: 0.5,
               ),
               const SizedBox(height: 32),
               Container(
+                height: 58,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(15)),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                     color: AppColors.secondaryColor),
                 child: ListTile(
                     onTap: onCreateAccount,
-                    title: const Text(
+                    title: Text(
                       'Criar uma conta',
-                      style: TextStyle(color: Colors.white),
+                      style: AppTextStyles.textButtonWidget,
                     ),
                     trailing: const Icon(
                       Icons.arrow_circle_right,
@@ -68,7 +69,7 @@ class IntroScreen extends StatelessWidget {
                 onPressed: onRegistered,
                 child: Text(
                   'Já sou cadastrado',
-                  style: TextStyle(color: AppColors.blue5Color),
+                  style: AppTextStyles.textRecoverPassword,
                 ),
               )
             ],
