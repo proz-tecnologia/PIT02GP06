@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
@@ -32,7 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return IconButton(
                 icon: const Icon(Icons.logout),
                 color: AppColors.secondaryColor,
-                onPressed: () {});
+                onPressed: () {
+                  logout();
+                });
           }))
         ],
         backgroundColor: Colors.white,
@@ -171,5 +174,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ]),
       )),
     );
+  }
+
+  logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacementNamed('/');
   }
 }
