@@ -8,6 +8,8 @@ import 'package:pit02gp06/src/home_module/home/home_controller.dart';
 import 'package:pit02gp06/src/home_module/transactions/transactions_controller.dart';
 import 'credit_card/credit_card_register_screen.dart';
 
+import 'profile/user_controller.dart';
+
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
@@ -17,6 +19,7 @@ class HomeModule extends Module {
         Bind.singleton((i) => CategoryController()),
         Bind.singleton((i) => TransactionsController()),
         Bind.singleton((i) => CreditCardController()),
+        Bind.lazySingleton((i) => UserController()),
       ];
 
   @override
