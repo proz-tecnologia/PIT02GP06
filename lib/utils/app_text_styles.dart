@@ -22,7 +22,7 @@ class AppTextStyles {
   static TextStyle get textOfDropDown => TextStyle(
       fontSize: 50, fontFamily: 'Karla', color: AppColors.primaryColor);
   static TextStyle get textBalance => // Saldo, Receitas e Despesas
-      TextStyle(fontSize: 18, fontFamily: 'Karla', color: AppColors.grey1Color);
+      TextStyle(fontSize: 17, fontFamily: 'Karla', color: AppColors.grey1Color);
   static TextStyle get textValueBalance => // Valor do saldo
       TextStyle(fontSize: 50, fontFamily: 'Karla', color: AppColors.grey1Color);
   static TextStyle get textValueIncome => TextStyle(
