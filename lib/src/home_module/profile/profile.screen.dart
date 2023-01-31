@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
+import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
-import '../../../utils/app_colors.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -27,6 +27,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          "Perfil",
+          style: TextStyle(color: AppColors.grey1Color),
+        ),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         actions: [
           Builder(builder: ((context) {
@@ -39,6 +44,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }))
         ],
         backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.vertical(bottom: Radius.elliptical(20, 20))),
+        shadowColor: const Color.fromARGB(40, 0, 0, 0),
       ),
       body: SingleChildScrollView(
           child: Padding(
