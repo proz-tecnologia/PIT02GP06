@@ -62,6 +62,9 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
                           final user =
                               await Modular.get<AuthRepository>().getUser();
                           final category = CategoryModel(
+                            id: widget.category != null
+                                ? widget.category!.id
+                                : null,
                             uid: user.uid,
                             genre: textController.text,
                             color: widget.category != null
