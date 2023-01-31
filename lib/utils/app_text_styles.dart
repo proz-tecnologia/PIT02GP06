@@ -88,4 +88,7 @@ class AppTextStyles {
 
   static TextStyle get textRecoverPassword =>
       TextStyle(fontSize: 15, color: AppColors.blue5Color);
+
+  static TextStyle get textRegisterCard =>
+      TextStyle(fontSize: 18, color: AppColors.whiteColor);
 }
