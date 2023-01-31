@@ -79,7 +79,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 return Column(
                   children: [
                     // IMAGE
-
                     Container(
                       height: 114,
                       width: 114,
@@ -90,15 +89,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fit: BoxFit.fitWidth,
                           )),
                     ),
-                    const SizedBox(height: 8), // NAME
+                    const SizedBox(height: 8),
+                    // NAME
                     Text(
                       user.name ?? '',
                       style: AppTextStyles.textNameProfileScreen,
                     ),
                     const SizedBox(height: 8),
-
                     // EMAIL
-
                     Text(
                       user.email ?? '',
                       style: AppTextStyles.textEmailProfileScreen,
