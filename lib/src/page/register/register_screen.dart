@@ -113,7 +113,7 @@ class RegisterScreen extends StatelessWidget {
                                       passwordItem.controller.text),
                                   style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.all(18),
-                                      backgroundColor: Colors.black,
+                                      backgroundColor: AppColors.primaryColor,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       )),

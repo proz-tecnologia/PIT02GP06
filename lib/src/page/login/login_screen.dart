@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/text_field_item.dart';
+import 'package:pit02gp06/src/page/register/register_screen.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
@@ -104,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         // TEXT "CRIAR CONTA"
                         TextButton(
-                          onPressed: onRecover,
+                          onPressed: onCreateAccount,
                           child: Text(
                             'Criar conta',
                             style: AppTextStyles.textRecoverPassword,

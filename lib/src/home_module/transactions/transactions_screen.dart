@@ -71,6 +71,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     return Column(
       children: [
         CustomAppBar(
+          leading: false,
           title: "Transações",
           actions: [
             IconButton(

@@ -15,7 +15,7 @@ class RegisterScreenController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RegisterScreen(
-      onLogin: () {},
+      onLogin: _onLogin,
       onRegister: (user, password) async {
         final result = await _authRepository.register(user, password);
 
@@ -28,5 +28,9 @@ class RegisterScreenController extends StatelessWidget {
         }
       },
     );
+  }
+
+  void _onLogin() {
+    Modular.to.pushReplacementNamed('/login');
   }
 }
