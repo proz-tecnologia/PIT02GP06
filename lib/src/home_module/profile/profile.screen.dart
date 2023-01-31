@@ -53,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: SingleChildScrollView(
           child: Padding(
-        padding: const EdgeInsets.all(52.0),
+        padding: const EdgeInsets.fromLTRB(52, 30, 52, 20),
         child: Column(children: [
           ValueListenableBuilder(
             valueListenable: _controller.state,
