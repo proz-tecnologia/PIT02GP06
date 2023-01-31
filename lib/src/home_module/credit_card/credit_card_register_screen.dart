@@ -10,9 +10,9 @@ import 'package:pit02gp06/src/common/masks.dart';
 import 'package:pit02gp06/src/page/view_model/credit_card_register_view_model.dart';
 import 'package:pit02gp06/src/widgets/show_loading_dialog.dart';
 import 'package:pit02gp06/src/widgets/text_field_widget.dart';
-
-import '../../utils/app_colors.dart';
-import '../authentication_module/auth_repository.dart';
+import 'package:pit02gp06/utils/app_text_styles.dart';
+import '../../../utils/app_colors.dart';
+import '../../authentication_module/auth_repository.dart';
 
 class CreditCardRegisterScreen extends StatefulWidget {
   const CreditCardRegisterScreen({
@@ -86,7 +86,13 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
     if (widget.viewModel.model != null) _fillValues(textFieldItemsMap);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.whiteColor,
+        foregroundColor: AppColors.grey1Color,
+        shadowColor: Color.fromARGB(40, 0, 0, 0),
+        shape: const RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.vertical(bottom: Radius.elliptical(20, 20))),
         title: Text(vm.model == null ? vm.registerTitle : vm.editTitle),
         centerTitle: true,
         actions: [
@@ -97,7 +103,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(45, 30, 45, 30),
           child: Form(
             key: _formKey,
             child: Column(children: [
@@ -105,40 +111,42 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
                 'lib/images/credit_card.png',
                 height: 100,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               TextFieldWidget(
                 item: textFieldItemsMap[nicknameKey],
-                borderColor: AppColors.grey4Color,
+                borderColor: AppColors.grey1Color,
               ),
               TextFieldWidget(
                 item: textFieldItemsMap[flagKey],
-                borderColor: AppColors.grey4Color,
+                borderColor: AppColors.grey1Color,
               ),
               TextFieldWidget(
                 item: textFieldItemsMap[limitKey],
-                borderColor: AppColors.grey4Color,
+                borderColor: AppColors.grey1Color,
               ),
               TextFieldWidget(
                 item: textFieldItemsMap[spentKey],
-                borderColor: AppColors.grey4Color,
+                borderColor: AppColors.grey1Color,
               ),
               TextFieldWidget(
                 item: textFieldItemsMap[closeDateKey],
-                borderColor: AppColors.grey4Color,
+                borderColor: AppColors.grey1Color,
               ),
               TextFieldWidget(
                 item: textFieldItemsMap[dueDateKey],
-                borderColor: AppColors.grey4Color,
+                borderColor: AppColors.grey1Color,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               MaterialButton(
-                color: Colors.indigoAccent,
+                color: AppColors.secondaryColor,
                 onPressed: () => _register(textFieldItemsMap),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(15),
                   child: Text(
                     vm.model == null ? vm.registerButton : vm.editButton,
-                    style: const TextStyle(color: Colors.white),
+                    style: AppTextStyles.textRegisterCard,
                   ),
                 ),
               )
