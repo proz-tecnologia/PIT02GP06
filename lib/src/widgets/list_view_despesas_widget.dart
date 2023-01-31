@@ -39,7 +39,7 @@ class _ListViewDespesasState extends State<ListViewDespesas> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 38),
+                padding: const EdgeInsets.only(right: 15),
                 child: Text(
                   "R\$ ${widget.listCategorias[index]['sold'].toString()}",
                   style: AppTextStyles.textBalance,
