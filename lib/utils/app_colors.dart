@@ -23,5 +23,5 @@ class AppColors {
   static Color get blue5Color => const Color(0xFF1E38FA);
   static Color get backgroundColor =>
       const Color(0xFFF5F6FF); // Background do app
-  static Color get chipGreyColor => const Color(0xFFE0E0E0);
+  static Color get chipGreyColor => const Color(0xFFAEE5FF);
 }

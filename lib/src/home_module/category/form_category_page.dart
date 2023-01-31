@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/src/home_module/category/category_controller.dart';
+import 'package:pit02gp06/src/widgets/show_loading_dialog.dart';
 
 import '../../../models/category_model.dart';
 import '../../authentication_module/auth_repository.dart';
@@ -59,9 +60,13 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
               ElevatedButton(
                   onPressed: _formKey.currentState?.validate() == true
                       ? () async {
+                          showLoadingDialog(context);
                           final user =
                               await Modular.get<AuthRepository>().getUser();
                           final category = CategoryModel(
+                            id: widget.category != null
+                                ? widget.category!.id
+                                : null,
                             uid: user.uid,
                             genre: textController.text,
                             color: widget.category != null
@@ -71,8 +76,8 @@ class _FormCategoryPageState extends State<FormCategoryPage> {
                           );
 
                           Modular.get<CategoryController>().save(category);
-
-                          Navigator.pop(context, category);
+                          Modular.to.pop();
+                          Modular.to.pop();
                         }
                       : null,
                   style: ElevatedButton.styleFrom(

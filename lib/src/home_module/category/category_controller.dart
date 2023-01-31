@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/category_model.dart';
 import '../../../repositories/category_repository.dart';
@@ -15,8 +14,6 @@ class CategoryController {
     init();
   }
   void init() async {
-    final instance = await SharedPreferences.getInstance();
-
     _repository = CategoryRepository();
     List<CategoryModel> categoryList = await _repository.loadList();
     state.value = CategorySuccessState(categoryList: categoryList);
