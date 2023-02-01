@@ -5,48 +5,16 @@ import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
+import 'package:pit02gp06/utils/credit_card_brand.dart';
 
 // ignore: must_be_immutable
 class CreditCardWidget extends StatelessWidget {
-  final mapBrands = {
-    "master": "Mastercard",
-    "visa": "Visa",
-    "elo": "Elo",
-    "american": "American Express",
-    "outro": "Outro",
-  };
-  late Widget iconBandeira;
   final CreditCardModel creditCard;
   final today = DateTime.now();
   CreditCardWidget({
     super.key,
     required this.creditCard,
-  }) {
-    switch (creditCard.flag) {
-      case "master":
-      case "visa":
-      case "elo":
-      case "american":
-        iconBandeira =
-            Image.asset("lib/images/${creditCard.flag}.png", height: 16);
-        break;
-      default:
-        {
-          iconBandeira = Icon(
-            Icons.credit_card,
-            color: AppColors.whiteColor,
-            size: 20,
-          );
-        }
-    }
-
-    int dif = creditCard.dueDate.difference(creditCard.closeDate).inDays;
-    log("_______Cartão ${creditCard.nickname}______");
-    log("Fechamento ${creditCard.closeDate}");
-    log("Vencimento ${creditCard.dueDate}");
-    log("- dif $dif");
-    log("_____________________________");
-  }
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,7 +38,7 @@ class CreditCardWidget extends StatelessWidget {
                     creditCard.flag,
                     style: AppTextStyles.textCreditCard,
                   ),
-                  iconBandeira,
+                  CreditBrand.brandIcon(creditCard.flag),
                 ],
               ),
               Column(
