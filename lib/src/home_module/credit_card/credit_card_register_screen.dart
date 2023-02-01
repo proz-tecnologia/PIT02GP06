@@ -33,11 +33,11 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final String nicknameKey = 'nickname';
-  final String flagKey = 'flag';
   final String limitKey = 'limit';
   final String spentKey = 'spent';
   final String closeDateKey = 'close_date';
   final String dueDateKey = 'due_date';
+  int _flagSelected = 0;
 
   String? _validatorWhenEmpty(String? value, String validator) =>
       value != null && value.isEmpty ? validator : null;
@@ -48,10 +48,6 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
       nicknameKey: TextFieldItem(
           label: vm.nicknameLabel,
           validator: (value) => _validatorWhenEmpty(value, vm.nicknameLabel)),
-      flagKey: TextFieldItem(
-          label: vm.flagLabel,
-          validator: (value) =>
-              _validatorWhenEmpty(value, vm.flagValidatorText)),
       limitKey: TextFieldItem(
           label: vm.limitLabel,
           keyboardType: TextInputType.number,
@@ -89,7 +85,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.whiteColor,
         foregroundColor: AppColors.grey1Color,
-        shadowColor: Color.fromARGB(40, 0, 0, 0),
+        shadowColor: const Color.fromARGB(40, 0, 0, 0),
         shape: const RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.vertical(bottom: Radius.elliptical(20, 20))),
@@ -101,69 +97,159 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(45, 30, 45, 30),
-          child: Form(
-            key: _formKey,
-            child: Column(children: [
-              Image.asset(
-                'lib/images/credit_card.png',
-                height: 100,
-              ),
-              const SizedBox(height: 20),
-              TextFieldWidget(
-                item: textFieldItemsMap[nicknameKey],
-                borderColor: AppColors.grey1Color,
-              ),
-              TextFieldWidget(
-                item: textFieldItemsMap[flagKey],
-                borderColor: AppColors.grey1Color,
-              ),
-              TextFieldWidget(
-                item: textFieldItemsMap[limitKey],
-                borderColor: AppColors.grey1Color,
-              ),
-              TextFieldWidget(
-                item: textFieldItemsMap[spentKey],
-                borderColor: AppColors.grey1Color,
-              ),
-              TextFieldWidget(
-                item: textFieldItemsMap[closeDateKey],
-                borderColor: AppColors.grey1Color,
-              ),
-              TextFieldWidget(
-                item: textFieldItemsMap[dueDateKey],
-                borderColor: AppColors.grey1Color,
-              ),
-              const SizedBox(height: 20),
-              MaterialButton(
-                color: AppColors.secondaryColor,
-                onPressed: () => _register(textFieldItemsMap),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
+      body: Container(
+        color: Colors.white,
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+                hasScrollBody: false,
                 child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text(
-                    vm.model == null ? vm.registerButton : vm.editButton,
-                    style: AppTextStyles.textRegisterCard,
+                  padding: const EdgeInsets.fromLTRB(45, 30, 45, 30),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      Image.asset(
+                        'lib/images/credit_card.png',
+                        height: 100,
+                      ),
+                      const SizedBox(height: 20),
+                      TextFieldWidget(
+                        item: textFieldItemsMap[nicknameKey],
+                        borderColor: AppColors.grey1Color,
+                      ),
+                      _dropdown(),
+                      const SizedBox(height: 10),
+                      TextFieldWidget(
+                        item: textFieldItemsMap[limitKey],
+                        borderColor: AppColors.grey1Color,
+                      ),
+                      TextFieldWidget(
+                        item: textFieldItemsMap[spentKey],
+                        borderColor: AppColors.grey1Color,
+                      ),
+                      TextFieldWidget(
+                        item: textFieldItemsMap[closeDateKey],
+                        borderColor: AppColors.grey1Color,
+                      ),
+                      TextFieldWidget(
+                        item: textFieldItemsMap[dueDateKey],
+                        borderColor: AppColors.grey1Color,
+                      ),
+                      const SizedBox(height: 20),
+                      MaterialButton(
+                        color: AppColors.secondaryColor,
+                        onPressed: () => _register(textFieldItemsMap),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text(
+                            vm.model == null
+                                ? vm.registerButton
+                                : vm.editButton,
+                            style: AppTextStyles.textRegisterCard,
+                          ),
+                        ),
+                      )
+                    ]),
                   ),
-                ),
-              )
-            ]),
-          ),
+                )),
+          ],
         ),
+      ),
+    );
+  }
+
+  DropdownMenuItem _dropdownMenuItem(int value, String image) {
+    return DropdownMenuItem(
+        value: value,
+        child: ListTile(
+          leading: Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Image.asset(
+              "lib/images/$image.png",
+              width: 35,
+              height: 35,
+            ),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(_getFlag(flagCode: value)),
+          ),
+        ));
+  }
+
+  Widget _dropdown() {
+    return Container(
+      height: 55,
+      decoration: BoxDecoration(
+          color: AppColors.grey4Color,
+          border: Border.all(width: 0.7),
+          borderRadius: BorderRadius.circular(16)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DropdownButton(
+              value: _flagSelected == 0 ? null : _flagSelected,
+              isExpanded: true,
+              underline: const SizedBox(),
+              items: [
+                _dropdownMenuItem(1, "visa_2"),
+                _dropdownMenuItem(2, "master_2"),
+                _dropdownMenuItem(3, "elo_2"),
+                _dropdownMenuItem(4, "american_2"),
+              ],
+              hint: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Selecione um cartão"),
+              ),
+              onChanged: (newValue) => setState(() {
+                    _flagSelected = newValue ?? 0;
+                  })),
+        ],
       ),
     );
   }
 
   void _fillValues(Map<String, TextFieldItem> map) {
     map[nicknameKey]?.controller.text = widget.viewModel.model?.nickname ?? '';
-    map[flagKey]?.controller.text = widget.viewModel.model?.flag ?? '';
     map[limitKey]?.controller.text =
         widget.viewModel.model?.limit.toString() ?? '';
     map[spentKey]?.controller.text =
         widget.viewModel.model?.spent.toString() ?? '';
+
+    switch (widget.viewModel.model?.flag) {
+      case "Visa":
+        _flagSelected = 1;
+        break;
+      case "Mastercard":
+        _flagSelected = 2;
+        break;
+      case "Elo":
+        _flagSelected = 3;
+        break;
+      case "American Express":
+        _flagSelected = 4;
+        break;
+      default:
+        _flagSelected = 0;
+    }
+  }
+
+  String _getFlag({int? flagCode}) {
+    switch (flagCode ?? _flagSelected) {
+      case 1:
+        return "Visa";
+      case 2:
+        return "Mastercard";
+      case 3:
+        return "Elo";
+      case 4:
+        return "American Express";
+      default:
+        return "";
+    }
   }
 
   void _register(Map<String, TextFieldItem> map) async {
@@ -175,7 +261,7 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
       var inputFormat = DateFormat('dd');
       final creditCardModel = CreditCardModel(
           uid: user.uid,
-          flag: map[flagKey]!.controller.text,
+          flag: _getFlag(),
           nickname: map[nicknameKey]!.controller.text,
           limit: double.parse(map[limitKey]!.controller.text),
           spent: double.parse(map[spentKey]!.controller.text),
