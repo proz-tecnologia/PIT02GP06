@@ -11,9 +11,6 @@ class CreditCardRegisterViewModel {
   String get nicknameLabel => 'Apelido do cartão*';
   String get nicknameValidatorText => 'Digite um apelido válido';
 
-  String get flagLabel => 'Bandeira*';
-  String get flagValidatorText => 'Digite um apelido válido';
-
   String get limitLabel => 'Limite*';
   String get spentLabel => 'Limite utilizado*';
 
@@ -25,4 +22,10 @@ class CreditCardRegisterViewModel {
 
   String get registerButton => 'Cadastrar';
   String get editButton => 'Salvar';
+
+  Map<String, List<int>> get flagCodePrefix => {
+        "visa": [4],
+        "master": [51, 52, 53, 54, 55],
+        "amex": [34, 37]
+      };
 }

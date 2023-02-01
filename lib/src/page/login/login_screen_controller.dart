@@ -23,19 +23,23 @@ class LoginScreenController extends StatelessWidget {
     });
 
     return LoginScreen(
-      onEnter: _onEnter,
+      onEnter: (email, password) => _onEnter(context, email, password),
       onRecover: () {},
       onCreateAccount: _onCreateAccount,
     );
   }
 
-  Future<void> _onEnter(String email, String password) async {
+  Future<void> _onEnter(
+      BuildContext context, String email, String password) async {
     final authResult = await _authRepository.login(email, password);
     if (authResult?.success ?? false) {
       final user = await _authRepository.userByUid(authResult?.result);
       Modular.get<AuthRepository>().setUser(user!);
 
       Modular.to.pushReplacementNamed('/home');
+    } else {
+      // ignore: use_build_context_synchronously
+      showMyFDialog(context, authResult?.error);
     }
   }
 
