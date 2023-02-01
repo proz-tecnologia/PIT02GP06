@@ -3,8 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/repositories/transactions_repository.dart';
 import 'package:pit02gp06/src/home_module/transactions/transactions_state.dart';
-import 'package:pit02gp06/utils/shared_preferences_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TransactionsController {
   ValueNotifier<TransactionsState> state =

@@ -4,8 +4,8 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_text_styles.dart';
 
 class ButtonCountSelect extends StatelessWidget {
-  Function selectCreditCard;
-  ButtonCountSelect({
+  final Function selectCreditCard;
+  const ButtonCountSelect({
     Key? key,
     required this.selectCreditCard,
     required String? selectedCreditCard,
@@ -29,7 +29,12 @@ class ButtonCountSelect extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('À vista'),
+              Text(
+                'À vista',
+                style: _selectedCreditCard == null
+                    ? AppTextStyles.textChipSelected
+                    : AppTextStyles.textChip,
+              ),
               Text(
                 'Conta',
                 style: _selectedCreditCard == null

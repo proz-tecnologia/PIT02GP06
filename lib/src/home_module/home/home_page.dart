@@ -9,8 +9,6 @@ import 'package:pit02gp06/src/widgets/header_user_card.dart';
 import 'package:pit02gp06/src/widgets/list_view_credit_cards.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
-import 'dart:developer';
-
 import '../../widgets/title_widget.dart';
 import '../credit_card/credit_card_controller.dart';
 import '../profile/user_controller.dart';

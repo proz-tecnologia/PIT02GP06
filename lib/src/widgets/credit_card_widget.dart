@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
@@ -38,7 +36,8 @@ class CreditCardWidget extends StatelessWidget {
                     creditCard.flag,
                     style: AppTextStyles.textCreditCard,
                   ),
-                  CreditBrand.brandIcon(creditCard.flag),
+                  CreditBrand.brandIcon(
+                      flag: creditCard.flag, color: AppColors.whiteColor),
                 ],
               ),
               Column(

@@ -3,14 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:pit02gp06/models/text_field_item.dart';
 import 'package:pit02gp06/src/home_module/profile/form_user_widget.dart';
 import 'package:pit02gp06/src/home_module/profile/user_controller.dart';
 import 'package:pit02gp06/src/home_module/profile/user_state.dart';
-import 'package:pit02gp06/src/widgets/text_field_widget.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
-import '../../../utils/app_colors.dart';
 import '../../widgets/custom_loading_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -120,6 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   logout() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacementNamed('/');
+    Modular.to.pushReplacementNamed('/');
+    // Navigator.of(context).pushReplacementNamed('/');
   }
 }

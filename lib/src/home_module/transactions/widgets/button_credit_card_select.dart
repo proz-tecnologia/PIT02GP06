@@ -6,8 +6,8 @@ import '../../../../utils/app_text_styles.dart';
 import '../../../../utils/credit_card_brand.dart';
 
 class ButtonCreditCardSelect extends StatelessWidget {
-  Function selectCreditCard;
-  ButtonCreditCardSelect({
+  final Function selectCreditCard;
+  const ButtonCreditCardSelect({
     Key? key,
     required this.creditCard,
     required this.selectCreditCard,
@@ -33,14 +33,24 @@ class ButtonCreditCardSelect extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('Crédito'),
+              Text(
+                'Crédito',
+                style: _selectedCreditCard == creditCard.id
+                    ? AppTextStyles.textChipSelected
+                    : AppTextStyles.textChip,
+              ),
               Text(
                 creditCard.nickname,
                 style: _selectedCreditCard == creditCard.id
                     ? AppTextStyles.textChipSelected
                     : AppTextStyles.textChip,
               ),
-              CreditBrand.brandIcon(creditCard.flag),
+              CreditBrand.brandIcon(
+                flag: creditCard.flag,
+                color: _selectedCreditCard == creditCard.id
+                    ? AppColors.whiteColor
+                    : AppColors.grey1Color,
+              ),
             ],
           ),
         ),

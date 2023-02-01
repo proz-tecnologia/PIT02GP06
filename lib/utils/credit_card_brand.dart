@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CreditBrand {
-  static Widget brandIcon(String flag) {
+  static Widget brandIcon({required String flag, Color? color}) {
     Widget iconBandeira;
     final mapBrands = {
       "Mastercard": "master",
@@ -14,14 +14,18 @@ class CreditBrand {
       case "Visa":
       case "Elo":
       case "American Express":
-        iconBandeira =
-            Image.asset("lib/images/${mapBrands[flag]}.png", height: 16);
+        iconBandeira = Image.asset(
+          "lib/images/${mapBrands[flag]}.png",
+          height: 16,
+          color: color,
+        );
         break;
       default:
         {
-          iconBandeira = const Icon(
+          iconBandeira = Icon(
             Icons.credit_card,
             size: 20,
+            color: color,
           );
         }
     }
