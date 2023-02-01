@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pit02gp06/src/home_module/credit_card/credit_card_controller.dart';
 import 'package:pit02gp06/src/home_module/credit_card/credit_card_state.dart';
 import 'package:pit02gp06/src/widgets/custom_loading_widget.dart';
-import 'package:pit02gp06/utils/app_colors.dart';
 import '../home_module/credit_card/add_credit_card_button.dart';
 import 'credit_card_widget.dart';
 
