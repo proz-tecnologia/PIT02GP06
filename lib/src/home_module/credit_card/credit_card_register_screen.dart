@@ -113,12 +113,12 @@ class _CreditCardRegisterScreenState extends State<CreditCardRegisterScreen> {
                         height: 100,
                       ),
                       const SizedBox(height: 20),
+                      _dropdown(),
+                      const SizedBox(height: 10),
                       TextFieldWidget(
                         item: textFieldItemsMap[nicknameKey],
                         borderColor: AppColors.grey1Color,
                       ),
-                      _dropdown(),
-                      const SizedBox(height: 10),
                       TextFieldWidget(
                         item: textFieldItemsMap[limitKey],
                         borderColor: AppColors.grey1Color,
