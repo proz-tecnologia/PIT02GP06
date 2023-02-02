@@ -5,8 +5,10 @@ import 'package:pit02gp06/src/home_module/category/category_controller.dart';
 import 'package:pit02gp06/src/home_module/base_screen.dart';
 import 'package:pit02gp06/src/home_module/credit_card/credit_card_controller.dart';
 import 'package:pit02gp06/src/home_module/home/home_controller.dart';
-import 'package:pit02gp06/src/page/credit_card_register_screen.dart';
 import 'package:pit02gp06/src/home_module/transactions/transactions_controller.dart';
+import 'credit_card/credit_card_register_screen.dart';
+
+import 'profile/user_controller.dart';
 
 class HomeModule extends Module {
   @override
@@ -17,6 +19,7 @@ class HomeModule extends Module {
         Bind.singleton((i) => CategoryController()),
         Bind.singleton((i) => TransactionsController()),
         Bind.singleton((i) => CreditCardController()),
+        Bind.lazySingleton((i) => UserController()),
       ];
 
   @override

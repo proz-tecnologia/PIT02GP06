@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
 import 'package:pit02gp06/src/home_module/home/home_controller.dart';
 import 'package:pit02gp06/src/home_module/home/home_state.dart';
 import 'package:pit02gp06/src/widgets/balance_card.dart';
 import 'package:pit02gp06/src/widgets/card_despesas_widget.dart';
+import 'package:pit02gp06/src/widgets/custom_loading_widget.dart';
 import 'package:pit02gp06/src/widgets/header_user_card.dart';
 import 'package:pit02gp06/src/widgets/list_view_credit_cards.dart';
 import 'package:pit02gp06/utils/app_colors.dart';
-import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
-import 'dart:developer';
-
-import '../../../models/user_model.dart';
 import '../../widgets/title_widget.dart';
 import '../credit_card/credit_card_controller.dart';
+import '../profile/user_controller.dart';
 import '../transactions/transactions_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -23,23 +20,14 @@ class HomePage extends StatelessWidget {
   Future<void> _refresh() async {
     Modular.get<TransactionsController>().init();
     Modular.get<CreditCardController>().init();
+    Modular.get<UserController>().init();
   }
 
   @override
   Widget build(BuildContext context) {
-    log(" medidas: ${MediaQuery.of(context).size.width} x ${MediaQuery.of(context).size.height}");
-
     return Column(
       children: [
-//        HeaderUserCard(userName: "Fulano"),
-        ValueListenableBuilder(
-          valueListenable: controller.state,
-          builder: (context, value, child) {
-            return HeaderUserCard(
-              userName: value is HomeSuccessState ? value.user.name! : '--',
-            );
-          },
-        ),
+        const HeaderUserCard(),
         Expanded(
           child: RefreshIndicator(
             onRefresh: _refresh,
@@ -66,7 +54,7 @@ class HomePage extends StatelessWidget {
                   },
                 ),
                 TitleWidget(title: "Cartões de Crédito"),
-                ListViewCreditCards(),
+                const ListViewCreditCards(),
                 TitleWidget(title: "Despesas"),
                 ValueListenableBuilder(
                   valueListenable: controller.state,
@@ -96,7 +84,8 @@ class HomePage extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                            child: const LinearProgressIndicator(),
+                            child: const CustomRectangularLoading(
+                                height: 160, width: 100, radius: 30),
                           );
                   },
                 ),

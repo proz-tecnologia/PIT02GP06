@@ -88,6 +88,7 @@ flutter:
       fonts:
         - asset: lib/fonts/Karla-Regular.ttf
         - asset: lib/fonts/Karla-Bold.ttf
+          weight: 700
         #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -19,7 +19,6 @@ class _ListViewDespesasState extends State<ListViewDespesas> {
         itemBuilder: (context, index) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                        crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -28,7 +27,7 @@ class _ListViewDespesasState extends State<ListViewDespesas> {
                     color: Color(widget.listCategorias[index]['color']),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(6.0),
                     child: Text(
                       widget.listCategorias[index]['genre'].toString().length >
                               10
@@ -40,7 +39,7 @@ class _ListViewDespesasState extends State<ListViewDespesas> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 8),
+                padding: const EdgeInsets.only(right: 15),
                 child: Text(
                   "R\$ ${widget.listCategorias[index]['sold'].toString()}",
                   style: AppTextStyles.textBalance,

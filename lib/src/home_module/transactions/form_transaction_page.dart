@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/models/transaction_model.dart';
 import 'package:pit02gp06/src/authentication_module/auth_repository.dart';
 import 'package:pit02gp06/src/home_module/category/category_controller.dart';
@@ -14,9 +13,7 @@ import 'package:pit02gp06/utils/app_colors.dart';
 import 'package:pit02gp06/utils/app_formatter.dart';
 import 'package:pit02gp06/utils/app_text_styles.dart';
 
-import '../../widgets/credit_card_widget.dart';
 import '../category/category_page.dart';
-import '../credit_card/add_credit_card_button.dart';
 
 class FormTransactionPage extends StatefulWidget {
   final String type;
@@ -120,9 +117,8 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                           widget.transaction!.creditCardId!,
                           widget.transaction!.value);
                     }
-                    final snackBar = SnackBar(
-                        content: Text(
-                            "transação ${widget.transaction!.id} apagada!"));
+                    const snackBar =
+                        SnackBar(content: Text("transação apagada!"));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     Navigator.pop(context, widget.transaction!);
                   },
@@ -147,19 +143,20 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                 children: [
                   SizedBox(
                     height: 100,
-                    width: MediaQuery.of(context).size.width * 0.46,
+                    width: MediaQuery.of(context).size.width * 0.42,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       controller: textValueController,
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
-                            double.tryParse(value) == null) {
-                          return 'preencha com o valor da transação';
+                            double.tryParse(value.replaceFirst(',', '.')) ==
+                                null) {
+                          return 'preencha o valor da transação';
                         }
                         return null;
                       },
-                      style: const TextStyle(fontSize: 30),
+                      style: const TextStyle(fontSize: 26),
                       decoration: const InputDecoration(
                         label: Text('Valor'),
                         prefixText: "R\$ ",
@@ -168,7 +165,7 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                   ),
                   SizedBox(
                       height: 100,
-                      width: MediaQuery.of(context).size.width * 0.46,
+                      width: MediaQuery.of(context).size.width * 0.42,
                       child: Column(
                         children: [
                           IconButton(
@@ -358,7 +355,8 @@ class _FormTransactionPageState extends State<FormTransactionPage> {
                           final dataModel = TransactionModel(
                               id: widget.transaction?.id,
                               date: _data,
-                              value: double.parse(textValueController.text),
+                              value: double.parse(textValueController.text
+                                  .replaceFirst(',', '.')),
                               uid: user.uid,
                               type: widget.type,
                               categoryId: _selectedCategory,

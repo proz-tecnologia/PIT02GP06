@@ -1,19 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pit02gp06/models/credit_card_model.dart';
 import 'package:pit02gp06/src/home_module/credit_card/credit_card_controller.dart';
 import 'package:pit02gp06/src/home_module/credit_card/credit_card_state.dart';
-import 'package:pit02gp06/src/page/view_model/credit_card_register_view_model.dart';
-import 'package:pit02gp06/utils/app_colors.dart';
-import 'package:pit02gp06/utils/app_formatter.dart';
-
+import 'package:pit02gp06/src/widgets/custom_loading_widget.dart';
 import '../home_module/credit_card/add_credit_card_button.dart';
 import 'credit_card_widget.dart';
 
 class ListViewCreditCards extends StatefulWidget {
-  ListViewCreditCards({
+  const ListViewCreditCards({
     Key? key,
   }) : super(key: key);
 
@@ -33,11 +27,9 @@ class _ListViewCreditCardsState extends State<ListViewCreditCards> {
         builder: (context, value, child) {
           switch (value.runtimeType) {
             case CreditCardLoadState:
-              return Card(
-                child: LinearProgressIndicator(
-                  backgroundColor: AppColors.backgroundColor,
-                  color: AppColors.whiteColor,
-                ),
+              return const Card(
+                child: CustomRectangularLoading(
+                    height: 100, width: 100, radius: 30),
               );
             case CreditCardSuccessState:
               final listCreditCards = (value as CreditCardSuccessState).list;

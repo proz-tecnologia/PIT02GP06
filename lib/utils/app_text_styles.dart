@@ -14,10 +14,15 @@ class AppTextStyles {
       fontFamily: 'Karla',
       fontWeight: FontWeight.bold,
       color: AppColors.grey1Color);
+  static TextStyle get textTitle2 => TextStyle(
+      fontSize: 20,
+      fontFamily: 'Karla',
+      fontWeight: FontWeight.bold,
+      color: AppColors.primaryColor);
   static TextStyle get textOfDropDown => TextStyle(
       fontSize: 50, fontFamily: 'Karla', color: AppColors.primaryColor);
   static TextStyle get textBalance => // Saldo, Receitas e Despesas
-      TextStyle(fontSize: 18, fontFamily: 'Karla', color: AppColors.grey1Color);
+      TextStyle(fontSize: 17, fontFamily: 'Karla', color: AppColors.grey1Color);
   static TextStyle get textValueBalance => // Valor do saldo
       TextStyle(fontSize: 50, fontFamily: 'Karla', color: AppColors.grey1Color);
   static TextStyle get textValueIncome => TextStyle(
@@ -35,18 +40,21 @@ class AppTextStyles {
 
 // button widget (criar uma conta, entrar)
 
-  static TextStyle get textButtonWidget =>
-      TextStyle(fontSize: 20, color: AppColors.whiteColor);
+  static TextStyle get textButtonWidget => TextStyle(
+        fontSize: 18,
+        color: AppColors.whiteColor,
+        fontWeight: FontWeight.bold,
+      );
 
 // button secondary (já sou cadastrado, recuperar a senha, criar conta)
   static TextStyle get textButtonSecondaryBlue => TextStyle(
-      fontSize: 20, fontFamily: 'Karla', color: AppColors.secondaryColor);
+      fontSize: 18, fontFamily: 'Karla', color: AppColors.secondaryColor);
   static TextStyle get textButtonSecondaryGrey => TextStyle(
       fontSize: 20, fontFamily: 'Karla', color: AppColors.primaryColor);
 
 // text intro (texto da tela inicial)
   static TextStyle get textIntro =>
-      TextStyle(fontSize: 25, fontFamily: 'Karla', color: AppColors.grey3Color);
+      TextStyle(fontSize: 20, fontFamily: 'Karla', color: AppColors.grey3Color);
 
 // text intro (logo)
   static TextStyle get textBrand =>
@@ -65,4 +73,22 @@ class AppTextStyles {
       fontFamily: 'Karla',
       fontWeight: FontWeight.bold,
       color: AppColors.whiteColor);
+
+  static TextStyle get textNameProfileScreen => TextStyle(
+      fontSize: 25, fontFamily: 'Karla', color: AppColors.primaryColor);
+
+  static TextStyle get textEmailProfileScreen =>
+      TextStyle(fontSize: 15, color: AppColors.grey2Color);
+
+  static TextStyle get textFieldProfileScreen => // Saldo, Receitas e Despesas
+      TextStyle(fontSize: 17, fontFamily: 'Karla', color: AppColors.grey1Color);
+
+  static TextStyle get textRegisterAndCreate =>
+      TextStyle(fontSize: 15, color: AppColors.primaryColor);
+
+  static TextStyle get textRecoverPassword =>
+      TextStyle(fontSize: 15, color: AppColors.blue5Color);
+
+  static TextStyle get textRegisterCard =>
+      TextStyle(fontSize: 18, color: AppColors.whiteColor);
 }

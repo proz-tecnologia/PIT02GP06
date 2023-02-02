@@ -44,6 +44,7 @@ class _CategoryPageState extends State<CategoryPage> {
       body: Column(
         children: [
           CustomAppBar(
+            leading: true,
             title: "Categorias",
             actions: [
               IconButton(

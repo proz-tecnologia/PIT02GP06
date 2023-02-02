@@ -22,6 +22,7 @@ class AppColors {
       const Color(0xFF000CFF); // Cor que faz parte do gráfico
   static Color get blue5Color => const Color(0xFF1E38FA);
   static Color get backgroundColor =>
-      const Color(0xFFF5F6FF); // Background do app
-  static Color get chipGreyColor => const Color(0xFFE0E0E0);
+      const Color(0xFBF5F6FF); // Background do app
+  static Color get chipGreyColor => const Color(0xFFDEDEDE);
+  static Color get linearProgressColor => const Color(0xFFDEDEDE);
 }

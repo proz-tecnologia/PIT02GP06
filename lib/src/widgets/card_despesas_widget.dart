@@ -6,7 +6,7 @@ import 'list_view_despesas_widget.dart';
 
 class CardDespesasWidget extends StatelessWidget {
   final List<Map<String, Object>> data;
-  CardDespesasWidget({
+  const CardDespesasWidget({
     Key? key,
     required this.data,
   }) : super(key: key);
