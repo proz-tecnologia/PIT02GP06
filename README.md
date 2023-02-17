@@ -1,9 +1,10 @@
+![logo_my_f](https://user-images.githubusercontent.com/25371759/219663242-2b5d5f06-45e1-40c9-8c79-26869cd43208.jpg)
+
+
 # My-F
 
 ## Gestão Financeira
 
-
-![logo_my_f](https://user-images.githubusercontent.com/25371759/219662430-18f9c249-39d3-4f2b-b7a3-7c1144afc37d.png)
 
 Aplicativo construido para te ajudar a controlar e organizar seus gastos, permitindo assim que você consigta, inclusive de forma gráfica, detectar gastos desnecessários que estejam impactando seu orçamento ao longo do tempo, mesmo que no dia-a-dia pareçam irrelevantes.
 Com este aplicativo será possível organizar seus gastos em categorias de despesas customizáveis, permitindo um uso fácil e intuitivo.
