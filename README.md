@@ -6,7 +6,7 @@
 ## Gestão Financeira
 
 
-Aplicativo construido para te ajudar a controlar e organizar seus gastos, permitindo assim que você consigta, inclusive de forma gráfica, detectar gastos desnecessários que estejam impactando seu orçamento ao longo do tempo, mesmo que no dia-a-dia pareçam irrelevantes.
+Aplicativo construido para te ajudar a controlar e organizar seus gastos, permitindo assim que você consiga, inclusive de forma gráfica, detectar gastos desnecessários que estejam impactando seu orçamento ao longo do tempo, mesmo que no dia-a-dia pareçam irrelevantes.
 Com este aplicativo será possível organizar seus gastos em categorias de despesas customizáveis, permitindo um uso fácil e intuitivo.
 
 Você, assim como eu, já se esqueceu de pagar sua fatura pois não se lembrava da data?
