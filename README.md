@@ -39,7 +39,8 @@ Uma feature que permite visualizar na home de seu aplicativo um resumo de todos 
 
 Tudo ali na home de maneira simples e rápida, pra te ajudar a decidir qual cartão utilizar pra uma compra importante...
 
-E claro, ao registrar uma despesa, você pode selecionar qual cartão está utilizando para que o aplicativo atualize os dados do cartão de forma automática! 
+E claro, ao registrar uma despesa, você pode selecionar qual cartão está utilizando para que o aplicativo atualize os dados do cartão de forma automática, tornando muito mais prático. 
+
 ![Captura de tela em 2023-02-17 10-37-39](https://user-images.githubusercontent.com/25371759/219671543-ea314145-f54d-4ef4-a653-95d132f61cf0.png)
 
 Além, é claro, de poder selecionar a categoria, data e até inserir uma descrição, em uma tela simples e intuitiva para organizar cada gasto!
