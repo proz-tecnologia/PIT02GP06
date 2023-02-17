@@ -1,16 +1,50 @@
-# App My-F
+# My-F
 
-A new Flutter project.
+## Gestão Financeira
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+![logo_my_f](https://user-images.githubusercontent.com/25371759/219662430-18f9c249-39d3-4f2b-b7a3-7c1144afc37d.png)
 
-A few resources to get you started if this is your first Flutter project:
+Aplicativo construido para te ajudar a controlar e organizar seus gastos, permitindo assim que você consigta, inclusive de forma gráfica, detectar gastos desnecessários que estejam impactando seu orçamento ao longo do tempo, mesmo que no dia-a-dia pareçam irrelevantes.
+Com este aplicativo será possível organizar seus gastos em categorias de despesas customizáveis, permitindo um uso fácil e intuitivo.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Você, assim como eu, já se esqueceu de pagar sua fatura pois não se lembrava da data?
+Já precisou fazer uma compra grande e perdeu tempo olhando em vários aplicativos bancários pra decidir qual cartão utilizar?
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+O My-F traz para você a...
+
+## Gestão de Cartão de Crédito
+
+Uma feature que permite visualizar na home de seu aplicativo um resumo de todos os seus casrtões!
+- Limite de cada cartão
+- Data de fechamento
+- Data de vencimento
+- Melhor dia de compras
+- Saldo utilizado
+
+Tudo ali na home de maneira simples e rápida, pra te ajudar a decidir qual cartão utilizar pra uma compra importante...
+
+## Sincronização em Nuvem
+
+Chega de perder seus dados sempre que precisa trocar de smartphone ou fazer aquela limpeza!
+No app My-F seus dados estão seguros utilizando a nuvem da Google!
+Utilizamos os serviços Firebase para que seus dados estejam sempre acessíveis, de onde você estiver,
+e os protegemos com senha criptografada para que só você tenha acesso a eles!
+
+E aguarde, futuras features estão por vir... acompanhe nossos Forks!
+
+
+
+
+# Grupo 6
+
+Projeto integrador para conclusão do curso
+##  Desenvolvimento Mobile em Flutter | Proz
+
+Visite as redes dos responsáveis por este projeto:
+
+- [Júlia Marques](https://www.linkedin.com/in/marques-julia/)
+- [Leandro Mandu](https://www.linkedin.com/in/leandro-mandu/)
+- [Victória Ellen de Oliveira](https://www.linkedin.com/in/victoriaellen/)
+
+# My-F | Flutter
